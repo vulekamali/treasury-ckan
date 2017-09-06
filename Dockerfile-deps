@@ -4,10 +4,10 @@ MAINTAINER OpenUp
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
- && apt-get install python-dev \
-                    libpq-dev \
-                    python-pip \
-                    git-core
+ && apt-get install -y python-dev \
+                       libpq-dev \
+                       python-pip \
+                       git-core
 ADD requirement-setuptools.txt .
 ADD requirements.txt .
 RUN pip install -r requirement-setuptools.txt
