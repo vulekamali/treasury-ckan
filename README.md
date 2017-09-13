@@ -1,10 +1,11 @@
 Dockerfile and config to run CKAN in dokku
 ==========================================
 
-CKAN depends on
+This CKAN installation depends on
  - Postgres - main database and DataStore plugin ad-hoc tables
  - Solr - search on the site
  - Redis - as a queue for background processes
+ - S3 - object (file) storage
 
 It is recommended to use an HTTP cache in front of CKAN in production.
 
@@ -38,6 +39,28 @@ grant ckan_default to superuser;
 create database ckan_default with owner ckan_default;
 ```
 
+### S3
+
+Create a bucket and a programmatic access user, and grant the user full access to the bucket with the following policy
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::treasury-data-portal/*",
+                "arn:aws:s3:::treasury-data-portal"
+            ]
+        }
+    ]
+}
+```
+
 ### CKAN
 
 Create the CKAN app in dokku
@@ -54,6 +77,11 @@ dokku redis:info ckan-redis
 
 Set CKAN environment variables, replacing these examples with actual producation ones
 
+- REDIS_URL: use the Redis _Dsn_
+- SOLR_URL: use the alias given for the docker link below
+- BEAKER_SESSION_SECRET: this must be a secret long random string. Each time it changes it invalidates any active sessions.
+- S3FILESTORE__SIGNATURE_VERSION: use as-is - no idea why the plugin requires this.
+
 ```
 dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/ckan_default \
                       CKAN_REDIS_URL=.../0 \
@@ -63,15 +91,13 @@ dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/
                       CKAN_SMTP_SERVER= \
                       CKAN_SMTP_USER= \
                       CKAN_SMTP_PASSWORD= \
-                      CKAN_SMTP_MAIL_FROM= \
+                      CKAN_SMTP_MAIL_FROM=webapps+treasury-portal@openup.org.za \
                       CKAN___CKANEXT__S3FILESTORE__AWS_BUCKET_NAME=treasury-data-portal \
                       CKAN___CKANEXT__S3FILESTORE__AWS_ACCESS_KEY_ID= \
                       CKAN___CKANEXT__S3FILESTORE__AWS_SECRET_ACCESS_KEY= \
-
-ckanext.s3filestore.aws_access_key_id = Your-AWS-Access-Key-ID
-ckanext.s3filestore.aws_secret_access_key = Your-AWS-Secret-Access-Key
-ckanext.s3filestore.aws_bucket_name = a-bucket-to-store-your-stuff
-
+                      CKAN___CKANEXT__S3FILESTORE__HOST_NAME=http://s3-eu-west-1.amazonaws.com/treasury-data-portal \
+                      CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1 \
+                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4
 ```
 
 Link CKAN and Redis
@@ -84,6 +110,18 @@ Link CKAN and Solr
 
 ```
 dokku docker-options:add ckan run,deploy --link ckan-solr.web.1:solr
+```
+
+Create a named docker volume
+
+```
+docker volume create --name ckan-filestore
+```
+
+Configure it to use the volume
+
+```
+dokku docker-options:add ckan run,deploy --volume ckan-filestore:/var/lib/ckan/default
 ```
 
 Add the dokku app remote to your loca git clone
@@ -117,6 +155,8 @@ Setting up development environment
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
 - create database
+- create a file `env.dev` in the project root, based on `env.tmpl` with S3 bucket config
+  - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
 - start services
 ```
 docker-compose up
