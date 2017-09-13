@@ -7,7 +7,7 @@ version: "2.2"
 # again to retry
 services:
   ckan:
-    image: ckan-2.7.0
+    build: .
     links:
         - solr
         - redis
@@ -28,6 +28,11 @@ services:
     image: ckan/solr:latest
     ports:
         - "8983:8983"
+    volumes:
+      - solr-data:/opt/solr/server/solr/ckan
 
   redis:
     image: redis:latest
+
+volumes:
+  solr-data:

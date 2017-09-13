@@ -1,5 +1,4 @@
-#FROM ubuntu:16.04
-FROM ckan-linux-deps
+FROM openup/ckan-dokku:latest
 MAINTAINER OpenUp
 
 RUN pip install ckanext-envvars
