@@ -18,10 +18,11 @@ services:
         - CKAN_REDIS_URL=redis://redis:6379/0
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
         - CKAN_SITE_URL=http://localhost/
-        - CKAN_LEVEL=DEBUG
         - CKAN___BEAKER__SESSION__SECRET=supersecret
+    env_file: env.dev
     volumes:
       - ./ckan.ini:/ckan.ini
+      - ckan-filestore:/var/lib/ckan/default
     command: ["paster", "serve", "ckan.ini"]
 
   solr:
@@ -36,3 +37,4 @@ services:
 
 volumes:
   solr-data:
+  ckan-filestore:
