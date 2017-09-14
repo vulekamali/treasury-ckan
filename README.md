@@ -112,15 +112,11 @@ Link CKAN and Solr
 dokku docker-options:add ckan run,deploy --link ckan-solr.web.1:solr
 ```
 
-Create a named docker volume
+Create a named docker volume and onfigure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
+
 
 ```
 docker volume create --name ckan-filestore
-```
-
-Configure it to use the volume
-
-```
 dokku docker-options:add ckan run,deploy --volume ckan-filestore:/var/lib/ckan/default
 ```
 
