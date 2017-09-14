@@ -120,7 +120,21 @@ docker volume create --name ckan-filestore
 dokku docker-options:add ckan run,deploy --volume ckan-filestore:/var/lib/ckan/default
 ```
 
-Add the dokku app remote to your loca git clone
+Allow large file uploads by creating an nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf` with the following:
+
+```
+client_max_body_size 100M;
+client_body_timeout 120s;
+```
+
+Then let nginx load it
+
+```
+sudo chown dokku:dokku /home/dokku/ckan/nginx.conf.d/ckan.conf
+sudo service nginx reload
+```
+
+Add the dokku app remote to your local git clone
 
 ```
 git remote add dokku dokku@dokku7.code4sa.org:ckan
