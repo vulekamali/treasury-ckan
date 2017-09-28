@@ -14,7 +14,6 @@ services:
     ports:
         - "80:5000"
     environment:
-        - CKAN_SQLALCHEMY_URL=postgres://ckan_default@172.17.0.1/ckan_default
         - CKAN_REDIS_URL=redis://redis:6379/0
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
         - CKAN_SITE_URL=http://localhost/
@@ -24,6 +23,24 @@ services:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default
     command: ["paster", "serve", "ckan.ini"]
+
+  ckan:
+    build: .
+    links:
+        - solr
+        - redis
+    ports:
+        - "80:5000"
+    environment:
+        - CKAN_REDIS_URL=redis://redis:6379/0
+        - CKAN_SOLR_URL=http://solr:8983/solr/ckan
+        - CKAN_SITE_URL=http://localhost/
+        - CKAN___BEAKER__SESSION__SECRET=supersecret
+    env_file: env.dev
+    volumes:
+      - ./ckan.ini:/ckan.ini
+      - ckan-filestore:/var/lib/ckan/default
+    command: ["gunicorn", "serve", "ckan.ini"]
 
   solr:
     image: ckan/solr:latest
