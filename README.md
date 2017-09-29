@@ -188,3 +188,4 @@ docker-compose exec ckan bash
 cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
 ```
+
