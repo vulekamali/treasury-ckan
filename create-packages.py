@@ -34,6 +34,23 @@ for province in provinces:
             year
         ))
 
+print
+print
+print
+
+for province in provinces:
+    for year in years:
+        print('ckanapi -r https://treasurydata.openup.org.za -a %s action package_update name=%s title="%s Provincial Budget %s" organisation_name=treasury owner_org=national-treasury \'financial_year:["%s"]\' '% (
+            key,
+            name(province, year),
+            province,
+            year,
+            year,
+        ))
+
+print
+print
+print
 
 import csv
 
