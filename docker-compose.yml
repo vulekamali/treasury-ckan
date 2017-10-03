@@ -23,7 +23,7 @@ services:
     volumes:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default
-    command: ["gunicorn", "--workers 2", "--paste ckan.ini"]
+    command: ["gunicorn", "--workers", "2", "--paste", "ckan.ini"]
 
   solr:
     image: ckan/solr:latest
