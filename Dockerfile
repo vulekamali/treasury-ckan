@@ -1,4 +1,4 @@
-FROM openup/ckan-dokku:latest
+FROM openup/ckan:deps-latest
 MAINTAINER OpenUp
 
 RUN pip install ckanext-envvars \
