@@ -98,7 +98,9 @@ dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/
                       CKAN___CKANEXT__S3FILESTORE__AWS_SECRET_ACCESS_KEY= \
                       CKAN___CKANEXT__S3FILESTORE__HOST_NAME=http://s3-eu-west-1.amazonaws.com/treasury-data-portal \
                       CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1 \
-                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4
+                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4 \
+                      NEW_RELIC_APP_NAME="Treasury CKAN" \
+                      NEW_RELIC_LICENSE_KEY=...
 ```
 
 Link CKAN and Redis
@@ -201,4 +203,3 @@ docker-compose exec ckan bash
 cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
 ```
-
