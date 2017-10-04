@@ -10,4 +10,4 @@ RUN pip install ckanext-envvars \
 RUN ln -s ./src/ckan/ckan/config/who.ini /who.ini
 ADD ckan.ini /ckan.ini
 
-CMD ["gunicorn", "--workers", "2", "-k", "gevent", "--paste", "ckan.ini"]
+CMD ["newrelic-admin", "run-program", "gunicorn", "--workers", "2", "--worker-class", "gevent", "--paste", "ckan.ini", "-t" "600", "--log-file", "-"]
