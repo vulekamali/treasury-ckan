@@ -37,7 +37,13 @@ create user ckan_default with password 'some good password';
 alter role ckan_default with login;
 grant ckan_default to superuser;
 create database ckan_default with owner ckan_default;
+-- create datastore user and db
+create user datastore_default with password 'some good password';
+alter role datastore_default with login;
+create database datastore_default with owner ckan_default;
 ```
+
+*Remember to set the correct permissions for the datastore database*
 
 ### S3
 
@@ -84,6 +90,8 @@ Set CKAN environment variables, replacing these examples with actual producation
 
 ```
 dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/ckan_default \
+                      CKAN_DATASTORE_WRITE_URL=postgres://ckan_default:password@host/datastore_default \
+                      CKAN_DATASTORE_READ_URL=postgres://datastore_default:password@host/datastore_default \
                       CKAN_REDIS_URL=.../0 \
                       CKAN_INI=/ckan.ini \
                       CKAN_SOLR_URL=http://solr:8983/solr/ckan \
@@ -180,17 +188,32 @@ Setting up development environment
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
 - create database
-- create a file `env.dev` in the project root, based on `env.tmpl` with S3 bucket config
+- create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-- start services
+Start services
+
 ```
 docker-compose up
 ```
-- Set up database and first sysadmin user.
+
+Set up database. First we start a shell in the ckan container, then change
+directory to so that the paster commands are found, then we run the paster
+command which sets up the database stuff. Finally the SQL for setting up
+permissions for the datastore extension. Execute these using a postgres
+superuser.
+
 ```
 docker-compose exec ckan bash
 cd src/ckan
 paster db init -c /ckan.ini
+paster datastore set-permissions -c /ckan.ini
+```
+
+First sysadmin user
+
+```
+docker-compose exec ckan bash
+cd src/ckan
 paster sysadmin add admin email="admin@admin.admin" -c /ckan.ini
 ```
 
