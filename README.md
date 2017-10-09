@@ -39,6 +39,7 @@ grant ckan_default to superuser;
 create database ckan_default with owner ckan_default;
 -- create datastore user and db
 create user datastore_default with password 'some good password';
+alter role datastore_default with login;
 create database datastore_default with owner ckan_default;
 ```
 
@@ -89,6 +90,8 @@ Set CKAN environment variables, replacing these examples with actual producation
 
 ```
 dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/ckan_default \
+                      CKAN_DATASTORE_WRITE_URL=postgres://ckan_default:password@host/datastore_default \
+                      CKAN_DATASTORE_READ_URL=postgres://datastore_default:password@host/datastore_default \
                       CKAN_REDIS_URL=.../0 \
                       CKAN_INI=/ckan.ini \
                       CKAN_SOLR_URL=http://solr:8983/solr/ckan \
