@@ -2,7 +2,7 @@ Dockerfile and config to run CKAN in dokku
 ==========================================
 
 This CKAN installation depends on
- - Postgres - main database and DataStore plugin ad-hoc tables
+ - Postgres - main database ad-hoc tables
  - Solr - search on the site
  - Redis - as a queue for background processes
  - S3 - object (file) storage
@@ -37,13 +37,7 @@ create user ckan_default with password 'some good password';
 alter role ckan_default with login;
 grant ckan_default to superuser;
 create database ckan_default with owner ckan_default;
--- create datastore user and db
-create user datastore_default with password 'some good password';
-alter role datastore_default with login;
-create database datastore_default with owner ckan_default;
 ```
-
-*Remember to set the correct permissions for the datastore database*
 
 ### S3
 
@@ -90,8 +84,6 @@ Set CKAN environment variables, replacing these examples with actual producation
 
 ```
 dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/ckan_default \
-                      CKAN_DATASTORE_WRITE_URL=postgres://ckan_default:password@host/datastore_default \
-                      CKAN_DATASTORE_READ_URL=postgres://datastore_default:password@host/datastore_default \
                       CKAN_REDIS_URL=.../0 \
                       CKAN_INI=/ckan.ini \
                       CKAN_SOLR_URL=http://solr:8983/solr/ckan \
@@ -198,15 +190,12 @@ docker-compose up
 
 Set up database. First we start a shell in the ckan container, then change
 directory to so that the paster commands are found, then we run the paster
-command which sets up the database stuff. Finally the SQL for setting up
-permissions for the datastore extension. Execute these using a postgres
-superuser.
+command which sets up the database stuff.
 
 ```
 docker-compose exec ckan bash
 cd src/ckan
 paster db init -c /ckan.ini
-paster datastore set-permissions -c /ckan.ini
 ```
 
 First sysadmin user
