@@ -7,7 +7,7 @@ RUN pip install ckanext-envvars \
                 git+https://github.com/OpenUpSA/ckanext-satreasury.git@master \
                 -e git+https://github.com/ckan/ckanext-googleanalytics.git@v2.0.2#egg=ckanext-googleanalytics \
                 git+https://github.com/jqnatividad/ckanext-officedocs.git@23137ca \
-                git+https://github.com/rossjones/ckanext-gdoc.git@2f61492
+                git+https://github.com/OpenUpSA/ckanext-gdoc.git@https
 
 RUN ln -s ./src/ckan/ckan/config/who.ini /who.ini
 ADD ckan.ini /ckan.ini
