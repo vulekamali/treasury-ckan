@@ -2,6 +2,7 @@ from ckanapi import RemoteCKAN
 import argparse
 import csv
 import sys
+import os
 
 PROV_BUDGET_NOTES = "Estimates of Provincial Revenue and Expenditure (EPRE) communicates each department's budget, provides current and anticipated medium term budget trends, provide an overview of departmental estimates based on the standardised budget and programme structures for a particular sector, focuses on strategic service delivery and gives a high level overview of performance measures and targets as defined in departmental Strategic Plans and Annual Performance Plans.\n\n## Definitions of columns:\n\n### Economic Classification\nThe economic classification is defined in the [Standard Chart of Accounts (SCOA)](http://scoa.treasury.gov.za/Pages/Charts.aspx). The latest available SCOA version is used at each budget publication."
 
@@ -9,6 +10,9 @@ parser = argparse.ArgumentParser(description='Bring CKAN up to date with a local
 parser.add_argument('tasks', metavar='task', type=str, nargs='+',
                     help='tasks to run')
 parser.add_argument('--apikey', help='authentication key')
+parser.add_argument('--resources-file', help='CSV with resource data')
+parser.add_argument('--resources-base', help='base local directory for resource files')
+
 
 args = parser.parse_args()
 
@@ -39,7 +43,7 @@ def package_id(province, year):
 
 
 if 'upload-resources' in args.tasks:
-    with open('scrape_normalised_hand_fixed.csv') as csvfile:
+    with open(args.resources_file) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             print
@@ -61,10 +65,16 @@ if 'upload-resources' in args.tasks:
                         name=row['name'],
                     )
                 else:
+                    path = args.resources_base + row['path']
+                    noextension, extension = os.path.splitext(path)
+                    if extension == '.xlsx':
+                        xlsmpath = noextension + '.xlsm'
+                        if os.path.isfile(xlsmpath):
+                            path = xlsmpath
                     print ckan.action.resource_create(
                         package_id=pid,
                         name=row['name'],
-                        upload=open(row['path'], 'rb')
+                        upload=open(path, 'rb')
                     )
 
 if 'update-packages' in args.tasks:
@@ -74,4 +84,5 @@ if 'update-packages' in args.tasks:
             print pid
             package = ckan.action.package_show(id=pid)
             package['notes'] = PROV_BUDGET_NOTES
+            package['resources'] = []
             ckan.action.package_update(**package)
