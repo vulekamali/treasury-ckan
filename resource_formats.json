@@ -43,6 +43,8 @@
   ["ODG", "OpenDocument Image", "application/vnd.oasis.opendocument.graphics", []],
   ["XML", "XML File", "application/xml", ["text/xml", "http://purl.org/net/mediatypes/application/xml"]],
   ["XLSX", "Excel OOXML Spreadsheet", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", []],
+  ["XLSM", "Excel OOXML Spreadsheet with VBA Macros", "application/vnd.ms-excel.sheet.macroEnabled.12", []],
+  ["XLSB", "Excel Spreadsheet - faster, less portable format", "application/vnd.ms-excel.sheet.binary.macroEnabled.12", []],
   ["DOCX", "Word OOXML Document", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", []],
   ["BIN", "Binary Data", "application/octet-stream", ["bin"]],
   ["XSLT", "Extensible Stylesheet Language Transformations", "application/xslt+xml", []],
