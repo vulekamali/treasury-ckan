@@ -2,7 +2,7 @@ Dockerfile and config to run CKAN in dokku
 ==========================================
 
 This CKAN installation depends on
- - Postgres - main database and DataStore plugin ad-hoc tables
+ - Postgres - main database ad-hoc tables
  - Solr - search on the site
  - Redis - as a queue for background processes
  - S3 - object (file) storage
@@ -90,6 +90,7 @@ Set CKAN environment variables, replacing these examples with actual producation
 ```
 dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/ckan_default \
                       CKAN_REDIS_URL=.../0 \
+                      CKAN_INI=/ckan.ini \
                       CKAN_SOLR_URL=http://solr:8983/solr/ckan \
                       CKAN_SITE_URL=http://treasurydata.openup.org.za/ \
                       CKAN___BEAKER__SESSION__SECRET= \
@@ -102,7 +103,9 @@ dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/
                       CKAN___CKANEXT__S3FILESTORE__AWS_SECRET_ACCESS_KEY= \
                       CKAN___CKANEXT__S3FILESTORE__HOST_NAME=http://s3-eu-west-1.amazonaws.com/treasury-data-portal \
                       CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1 \
-                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4
+                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4 \
+                      NEW_RELIC_APP_NAME="Treasury CKAN" \
+                      NEW_RELIC_LICENSE_KEY=...
 ```
 
 Link CKAN and Redis
@@ -158,6 +161,18 @@ dokku run ckan bash
 cd src/ckan
 paster db init -c /ckan.ini
 paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
+```
+
+Setup cron jobs.
+
+```
+sudo mkdir /var/log/ckan/
+sudo touch /var/log/ckan/cronjobs.log
+sudo chown ubuntu:ubuntu /var/log/ckan/cronjobs.log
+crontab -e
+
+# hourly, update tracking stats, see http://docs.ckan.org/en/ckan-2.7.0/maintaining/tracking.html#tracking
+5 * * * * /usr/bin/dokku --rm run ckan paster --plugin=ckan tracking update 2017-09-01 2>&1 >> /var/log/ckan/cronjobs.log && /usr/bin/dokku --rm run ckan paster --plugin=ckan search-index rebuild -r 2>&1 >> /var/log/ckan/cronjobs.log
 ```
 
 ### HTTP Cache

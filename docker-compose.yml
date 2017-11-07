@@ -22,7 +22,6 @@ services:
     volumes:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default
-    command: ["paster", "serve", "ckan.ini"]
 
   ckan:
     build: .
