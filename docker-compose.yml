@@ -30,7 +30,6 @@ services:
       dockerfile: Dockerfile-deps
     ports:
       - "8800:8800"
-    command: python /src/datapusher/datapusher/main.py /src/datapusher/deployment/datapusher_settings.py
 
   solr:
     image: ckan/solr:latest
