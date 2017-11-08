@@ -6,6 +6,7 @@ This CKAN installation depends on
  - Solr - search on the site
  - Redis - as a queue for background processes
  - S3 - object (file) storage
+ - [CKAN DataPusher](https://github.com/OpenUpSA/ckan-datapusher)
 
 It is recommended to use an HTTP cache in front of CKAN in production.
 
@@ -120,7 +121,13 @@ Link CKAN and Solr
 dokku docker-options:add ckan run,deploy --link ckan-solr.web.1:solr
 ```
 
-Create a named docker volume and onfigure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
+Link CKAN and CKAN DataPusher
+
+```
+dokku docker-options:add ckan run,deploy --link ckan-datapusher.web.1:ckan-datapusher
+```
+
+Create a named docker volume and configure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
 
 
 ```
