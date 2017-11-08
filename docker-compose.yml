@@ -23,6 +23,14 @@ services:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default
 
+  datapusher:
+    # image: openup/ckan-datapusher
+    build:
+      context: ../ckan-datapusher-dokku/
+      dockerfile: Dockerfile-deps
+    ports:
+      - "8800:8800"
+
   solr:
     image: ckan/solr:latest
     ports:

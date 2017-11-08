@@ -6,6 +6,7 @@ This CKAN installation depends on
  - Solr - search on the site
  - Redis - as a queue for background processes
  - S3 - object (file) storage
+ - [CKAN DataPusher](https://github.com/OpenUpSA/ckan-datapusher)
 
 It is recommended to use an HTTP cache in front of CKAN in production.
 
@@ -37,7 +38,12 @@ create user ckan_default with password 'some good password';
 alter role ckan_default with login;
 grant ckan_default to superuser;
 create database ckan_default with owner ckan_default;
+-- create datastore user and db
+create user datastore_default with password 'some good password';
+create database datastore_default with owner ckan_default;
 ```
+
+*Remember to set the correct permissions for the datastore database*
 
 ### S3
 
@@ -115,7 +121,13 @@ Link CKAN and Solr
 dokku docker-options:add ckan run,deploy --link ckan-solr.web.1:solr
 ```
 
-Create a named docker volume and onfigure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
+Link CKAN and CKAN DataPusher
+
+```
+dokku docker-options:add ckan run,deploy --link ckan-datapusher.web.1:ckan-datapusher
+```
+
+Create a named docker volume and configure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
 
 
 ```
@@ -190,12 +202,15 @@ docker-compose up
 
 Set up database. First we start a shell in the ckan container, then change
 directory to so that the paster commands are found, then we run the paster
-command which sets up the database stuff.
+command which sets up the database stuff. Finally the SQL for setting up
+permissions for the datastore extension. Execute these using a postgres
+superuser.
 
 ```
 docker-compose exec ckan bash
 cd src/ckan
 paster db init -c /ckan.ini
+paster datastore set-permissions -c /ckan.ini
 ```
 
 First sysadmin user
