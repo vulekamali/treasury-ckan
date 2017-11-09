@@ -1,10 +1,10 @@
-from ckanapi import RemoteCKAN
+from ckanapi import RemoteCKAN, ValidationError
 import argparse
 import csv
 import sys
 import os
+from slugify import slugify
 
-PROV_BUDGET_NOTES = "Estimates of Provincial Revenue and Expenditure (EPRE) communicates each department's budget, provides current and anticipated medium term budget trends, provide an overview of departmental estimates based on the standardised budget and programme structures for a particular sector, focuses on strategic service delivery and gives a high level overview of performance measures and targets as defined in departmental Strategic Plans and Annual Performance Plans.\n\n## Definitions of columns:\n\n### Economic Classification\nThe economic classification is defined in the [Standard Chart of Accounts (SCOA)](http://scoa.treasury.gov.za/Pages/Charts.aspx). The latest available SCOA version is used at each budget publication."
 
 parser = argparse.ArgumentParser(description='Bring CKAN up to date with a local representation of what it should look like.')
 parser.add_argument('tasks', metavar='task', type=str, nargs='+',
@@ -13,22 +13,9 @@ parser.add_argument('--apikey', help='authentication key')
 parser.add_argument('--resources-file', help='CSV with resource data')
 parser.add_argument('--resources-base', help='base local directory for resource files')
 
-
 args = parser.parse_args()
 
 ckan = RemoteCKAN('https://treasurydata.openup.org.za', apikey=args.apikey)
-
-provinces = [
-    'Eastern Cape',
-    'Free State',
-    'Gauteng',
-    'KwaZulu-Natal',
-    'Limpopo',
-    'Mpumalanga',
-    'Northern Cape',
-    'North West',
-    'Western Cape',
-]
 
 finyear = {
     '2015': '2015-16',
@@ -36,10 +23,32 @@ finyear = {
     '2017': '2017-18',
 }
 
+prov_abbrev = {
+    'Eastern Cape': 'EC',
+    'Free State': 'FS',
+    'Gauteng': 'GT',
+    'KwaZulu-Natal': 'NL',
+    'Limpopo': 'LP',
+    'Mpumalanga': 'MP',
+    'Northern Cape': 'NC',
+    'North West': 'NW',
+    'Western Cape': 'WC',
+}
+
 packagecache = {}
 
-def package_id(province, year):
-    return '%s-provincial-budget-%s' % (province.lower().replace(' ', '-'), year)
+
+def package_id(geographic_region, department_name, financial_year):
+    short_dept = short_dept = slugify(department_name, max_length=85, word_boundary=True)
+    return slugify('prov dept %s %s %s' % (
+        prov_abbrev[geographic_region], short_dept, finyear[financial_year]))
+
+
+def get_vocab_map():
+    vocab_map = {}
+    for vocab in ckan.action.vocabulary_list():
+        vocab_map[vocab['name']] = vocab['id']
+    return vocab_map
 
 
 if 'upload-resources' in args.tasks:
@@ -77,12 +86,38 @@ if 'upload-resources' in args.tasks:
                         upload=open(path, 'rb')
                     )
 
-if 'update-packages' in args.tasks:
-    for province in provinces[0:]:
-        for year in finyear.values()[0:]:
-            pid = package_id(province, year)
+if 'create-packages' in args.tasks:
+    with open('metadata/departments.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        vocab_map = get_vocab_map()
+
+        for row in reader:
+            geo_region = row['geographic_region']
+            financial_year = row['financial_year']
+            dept_name = row['department_name']
+            pid = package_id(geo_region, dept_name, financial_year)
+            title = "%s Department: %s %s" % (geo_region, dept_name, finyear[financial_year])
             print pid
-            package = ckan.action.package_show(id=pid)
-            package['notes'] = PROV_BUDGET_NOTES
-            package['resources'] = []
-            ckan.action.package_update(**package)
+            print title
+
+            try:
+                package = ckan.action.package_create(
+                    name=pid,
+                    title=title,
+                    license_id='other-pd',
+                    tags=[
+                        { 'vocabulary_id': vocab_map['spheres'],
+                          'name': 'Provincial' },
+                        { 'vocabulary_id': vocab_map['financial_years'],
+                          'name': finyear[financial_year] },
+                        { 'vocabulary_id': vocab_map['provinces'],
+                          'name': geo_region },
+                    ],
+                    extras=[
+                        { 'key': 'Department Name', 'value': dept_name }
+                    ],
+                    owner_org='national-treasury'
+                )
+                print package
+            except ValidationError, e:
+                print e

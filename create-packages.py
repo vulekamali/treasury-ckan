@@ -60,14 +60,14 @@ with open('scrape_normalised_hand_fixed.csv') as csvfile:
         if row['url']:
             print('ckanapi -r https://treasurydata.openup.org.za -a %s action resource_create package_id=%s name="%s" "url=%s"'  % (
                 key,
-                name(row['jurisdiction'], finyear[row['year']]),
+                name(row['geographic_region'], finyear[row['year']]),
                 row['name'],
                 row['url'],
             ))
         else:
             print('ckanapi -r https://treasurydata.openup.org.za -a %s action resource_create package_id=%s name="%s" "upload@%s"'  % (
                 key,
-                name(row['jurisdiction'], finyear[row['year']]),
+                name(row['geographic_region'], finyear[row['year']]),
                 row['name'],
                 row['path'],
             ))
