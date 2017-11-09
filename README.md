@@ -2,10 +2,11 @@ Dockerfile and config to run CKAN in dokku
 ==========================================
 
 This CKAN installation depends on
- - Postgres - main database and DataStore plugin ad-hoc tables
+ - Postgres - main database ad-hoc tables
  - Solr - search on the site
  - Redis - as a queue for background processes
  - S3 - object (file) storage
+ - [CKAN DataPusher](https://github.com/OpenUpSA/ckan-datapusher)
 
 It is recommended to use an HTTP cache in front of CKAN in production.
 
@@ -37,7 +38,12 @@ create user ckan_default with password 'some good password';
 alter role ckan_default with login;
 grant ckan_default to superuser;
 create database ckan_default with owner ckan_default;
+-- create datastore user and db
+create user datastore_default with password 'some good password';
+create database datastore_default with owner ckan_default;
 ```
+
+*Remember to set the correct permissions for the datastore database*
 
 ### S3
 
@@ -85,6 +91,7 @@ Set CKAN environment variables, replacing these examples with actual producation
 ```
 dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/ckan_default \
                       CKAN_REDIS_URL=.../0 \
+                      CKAN_INI=/ckan.ini \
                       CKAN_SOLR_URL=http://solr:8983/solr/ckan \
                       CKAN_SITE_URL=http://treasurydata.openup.org.za/ \
                       CKAN___BEAKER__SESSION__SECRET= \
@@ -97,7 +104,9 @@ dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/
                       CKAN___CKANEXT__S3FILESTORE__AWS_SECRET_ACCESS_KEY= \
                       CKAN___CKANEXT__S3FILESTORE__HOST_NAME=http://s3-eu-west-1.amazonaws.com/treasury-data-portal \
                       CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1 \
-                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4
+                      CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4 \
+                      NEW_RELIC_APP_NAME="Treasury CKAN" \
+                      NEW_RELIC_LICENSE_KEY=...
 ```
 
 Link CKAN and Redis
@@ -112,7 +121,13 @@ Link CKAN and Solr
 dokku docker-options:add ckan run,deploy --link ckan-solr.web.1:solr
 ```
 
-Create a named docker volume and onfigure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
+Link CKAN and CKAN DataPusher
+
+```
+dokku docker-options:add ckan run,deploy --link ckan-datapusher.web.1:ckan-datapusher
+```
+
+Create a named docker volume and configure ckan to use the volume just so we can configure an upload path. It _should_ be kept clear by the s3 plugin.
 
 
 ```
@@ -155,6 +170,18 @@ paster db init -c /ckan.ini
 paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
 ```
 
+Setup cron jobs.
+
+```
+sudo mkdir /var/log/ckan/
+sudo touch /var/log/ckan/cronjobs.log
+sudo chown ubuntu:ubuntu /var/log/ckan/cronjobs.log
+crontab -e
+
+# hourly, update tracking stats, see http://docs.ckan.org/en/ckan-2.7.0/maintaining/tracking.html#tracking
+5 * * * * /usr/bin/dokku --rm run ckan paster --plugin=ckan tracking update 2017-09-01 2>&1 >> /var/log/ckan/cronjobs.log && /usr/bin/dokku --rm run ckan paster --plugin=ckan search-index rebuild -r 2>&1 >> /var/log/ckan/cronjobs.log
+```
+
 ### HTTP Cache
 
 http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create-the-nginx-config-file or cloudflare?
@@ -165,17 +192,32 @@ Setting up development environment
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
 - create database
-- create a file `env.dev` in the project root, based on `env.tmpl` with S3 bucket config
+- create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-- start services
+Start services
+
 ```
 docker-compose up
 ```
-- Set up database and first sysadmin user.
+
+Set up database. First we start a shell in the ckan container, then change
+directory to so that the paster commands are found, then we run the paster
+command which sets up the database stuff. Finally the SQL for setting up
+permissions for the datastore extension. Execute these using a postgres
+superuser.
+
 ```
 docker-compose exec ckan bash
 cd src/ckan
 paster db init -c /ckan.ini
+paster datastore set-permissions -c /ckan.ini
+```
+
+First sysadmin user
+
+```
+docker-compose exec ckan bash
+cd src/ckan
 paster sysadmin add admin email="admin@admin.admin" -c /ckan.ini
 ```
 
