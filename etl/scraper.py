@@ -12,14 +12,14 @@ REGEX_EPRE_VOTE_PDF = r'Vote \d.+'
 
 class URLItem(scrapy.Item):
     year = scrapy.Field()
-    jurisdiction = scrapy.Field()
+    geographic_region = scrapy.Field()
     url = scrapy.Field()
     name = scrapy.Field()
 
 
 class FileItem(scrapy.Item):
     year = scrapy.Field()
-    jurisdiction = scrapy.Field()
+    geographic_region = scrapy.Field()
     path = scrapy.Field()
     name = scrapy.Field()
 
@@ -80,7 +80,7 @@ class TreasurySpider(scrapy.Spider):
                         if extension in ('.xls', '.xlsx', '.xlsm'):
                             item = FileItem()
                             item['path'] = os.path.join(directory, filename)
-                            item['jurisdiction'] = province
+                            item['geographic_region'] = province
                             item['year'] = response.meta['year']
                             item['name'] = filename
                             yield item
@@ -97,7 +97,7 @@ class TreasurySpider(scrapy.Spider):
                 url = abs_url(response, anchor)
                 item = URLItem()
                 item['url'] = url
-                item['jurisdiction'] = response.meta['province']
+                item['geographic_region'] = response.meta['province']
                 item['year'] = response.meta['year']
                 item['name'] = anchor.xpath('text()').extract_first().strip()
                 yield item

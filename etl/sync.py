@@ -56,8 +56,8 @@ if 'upload-resources' in args.tasks:
         reader = csv.DictReader(csvfile)
         for row in reader:
             print
-            print row['jurisdiction'], row['year'], row['name']
-            pid = package_id(row['jurisdiction'], finyear[row['year']])
+            print row['geographic_region'], row['year'], row['name']
+            pid = package_id(row['geographic_region'], finyear[row['year']])
             package = packagecache.get(pid, None)
             if not package:
                 package = ckan.action.package_show(id=pid)

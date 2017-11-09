@@ -6,13 +6,13 @@ import re
 df = pd.read_json('etl-data/scraped.jsonl', lines=True)
 
 years = set(df['year'].tolist())
-jurisdictions = set(df['jurisdiction'].tolist())
+geographic_regions = set(df['geographic_region'].tolist())
 
 for year in years:
-    for juris in jurisdictions:
+    for juris in geographic_regions:
         clean_sheets = {}
         clean_chapters = {}
-        names = df.loc[(df['jurisdiction'] == juris) & (df['year'] == year)]['name'].tolist()
+        names = df.loc[(df['geographic_region'] == juris) & (df['year'] == year)]['name'].tolist()
         chapters = [name for name in names if 'Vote' in name]
         for chapter in chapters:
             clean_chapters[re.sub('Vote \d+ : ', '', chapter)] = chapter
@@ -29,7 +29,7 @@ for year in years:
             dist, chapter = sorted(distance.ilevenshtein(mod_sheet, clean_chapters.keys()))[0]
             max_len = max(len(chapter), len(mod_sheet))
             dist_pct = 100 * (max_len-dist) / len(chapter)
-            df.loc[(df['jurisdiction'] == juris) &
+            df.loc[(df['geographic_region'] == juris) &
                    (df['year'] == year) &
                    (df['name'] == clean_sheets[sheet]),
                    'name'] = clean_chapters[chapter]

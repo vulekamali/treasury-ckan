@@ -263,7 +263,7 @@ scrapy runspider --output=etl-data/scraped.jsonl --output-format=jsonl etl/scrap
 A list of department names and vote numbers for each provincial government is produced from the EPRE chapters.
 
 ```
-cat  etl-data/scraped.jsonl |grep pdf|egrep "(2015|2016|2017)"|jq -r '"\(.year),\(.jurisdiction),\"\(.name)\""'|sort>etl-data/departments.csv
+cat  etl-data/scraped.jsonl |grep pdf|egrep "(2015|2016|2017)"|jq -r '"\(.year),\(.geographic_region),\"\(.name)\""'|sort>etl-data/departments.csv
 ```
 
 Use the "Text to columns" function of a spreadsheet program to split vote number and department name. Add column headers and save as `metadata/departments.csv`
