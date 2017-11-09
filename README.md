@@ -6,10 +6,14 @@ This is the software repository for the South African National Treasury Data Por
 
 We use CKAN to organise the datasets according to various taxonomies and use the CKAN dataset API to make the data discoverable.
 
-This repository also contains code and documentation to load and maintain data in CKAN.
+This repository also contains [code and documentation to load and maintain data in CKAN](#extract-transform-load-etl).
 
 Dockerfile and config to run CKAN in dokku
 ------------------------------------------
+
+We run CKAN on the dokku platform. We use dokku's dockerfile deployment method to deploy using the the Dockerfile in this repository. Since there are numerous operating system and python dependencies that ckan relies on, we build an image with these on hub.docker.com using Dockerfile-deps.
+
+The Dockerfile then builds on this. We install CKAN plugins using the Dockerfile, which makes it easier to try different ones and keep all plugin installation in one place. These don't take a lot of time so moving them to Dockerfile-deps isn't as important as flexibilty.
 
 This CKAN installation depends on
  - Postgres - main database ad-hoc tables
@@ -239,4 +243,19 @@ You might need to rebuild the search index, e.g. if you newly/re-created the doc
 docker-compose exec ckan bash
 cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
+```
+
+Extract, Transform, Load (ETL)
+------------------------------
+
+To start with, this will document the largely manuall and irregular process of getting the data together and uploaded to CKAN.
+
+### Estimates of Provincial Revenue and Expenditure (EPRE)
+
+EPREs are scraped from treasury.gov.za and stored under `etl-scraped`. These should not be added to git. The folder is therefore gitignored.
+
+Metadata from the scrape is also stored there, as specified by `--output`
+
+```
+scrapy runspider --output=etl-scraped/scraped.csv --output-format=csv etl/scraper.py
 ```
