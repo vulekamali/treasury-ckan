@@ -1,0 +1,371 @@
+financial_year,geographic_region,vote_number,department_name
+2015,Eastern Cape,1,Office of the Premier
+2015,Eastern Cape,2,Provincial Legislature
+2015,Eastern Cape,3,Health
+2015,Eastern Cape,4,Social Development
+2015,Eastern Cape,5,Roads and Public Works
+2015,Eastern Cape,6,Education
+2015,Eastern Cape,7,Local Government and Traditional Affairs
+2015,Eastern Cape,8,Rural Development and Agrarian Reform
+2015,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism"
+2015,Eastern Cape,10,Transport
+2015,Eastern Cape,11,Human Settlements
+2015,Eastern Cape,12,Provincial Treasury
+2015,Eastern Cape,14,"Sport, Art and Culture"
+2015,Eastern Cape,15,Safety and Liaison
+2015,Free State,1,Office of the Premier
+2015,Free State,2,Free State Legislature
+2015,Free State,3,"Economic Development, Tourism and Environmental Affairs"
+2015,Free State,4,Provincial Treasury
+2015,Free State,5,Health
+2015,Free State,6,Education
+2015,Free State,7,Social Development
+2015,Free State,8,Cooperative Governance and Traditional Affairs
+2015,Free State,9,Public Works
+2015,Free State,10,"Police, Roads and Transport"
+2015,Free State,11,Agriculture and Rural Development
+2015,Free State,12,"Sport, Arts, Culture and Recreation"
+2015,Free State,13,Human Settlements
+2015,Gauteng,1,Office of the Premier
+2015,Gauteng,2,Provincial Legislature
+2015,Gauteng,3,Economic Development
+2015,Gauteng,4,Health
+2015,Gauteng,5,Education
+2015,Gauteng,6,Social Development
+2015,Gauteng,7,Cooperative Governance and Traditional Affairs
+2015,Gauteng,8,Human Settlements
+2015,Gauteng,9,Roads and Trasport
+2015,Gauteng,10,Community Safety
+2015,Gauteng,11,Agriculture and Rural Development
+2015,Gauteng,12,"Sport, Arts, Culture and Recreation"
+2015,Gauteng,13,Finance
+2015,Gauteng,14,Gauteng Provincial Treasury
+2015,Gauteng,15,Infrastructure Development
+2015,KwaZulu-Natal,1,Office of the Premier
+2015,KwaZulu-Natal,2,Provincial Legislature
+2015,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development"
+2015,KwaZulu-Natal,4,Economic Development and Tourism
+2015,KwaZulu-Natal,5,Education
+2015,KwaZulu-Natal,6,Provincial Treasury
+2015,KwaZulu-Natal,7,Health
+2015,KwaZulu-Natal,8,Human Settlements
+2015,KwaZulu-Natal,9,Community Safety and Liaison
+2015,KwaZulu-Natal,10,The Royal Household
+2015,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs
+2015,KwaZulu-Natal,12,Transport
+2015,KwaZulu-Natal,13,Social Development
+2015,KwaZulu-Natal,14,Public Works
+2015,KwaZulu-Natal,15,Arts and Culture
+2015,KwaZulu-Natal,16,Sport and Recreation
+2015,Limpopo,1,Office of the Premier
+2015,Limpopo,2,Limpopo Legislature
+2015,Limpopo,3,Education
+2015,Limpopo,4,Agriculture
+2015,Limpopo,5,Provincial Treasury
+2015,Limpopo,6,"Economic Development, Environmental Affairs and Tourism"
+2015,Limpopo,7,Health
+2015,Limpopo,8,Roads and Transport
+2015,Limpopo,9,Public Works
+2015,Limpopo,10,"Safety, Security and Liaison"
+2015,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs"
+2015,Limpopo,12,Social Development
+2015,Limpopo,13,"Sport, Arts and Culture"
+2015,Mpumalanga,1,Office of the Premier
+2015,Mpumalanga,2,Mpumalanga Provincial Legislature
+2015,Mpumalanga,3,Finance
+2015,Mpumalanga,4,Co-operative Governance and Traditional Affairs
+2015,Mpumalanga,5,"Agricultural, Rural Development and Land Administration"
+2015,Mpumalanga,6,"Economic Development, Environment and Tourism"
+2015,Mpumalanga,7,Education
+2015,Mpumalanga,8,"Public Works, Roads and Transport"
+2015,Mpumalanga,9,"Community Safety, Security and Liaison"
+2015,Mpumalanga,10,Health
+2015,Mpumalanga,11,"Culture, Sport and Recreation"
+2015,Mpumalanga,12,Social Development
+2015,Mpumalanga,13,Human Settlements
+2015,Northern Cape,1,Office of the Premier
+2015,Northern Cape,2,Provincial Legislature
+2015,Northern Cape,3,"Transport, Safety and Liaison"
+2015,Northern Cape,4,Education
+2015,Northern Cape,5,Roads and Public Works
+2015,Northern Cape,6,Economic Development and Tourism
+2015,Northern Cape,7,"Sport, Arts and Culture"
+2015,Northern Cape,8,Provincial Treasury
+2015,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs"
+2015,Northern Cape,10,Health
+2015,Northern Cape,11,Social Development
+2015,Northern Cape,12,"Agriculture, Land Reform and Rural Development"
+2015,Northern Cape,13,Environment and Nature Conservation
+2015,North West,1,Office of the Premier
+2015,North West,2,Provincial Legislature
+2015,North West,3,Health
+2015,North West,4,"Sport, Arts and Culture"
+2015,North West,5,Public Safety and Liaison
+2015,North West,6,"Economic Development, Environment, Conservation and Tourism"
+2015,North West,7,Finance
+2015,North West,8,Education
+2015,North West,9,Local Government and Traditional Affairs
+2015,North West,11,"Public Works, Roads and Transport"
+2015,North West,12,Social Development
+2015,North West,13,Agricultural and Rural Development
+2015,North West,15,Human Settlements
+2015,Western Cape,1,Office of the Premier
+2015,Western Cape,2,Provincial Parliament
+2015,Western Cape,3,Provincial Treasury
+2015,Western Cape,4,Community Safety
+2015,Western Cape,5,Education
+2015,Western Cape,6,Health
+2015,Western Cape,7,Social Development
+2015,Western Cape,8,Human Settlements
+2015,Western Cape,9,Environmental Affairs and Development Planning
+2015,Western Cape,10,Transport and Public Works
+2015,Western Cape,11,Agriculture
+2015,Western Cape,12,Economical Development and Tourism
+2015,Western Cape,13,Cultural Affairs and Sport
+2015,Western Cape,14,Local Government
+2016,Eastern Cape,1,Office of the Premier
+2016,Eastern Cape,2,Provincial Legislature
+2016,Eastern Cape,3,Health
+2016,Eastern Cape,4,Social Development
+2016,Eastern Cape,5,Roads and Public Works
+2016,Eastern Cape,6,Education
+2016,Eastern Cape,7,Cooperative Governance and Traditional Affairs
+2016,Eastern Cape,8,Rural Development and Agrarian Reform
+2016,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism"
+2016,Eastern Cape,10,Transport
+2016,Eastern Cape,11,Human Settlements
+2016,Eastern Cape,12,Provincial Treasury
+2016,Eastern Cape,14,"Sport, Art and Culture"
+2016,Eastern Cape,15,Safety and Liaison
+2016,Free State,1,Office of the Premier
+2016,Free State,2,Free State Legislature
+2016,Free State,3,"Department of Economic and Small Business Development, Tourism and Environmental Affairs"
+2016,Free State,4,Provincial Treasury
+2016,Free State,5,Health
+2016,Free State,6,Education
+2016,Free State,7,Social Development
+2016,Free State,8,Cooperative Governance and Traditional Affairs
+2016,Free State,9,Public Works and Infrastructure
+2016,Free State,10,"Police, Roads and Transport"
+2016,Free State,11,Agriculture and Rural Development
+2016,Free State,12,"Sport, Arts, Culture and Recreation"
+2016,Free State,13,Human Settlements
+2016,Gauteng,1,Office of the Premier
+2016,Gauteng,2,Provincial Legislature
+2016,Gauteng,3,Economic Development
+2016,Gauteng,4,Health
+2016,Gauteng,5,Education
+2016,Gauteng,6,Social Development
+2016,Gauteng,7,Cooperative Governance and Traditional Affairs
+2016,Gauteng,8,Human Settlements
+2016,Gauteng,9,Roads and Trasport
+2016,Gauteng,10,Community Safety
+2016,Gauteng,11,Agriculture and Rural Development
+2016,Gauteng,12,"Sport, Arts, Culture and Recreation"
+2016,Gauteng,13,E-Government
+2016,Gauteng,14,Gauteng Provincial Treasury
+2016,Gauteng,15,Infrastructure Development
+2016,KwaZulu-Natal,1,Office of the Premier
+2016,KwaZulu-Natal,2,Provincial Legislature
+2016,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development"
+2016,KwaZulu-Natal,4,Economic Development and Tourism
+2016,KwaZulu-Natal,5,Education
+2016,KwaZulu-Natal,6,Provincial Treasury
+2016,KwaZulu-Natal,7,Health
+2016,KwaZulu-Natal,8,Human Settlements
+2016,KwaZulu-Natal,9,Community Safety and Liaison
+2016,KwaZulu-Natal,10,Sports and Recreation
+2016,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs
+2016,KwaZulu-Natal,12,Transport
+2016,KwaZulu-Natal,13,Social Development
+2016,KwaZulu-Natal,14,Public Works
+2016,KwaZulu-Natal,15,Arts and Culture
+2016,Limpopo,1,Office of the Premier
+2016,Limpopo,2,Limpopo Legislature
+2016,Limpopo,3,Education
+2016,Limpopo,4,Agriculture and Rural Development
+2016,Limpopo,5,Provincial Treasury
+2016,Limpopo,6,"Economic Development, Environmental Affairs and Tourism"
+2016,Limpopo,7,Health
+2016,Limpopo,8,Transport
+2016,Limpopo,9,"Public Works, Roads and Infrastructure"
+2016,Limpopo,10,"Safety, Security and Liaison"
+2016,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs"
+2016,Limpopo,12,Social Development
+2016,Limpopo,13,"Sport, Arts and Culture"
+2016,Mpumalanga,1,Office of the Premier
+2016,Mpumalanga,2,Mpumalanga Provincial Legislature
+2016,Mpumalanga,3,Provincial Treasury
+2016,Mpumalanga,4,Co-operative Governance and Traditional Affairs
+2016,Mpumalanga,5,"Agricultural, Rural Development and Land Administration"
+2016,Mpumalanga,6,"Economic Development, Environment and Tourism"
+2016,Mpumalanga,7,Education
+2016,Mpumalanga,8,"Public Works, Roads and Transport"
+2016,Mpumalanga,9,"Community Safety, Security and Liaison"
+2016,Mpumalanga,10,Health
+2016,Mpumalanga,11,"Culture, Sport and Recreation"
+2016,Mpumalanga,12,Social Development
+2016,Mpumalanga,13,Human Settlements
+2016,Northern Cape,1,Office of the Premier
+2016,Northern Cape,2,Provincial Legislature
+2016,Northern Cape,3,"Transport, Safety and Liaison"
+2016,Northern Cape,4,Education
+2016,Northern Cape,5,Roads and Public Works
+2016,Northern Cape,6,Economic Development and Tourism
+2016,Northern Cape,7,"Sport, Arts and Culture"
+2016,Northern Cape,8,Provincial Treasury
+2016,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs"
+2016,Northern Cape,10,Health
+2016,Northern Cape,11,Social Development
+2016,Northern Cape,12,"Agriculture, Land Reform and Rural Development"
+2016,Northern Cape,13,Environment and Nature Conservation
+2016,North West,1,Office of the Premier
+2016,North West,2,Provincial Legislature
+2016,North West,3,Health
+2016,North West,4,"Culture, Arts and Traditional Affairs"
+2016,North West,5,Community Safety and Transport Management
+2016,North West,6,Economy and Entreprise Development
+2016,North West,7,Finance
+2016,North West,8,Education and Sports Development
+2016,North West,9,Local Government and Human Settlements
+2016,North West,10,Tourism
+2016,North West,11,Public Works and Roads
+2016,North West,12,Social Development
+2016,North West,13,Rural Environment and Agricultural Development
+2016,Western Cape,1,Office of the Premier
+2016,Western Cape,2,Provincial Parliament
+2016,Western Cape,3,Provincial Treasury
+2016,Western Cape,4,Community Safety
+2016,Western Cape,5,Education
+2016,Western Cape,6,Health
+2016,Western Cape,7,Social Development
+2016,Western Cape,8,Human Settlements
+2016,Western Cape,9,Environmental Affairs and Development Planning
+2016,Western Cape,10,Transport and Public Works
+2016,Western Cape,11,Agriculture
+2016,Western Cape,12,Economical Development and Tourism
+2016,Western Cape,13,Cultural Affairs and Sport
+2016,Western Cape,14,Local Government
+2017,Eastern Cape,1,Office of the Premier
+2017,Eastern Cape,2,Provincial Legislature
+2017,Eastern Cape,3,Health
+2017,Eastern Cape,4,Social Development
+2017,Eastern Cape,5,Roads and Public Works
+2017,Eastern Cape,6,Education
+2017,Eastern Cape,7,Cooperative Governance and Traditional Affairs
+2017,Eastern Cape,8,Rural Development and Agrarian Reform
+2017,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism"
+2017,Eastern Cape,10,Transport
+2017,Eastern Cape,11,Human Settlements
+2017,Eastern Cape,12,Provincial Treasury
+2017,Eastern Cape,14,"Sport, Art and Culture"
+2017,Eastern Cape,15,Safety and Liaison
+2017,Free State,1,Office of the Premier
+2017,Free State,2,Free State Legislature
+2017,Free State,3,"Department of Economic and Small Business Development, Tourism and Environmental Affairs"
+2017,Free State,4,Provincial Treasury
+2017,Free State,5,Health
+2017,Free State,6,Education
+2017,Free State,7,Social Development
+2017,Free State,8,Cooperative Governance and Traditional Affairs
+2017,Free State,9,Public Works and Infrastructure
+2017,Free State,10,"Police, Roads and Transport"
+2017,Free State,11,Agriculture and Rural Development
+2017,Free State,12,"Sport, Arts, Culture and Recreation"
+2017,Free State,13,Human Settlements
+2017,Gauteng,1,Office of the Premier
+2017,Gauteng,2,Provincial Legislature
+2017,Gauteng,3,Economic Development
+2017,Gauteng,4,Health
+2017,Gauteng,5,Education
+2017,Gauteng,6,Social Development
+2017,Gauteng,7,Cooperative Governance and Traditional Affairs
+2017,Gauteng,8,Human Settlements
+2017,Gauteng,9,Roads and Trasport
+2017,Gauteng,10,Community Safety
+2017,Gauteng,11,Agriculture and Rural Development
+2017,Gauteng,12,"Sport, Arts, Culture and Recreation"
+2017,Gauteng,13,E-Government
+2017,Gauteng,14,Gauteng Provincial Treasury
+2017,Gauteng,15,Infrastructure Development
+2017,KwaZulu-Natal,1,Office of the Premier
+2017,KwaZulu-Natal,2,Provincial Legislature
+2017,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development"
+2017,KwaZulu-Natal,4,Economic Development and Tourism
+2017,KwaZulu-Natal,5,Education
+2017,KwaZulu-Natal,6,Provincial Treasury
+2017,KwaZulu-Natal,7,Health
+2017,KwaZulu-Natal,8,Human Settlements
+2017,KwaZulu-Natal,9,Community Safety and Liaison
+2017,KwaZulu-Natal,10,Sports and Recreation
+2017,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs
+2017,KwaZulu-Natal,12,Transport
+2017,KwaZulu-Natal,13,Social Development
+2017,KwaZulu-Natal,14,Public Works
+2017,KwaZulu-Natal,15,Arts and Culture
+2017,Limpopo,1,Office of the Premier
+2017,Limpopo,2,Limpopo Legislature
+2017,Limpopo,3,Education
+2017,Limpopo,4,Agriculture and Rural Development
+2017,Limpopo,5,Provincial Treasury
+2017,Limpopo,6,"Economic Development, Environmental Affairs and Tourism"
+2017,Limpopo,7,Health
+2017,Limpopo,8,Transport
+2017,Limpopo,9,"Public Works, Roads and Infrastructure"
+2017,Limpopo,10,"Safety, Security and Liaison"
+2017,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs"
+2017,Limpopo,12,Social Development
+2017,Limpopo,13,"Sport, Arts and Culture"
+2017,Mpumalanga,1,Office of the Premier
+2017,Mpumalanga,2,Mpumalanga Provincial Legislature
+2017,Mpumalanga,3,Provincial Treasury
+2017,Mpumalanga,4,Co-operative Governance and Traditional Affairs
+2017,Mpumalanga,5,"Agricultural, Rural Development and Land Administration"
+2017,Mpumalanga,6,"Economic Development, Environment and Tourism"
+2017,Mpumalanga,7,Education
+2017,Mpumalanga,8,"Public Works, Roads and Transport"
+2017,Mpumalanga,9,"Community Safety, Security and Liaison"
+2017,Mpumalanga,10,Health
+2017,Mpumalanga,11,"Culture, Sport and Recreation"
+2017,Mpumalanga,12,Social Development
+2017,Mpumalanga,13,Human Settlements
+2017,Northern Cape,1,Office of the Premier
+2017,Northern Cape,2,Provincial Legislature
+2017,Northern Cape,3,"Transport, Safety and Liaison"
+2017,Northern Cape,4,Education
+2017,Northern Cape,5,Roads and Public Works
+2017,Northern Cape,6,Economic Development and Tourism
+2017,Northern Cape,7,"Sport, Arts and Culture"
+2017,Northern Cape,8,Provincial Treasury
+2017,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs"
+2017,Northern Cape,10,Health
+2017,Northern Cape,11,Social Development
+2017,Northern Cape,12,"Agriculture, Land Reform and Rural Development"
+2017,Northern Cape,13,Environment and Nature Conservation
+2017,North West,1,Office of the Premier
+2017,North West,2,Provincial Legislature
+2017,North West,3,Health
+2017,North West,4,"Culture, Arts and Traditional Affairs"
+2017,North West,5,Community Safety and Transport Management
+2017,North West,6,Economy and Entreprise Development
+2017,North West,7,Finance
+2017,North West,8,Education and Sports Development
+2017,North West,9,Local Government and Human Settlements
+2017,North West,10,Tourism
+2017,North West,11,Public Works and Roads
+2017,North West,12,Social Development
+2017,North West,13,Rural Environment and Agricultural Development
+2017,Western Cape,1,Office of the Premier
+2017,Western Cape,2,Provincial Parliament
+2017,Western Cape,3,Provincial Treasury
+2017,Western Cape,4,Community Safety
+2017,Western Cape,5,Education
+2017,Western Cape,6,Health
+2017,Western Cape,7,Social Development
+2017,Western Cape,8,Human Settlements
+2017,Western Cape,9,Environmental Affairs and Development Planning
+2017,Western Cape,10,Transport and Public Works
+2017,Western Cape,11,Agriculture
+2017,Western Cape,12,Economical Development and Tourism
+2017,Western Cape,13,Cultural Affairs and Sport
+2017,Western Cape,14,Local Government

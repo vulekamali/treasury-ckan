@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import re
 
-df = pd.read_json('scrape.jsonl', lines=True)
+df = pd.read_json('etl-data/scraped.jsonl', lines=True)
 
 years = set(df['year'].tolist())
 jurisdictions = set(df['jurisdiction'].tolist())
@@ -34,4 +34,4 @@ for year in years:
                    (df['name'] == clean_sheets[sheet]),
                    'name'] = clean_chapters[chapter]
 
-df.to_csv('scrape_normalised.csv')
+df.to_csv('etl-data/scrape_normalised.csv')
