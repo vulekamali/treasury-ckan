@@ -56,16 +56,20 @@ if 'upload-resources' in args.tasks:
         reader = csv.DictReader(csvfile)
         for row in reader:
             print
-            print row['geographic_region'], row['year'], row['name']
-            pid = package_id(row['geographic_region'], finyear[row['year']])
+            geographic_region = row['geographic_region']
+            financial_year = row['year']
+            department_name = row['department_name']
+            pid = package_id(geographic_region, department_name, financial_year)
+            print pid
             package = packagecache.get(pid, None)
             if not package:
                 package = ckan.action.package_show(id=pid)
                 packagecache[pid] = package
             resources = package['resources']
             matches = [r for r in resources if r['name'] == row['name']]
+            print row['name'], row['normalised_path']
             if matches:
-                print 'YES'
+                print 'Resource Exists'
             else:
                 if row['url']:
                     print ckan.action.resource_create(
@@ -76,10 +80,6 @@ if 'upload-resources' in args.tasks:
                 else:
                     path = args.resources_base + row['path']
                     noextension, extension = os.path.splitext(path)
-                    if extension == '.xlsx':
-                        xlsmpath = noextension + '.xlsm'
-                        if os.path.isfile(xlsmpath):
-                            path = xlsmpath
                     print ckan.action.resource_create(
                         package_id=pid,
                         name=row['name'],
