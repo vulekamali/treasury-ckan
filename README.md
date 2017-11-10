@@ -278,4 +278,4 @@ pyhon normalize.py
 
 This writes `etl-data/scraped_normalised.csv` which you can then correct manually. The list of manual corrections should always be saved in metadata/fuzzy_normalisation_fixes.csv
 
-The scrape includes PDFs for many years but only spreadsheets for the last three years so those we delete the other years.
+We then save `etl-data/scraped_normalised.csv` as `metadata/epre_fienames.csv` and run `etl/rename.py` which will add the `department_name` and `normalised_path` columns, and copy the files from the scraped path to the normalised path.
