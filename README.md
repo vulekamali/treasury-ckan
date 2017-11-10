@@ -248,7 +248,7 @@ paster --plugin=ckan search-index rebuild -c /ckan.ini
 Extract, Transform, Load (ETL)
 ------------------------------
 
-To start with, this will document the largely manually and irregular process of getting the data together and uploaded to CKAN.
+To start with, this will document the partly manual and irregular process of getting the data together and uploaded to CKAN.
 
 ### Estimates of Provincial Revenue and Expenditure (EPRE)
 
