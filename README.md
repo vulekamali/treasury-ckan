@@ -273,7 +273,7 @@ The spreadsheet filenames don't match the PDF names which represent the departme
 We use `etl/normalize.py` to do the bulk of that. Since it's doing fuzzy matching, it makes mistakes, and you'll have to view the results and do some manual fixes. ***Beware that provinces have different for their departments and they can't just be normalised across provinces***.
 
 ```
-pyhon normalize.py
+pyhon etl/normalize.py
 ```
 
 This writes `etl-data/scraped_normalised.csv` which you can then correct manually. The list of manual corrections should always be saved in metadata/fuzzy_normalisation_fixes.csv
