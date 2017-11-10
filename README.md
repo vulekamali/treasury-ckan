@@ -268,7 +268,7 @@ cat  etl-data/scraped.jsonl |grep pdf|egrep "(2015|2016|2017)"|jq -r '"\(.year),
 
 Use the "Text to columns" function of a spreadsheet program to split vote number and department name. Add column headers and save as `metadata/departments.csv`
 
-The spreadsheet filenames don't match the PDF names which are quite clear. We also want the per-vote spreadsheet names to match the chapter PDFs because they should be viewed together.
+The spreadsheet filenames don't match the PDF names which represent the department names. We also want the per-vote spreadsheet names to match the chapter PDFs because they should be viewed together.
 
 We use `etl/normalize.py` to do the bulk of that. Since it's doing fuzzy matching, it makes mistakes, and you'll have to view the results and do some manual fixes. ***Beware that provinces have different for their departments and they can't just be normalised across provinces***.
 
@@ -276,6 +276,6 @@ We use `etl/normalize.py` to do the bulk of that. Since it's doing fuzzy matchin
 pyhon normalize.py
 ```
 
-This writes `etl-data/scraped_normalised.csv` which you can then correct manually.
+This writes `etl-data/scraped_normalised.csv` which you can then correct manually. The list of manual corrections should always be saved in metadata/fuzzy_normalisation_fixes.csv
 
 The scrape includes PDFs for many years but only spreadsheets for the last three years so those we delete the other years.

@@ -1,10 +1,12 @@
-from fuzzywuzzy import process
+from fuzzywuzzy import fuzz, process
 import pandas as pd
 import os
 import re
 
 df_depts = pd.read_csv('metadata/departments.csv')
 df_files = pd.read_json('etl-data/scraped.jsonl', lines=True)
+
+df_files = df_files.loc[df_files['year'] >= 2015]
 
 years = set(df_depts['financial_year'].tolist())
 geographic_regions = set(df_depts['geographic_region'].tolist())
@@ -40,13 +42,15 @@ for year in years:
                 mod_sheet = 'Treasury'
             else:
                 mod_sheet = sheet
-            chapter = process.extractOne(mod_sheet, clean_chapters.keys())[0]
-            df_files.loc[(df_files['geographic_region'] == region) &
-                   (df_files['year'] == year) &
-                   (df_files['name'] == clean_sheets[sheet]),
-                   'name'] = clean_chapters[chapter]
+            chapter = process.extractOne(mod_sheet, clean_chapters.keys(), scorer=fuzz.partial_ratio)[0]
+            df_files.loc[
+                (df_files['geographic_region'] == region) &
+                (df_files['year'] == year) &
+                (df_files['name'] == clean_sheets[sheet]),
+                'name'
+            ] = clean_chapters[chapter]
 
 df_files.sort_values(['geographic_region', 'name'], inplace=True)
 df_files.sort_values('year', ascending=False, inplace=True, kind='mergesort')
 
-df_files.to_csv('etl-data/scrape_normalised_fuzzy.csv')
+df_files.to_csv('etl-data/scrape_normalised.csv')

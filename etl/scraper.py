@@ -66,7 +66,7 @@ class TreasurySpider(scrapy.Spider):
                 label = anchor.xpath('text()').extract_first().strip()
                 if url.endswith('.zip') and 'dataset' not in label.lower():
                     province = label
-                    directory = os.path.join('etl-scraped', response.meta['year'], province)
+                    directory = os.path.join('etl-data', response.meta['year'], province)
                     if not os.path.exists(directory):
                         os.makedirs(directory)
                     filename = os.path.join(directory, 'epre-xls.zip')
