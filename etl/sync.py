@@ -4,6 +4,8 @@ import csv
 import sys
 import os
 from slugify import slugify
+import pandas as pd
+from util import merge
 
 
 parser = argparse.ArgumentParser(description='Bring CKAN up to date with a local representation of what it should look like.')
@@ -38,8 +40,13 @@ prov_abbrev = {
 packagecache = {}
 
 
+def group_id(geographic_region, financial_year):
+    return slugify('%s province %s' % (
+        prov_abbrev[geographic_region], finyear[financial_year]))
+
+
 def package_id(geographic_region, department_name, financial_year):
-    short_dept = short_dept = slugify(department_name, max_length=85, word_boundary=True)
+    short_dept = slugify(department_name, max_length=85, word_boundary=True)
     return slugify('prov dept %s %s %s' % (
         prov_abbrev[geographic_region], short_dept, finyear[financial_year]))
 
@@ -86,7 +93,7 @@ if 'upload-resources' in args.tasks:
                         upload=open(path, 'rb')
                     )
 
-if 'create-packages' in args.tasks:
+if 'sync-packages' in args.tasks:
     with open('metadata/departments.csv') as csvfile:
         reader = csv.DictReader(csvfile)
         vocab_map = get_vocab_map()
@@ -99,25 +106,53 @@ if 'create-packages' in args.tasks:
             title = "%s Department: %s %s" % (geo_region, dept_name, finyear[financial_year])
             print pid
             print title
-
+            package_fields = {
+                'name': pid,
+                'id': pid,
+                'title': title,
+                'license_id': 'other-pd',
+                'groups': [{'name': group_id(geo_region, financial_year)}],
+                'tags': [
+                    { 'vocabulary_id': vocab_map['spheres'],
+                      'name': 'Provincial' },
+                    { 'vocabulary_id': vocab_map['financial_years'],
+                      'name': finyear[financial_year] },
+                    { 'vocabulary_id': vocab_map['provinces'],
+                      'name': geo_region },
+                ],
+                'extras': [
+                    { 'key': 'Department Name', 'value': dept_name },
+                    { 'key': 'Vote Number', 'value': row['vote_number'] },
+                ],
+                'owner_org': 'national-treasury'
+            }
             try:
-                package = ckan.action.package_create(
-                    name=pid,
-                    title=title,
-                    license_id='other-pd',
-                    tags=[
-                        { 'vocabulary_id': vocab_map['spheres'],
-                          'name': 'Provincial' },
-                        { 'vocabulary_id': vocab_map['financial_years'],
-                          'name': finyear[financial_year] },
-                        { 'vocabulary_id': vocab_map['provinces'],
-                          'name': geo_region },
-                    ],
-                    extras=[
-                        { 'key': 'Department Name', 'value': dept_name }
-                    ],
-                    owner_org='national-treasury'
-                )
+                package = ckan.action.package_create(**package_fields)
                 print package
             except ValidationError, e:
-                print e
+                if e.error_dict[u'name'] == [u'That URL is already in use.']:
+                    print "Package exists. Updating."
+                    package = ckan.action.package_patch(**package_fields)
+                    print package
+                else:
+                    print e
+
+if 'create-groups' in args.tasks:
+    df_depts = pd.read_csv('metadata/departments.csv')
+    years = set(df_depts['financial_year'].tolist())
+    geographic_regions = set(df_depts['geographic_region'].tolist())
+    for year in years:
+        financial_year = finyear[str(year)]
+        for region in geographic_regions:
+            gid = group_id(region, str(year))
+            title = "%s Province %s" % (region, financial_year)
+            extras=[
+                { 'key': 'Geographic Region', 'value': region },
+                { 'key': 'Financial Year', 'value': financial_year },
+            ]
+            group = ckan.action.group_create(
+                name=gid,
+                title=title,
+                extras=extras,
+            )
+            print group
