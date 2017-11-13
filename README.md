@@ -154,7 +154,6 @@ Allow large file uploads by creating an nginx config file (and directory if need
 ```
 client_max_body_size 100M;
 client_body_timeout 120s;
-add_header Access-Control-Allow-Origin https://openup.org.za;
 ```
 
 Then let nginx load it
