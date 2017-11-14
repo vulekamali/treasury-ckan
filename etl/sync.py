@@ -107,8 +107,8 @@ if 'sync-packages' in args.tasks:
             print pid
             print title
             package_fields = {
-                'name': pid,
                 'id': pid,
+                'name': pid,
                 'title': title,
                 'license_id': 'other-pd',
                 'groups': [{'name': group_id(geo_region, financial_year)}],
@@ -121,8 +121,12 @@ if 'sync-packages' in args.tasks:
                       'name': geo_region },
                 ],
                 'extras': [
+                    { 'key': 'department_name', 'value': dept_name },
                     { 'key': 'Department Name', 'value': dept_name },
+                    { 'key': 'department_name_slug', 'value': slugify(dept_name) },
                     { 'key': 'Vote Number', 'value': row['vote_number'] },
+                    { 'key': 'vote_number', 'value': row['vote_number'] },
+                    { 'key': 'geographic_region_slug', 'value': slugify(geo_region) },
                 ],
                 'owner_org': 'national-treasury'
             }
