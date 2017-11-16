@@ -17,3 +17,4 @@ docker run --rm -v $PWD:$PWD openup/tesseract4re-gs tesseract "$PWD/$TIFFFILE" "
 rm -f "$TIFFFILE"
 # Convert images in PDF to jpeg to reduce size ~4MB
 docker run --rm -v $PWD:$PWD openup/tesseract4re-gs gs -o gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -sOutputFile="$PWD/$SMALLEROCRDPDF" "$PWD/$OCRDPDF"
+rm -f "$OCRDPDF"
