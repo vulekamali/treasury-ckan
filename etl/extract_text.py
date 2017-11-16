@@ -81,8 +81,8 @@ subsection_splitter =  re.compile(subsection_split_regex, flags=re.DOTALL + re.I
 
 print subsection_split_regex
 
-def text_to_markdown(basename, txt_filename):
-    dirname = "%s_markdown" % basename
+def text_to_markdown(basename, txt_filename, item):
+    dirname = "etl-data/%s/%s/%s_markdown" % (item['year'], item['geographic_region'], basename)
     found_subsections = False
 
     with open(txt_filename) as txt_file:
@@ -94,14 +94,21 @@ def text_to_markdown(basename, txt_filename):
             overview_content = match.group('overview_content')
             subsection_matches = subsection_matcher.match('\n' + overview_content)
             if subsection_matches:
-                for subsection in subsection_matches.captures(1):
+                for idx, subsection in enumerate(subsection_matches.captures(1)):
                     split_subsection = subsection_splitter.match(subsection)
                     heading = split_subsection.group('heading').strip()
                     if heading in wanted_headings:
-                        print "### " + split_subsection.group('heading')
+                        section_markdown = clean_text(split_subsection.group('content'))
+                        print "### " + heading
                         print
-                        print clean_text(split_subsection.group('content'))
+                        print section_markdown
                         print "----------------------"
+
+                        if not os.path.exists(dirname):
+                            os.makedirs(dirname)
+                        filename = "%s/%s-%s.md" % (dirname, idx + 1, heading)
+                        with open(filename, 'wb') as outfile:
+                            outfile.write(section_markdown)
                         found_subsections = True
                 print "======================================="
             else:
@@ -139,6 +146,9 @@ with open('etl-data/scraped.jsonl') as jsonfile:
     for line in jsonfile.readlines():
         item = json.loads(line)
         if item.get('path', '').endswith('.pdf'):
+            if '2015/KwaZulu-Natal/Vote 10 : The Royal Household.pdf' in item['path']:
+                continue
+
             original_filename = item['path']
             original_filename_noext = os.path.splitext(original_filename)[0]
 
@@ -153,7 +163,9 @@ with open('etl-data/scraped.jsonl') as jsonfile:
             txt_filename = extract_text(original_filename_noext, original_filename)
             print
 
-            markdown_folder, found_subsections = text_to_markdown(original_filename, txt_filename)
+            markdown_folder, found_subsections \
+                = text_to_markdown(original_filename, txt_filename, item)
             if not found_subsections:
-                markdown_folder, found_subsections = text_to_markdown(original_filename, ocr_txt_filename)
+                markdown_folder, found_subsections \
+                    = text_to_markdown(original_filename, ocr_txt_filename, item)
             print
