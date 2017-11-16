@@ -79,11 +79,11 @@ def text_to_markdown(basename, txt_filename):
             overview_content = match.group('overview_content')
             subsection_matches = subsection_matcher.match('\n' + overview_content)
             if subsection_matches:
-                for subsection in subsection_matches.captures():
+                for subsection in subsection_matches.captures(1):
                     split_subsection = subsection_splitter.match(subsection)
                     print "### " + split_subsection.group('heading')
                     print
-                    print "    " + split_subsection.group('content')
+                    print clean_text(split_subsection.group('content'))
                     print "----------------------"
                 print "======================================="
             else:
@@ -96,10 +96,17 @@ def text_to_markdown(basename, txt_filename):
             print
             print
             print "========== no overview section =========="
-
-
-
     return dirname
+
+
+broken_line_regex = r'([a-z,])\s+([a-z])'
+broken_line_matcher = re.compile(broken_line_regex, flags=re.DOTALL)
+
+
+def clean_text(content):
+    content = broken_line_matcher.sub('\\1 \\2', content)
+
+    return
 
 
 with open('etl-data/scraped.jsonl') as jsonfile:
