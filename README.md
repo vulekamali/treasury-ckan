@@ -257,7 +257,7 @@ EPREs are scraped from treasury.gov.za and stored under `etl-data`. These should
 Metadata from the scrape is also stored there, as specified by `--output`. We use Line-delimited JSON objects `jl` because the CSV output doesn't handle the two different types of items.
 
 ```
-scrapy runspider --output=etl-data/scraped.jsonl --output-format=jsonl etl/scraper.py
+scrapy runspider --output=etl-data/scraped.jsonl --output-format=jl etl/scraper.py
 ```
 
 A list of department names and vote numbers for each provincial government is produced from the EPRE chapters.
@@ -270,12 +270,18 @@ Use the "Text to columns" function of a spreadsheet program to split vote number
 
 The spreadsheet filenames don't match the PDF names which represent the department names. We also want the per-vote spreadsheet names to match the chapter PDFs because they should be viewed together.
 
-We use `etl/normalize.py` to do the bulk of that. Since it's doing fuzzy matching, it makes mistakes, and you'll have to view the results and do some manual fixes. ***Beware that provinces have different for their departments and they can't just be normalised across provinces***.
+We use `etl/normalise.py` to do the bulk of that. Since it's doing fuzzy matching, it makes mistakes, and you'll have to view the results and do some manual fixes. ***Beware that provinces have different for their departments and they can't just be normalised across provinces***.
 
 ```
-pyhon etl/normalize.py
+pyhon etl/normalise.py
 ```
 
 This writes `etl-data/scraped_normalised.csv` which you can then correct manually. The list of manual corrections should always be saved in metadata/fuzzy_normalisation_fixes.csv
 
 We then save `etl-data/scraped_normalised.csv` as `metadata/epre_fienames.csv` and run `etl/rename.py` which will add the `department_name` and `normalised_path` columns, and copy the files from the scraped path to the normalised path.
+
+Build dockerfile for OCRing PDFs
+
+```
+docker build -f etl/Dockerfile -t openup/tesseract4re-gs:latest etl
+```
