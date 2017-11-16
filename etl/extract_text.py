@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 import json
 import subprocess
 import os
 import regex as re
 import pprint
+import string
 
 
 def extract_pages(basename):
@@ -57,20 +57,27 @@ wanted_headings = [
     'Core functions and responsibilities',
 ]
 headings = [
-    'Vision',
-    'Mission',
-    'Strategic Objectives',
-    'Overview of the main services that the department intends to deliver',
-    'Legislative mandate',
-    'External activities and other events relevant to budget decisions',
-    'Core functions and responsibilities',
     'Acts, Rules and Regulations',
+    'Consititutional mandates',
+    'Core functions and responsibilities',
+    'Core functions',
+    'Demands and changes in services',
+    'External activities and other events relevant to budget decisions',
+    'Legislative and other mandates',
+    'Legislative mandate',
+    'Main services',
+    'Main Services and Core functions',
+    'Mission',
+    'Overview of the main services that the department intends to deliver',
+    'Policy mandates',
+    'Strategic Objectives',
+    'Vision',
 ]
 headings_regex = '(?:%s)\n' % '|'.join(headings)
 subsection_match_regex = r'^(\n[]*%s.+?)+$' % headings_regex
 subsection_split_regex = r'^(?:\n[]*(?P<heading>%s)(?P<content>.+?))+$' % headings_regex
 subsection_matcher = re.compile(subsection_match_regex, flags=re.DOTALL)
-subsection_splitter =  re.compile(subsection_split_regex, flags=re.DOTALL)
+subsection_splitter =  re.compile(subsection_split_regex, flags=re.DOTALL + re.IGNORECASE)
 
 print subsection_split_regex
 
@@ -100,7 +107,7 @@ def text_to_markdown(basename, txt_filename):
                 print "No subsection matches"
                 print "---------------------"
                 print subsection_match_regex
-                print overview_content
+                #print overview_content
         else:
             print
             print
@@ -110,13 +117,18 @@ def text_to_markdown(basename, txt_filename):
 
 broken_line_regex = r'([a-z,])\s+([a-z0-9])'
 broken_line_matcher = re.compile(broken_line_regex, flags=re.DOTALL)
-list_item_regex = r'\s*[](\s+)(\w+)'
-list_item_matcher = re.compile(list_item_regex, flags=re.UNICODE)
+list_item_regex = r'\s*[^\w](\s+)(\w+)'
+list_item_matcher = re.compile(list_item_regex)
+printable = set(string.printable)
+header_regex = '^.{0,20}Estimates of Provincial Revenue and Expenditure.{0,20}$'
+header_matcher = re.compile(header_regex, flags=re.MULTILINE)
 
 
 def clean_text(content):
+    content = list_item_matcher.sub('', content)
     content = broken_line_matcher.sub('\\1 \\2', content)
-    content = list_item_matcher.sub('\1- \2', content)
+    content = list_item_matcher.sub('\\1- \\2', content)
+    content = filter(lambda x: x in printable, content)
 
     return content
 
