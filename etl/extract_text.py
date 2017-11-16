@@ -83,6 +83,7 @@ print subsection_split_regex
 
 def text_to_markdown(basename, txt_filename):
     dirname = "%s_markdown" % basename
+    found_subsections = False
 
     with open(txt_filename) as txt_file:
         text = txt_file.read()
@@ -101,6 +102,7 @@ def text_to_markdown(basename, txt_filename):
                         print
                         print clean_text(split_subsection.group('content'))
                         print "----------------------"
+                        found_subsections = True
                 print "======================================="
             else:
                 print "---------------------"
@@ -112,7 +114,7 @@ def text_to_markdown(basename, txt_filename):
             print
             print
             print "========== no overview section =========="
-    return dirname
+    return dirname, found_subsections
 
 
 broken_line_regex = r'([a-z,])\s+([a-z0-9])'
@@ -151,6 +153,7 @@ with open('etl-data/scraped.jsonl') as jsonfile:
             txt_filename = extract_text(original_filename_noext, original_filename)
             print
 
-            markdown_folder = text_to_markdown(original_filename, txt_filename)
-            #markdown_folder = text_to_markdown(original_filename, ocr_txt_filename)
+            markdown_folder, found_subsections = text_to_markdown(original_filename, txt_filename)
+            if not found_subsections:
+                markdown_folder, found_subsections = text_to_markdown(original_filename, ocr_txt_filename)
             print
