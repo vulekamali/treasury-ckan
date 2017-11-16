@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import subprocess
 import os
@@ -39,7 +40,7 @@ def extract_text(basename, ocr_filename):
     if os.path.isfile(txt_filename):
         print "File exists: '%s'" % txt_filename
     else:
-        command = ["pdftotext", ocr_filename, txt_filename]
+        command = ["pdftotext", "-layout", ocr_filename, txt_filename]
         print command
         exit_code = subprocess.call(command)
         if exit_code:
@@ -49,6 +50,12 @@ def extract_text(basename, ocr_filename):
 
 overview_matcher = re.compile(r'\n(?:1\.)?\s*Overview\n\s*(?P<overview_content>.+)(?:Review of the current financial year|$)', flags=re.DOTALL)
 
+wanted_headings = [
+    'Vision',
+    'Mission',
+    'Strategic Objectives',
+    'Core functions and responsibilities',
+]
 headings = [
     'Vision',
     'Mission',
@@ -81,10 +88,12 @@ def text_to_markdown(basename, txt_filename):
             if subsection_matches:
                 for subsection in subsection_matches.captures(1):
                     split_subsection = subsection_splitter.match(subsection)
-                    print "### " + split_subsection.group('heading')
-                    print
-                    print clean_text(split_subsection.group('content'))
-                    print "----------------------"
+                    heading = split_subsection.group('heading').strip()
+                    if heading in wanted_headings:
+                        print "### " + split_subsection.group('heading')
+                        print
+                        print clean_text(split_subsection.group('content'))
+                        print "----------------------"
                 print "======================================="
             else:
                 print "---------------------"
@@ -99,14 +108,17 @@ def text_to_markdown(basename, txt_filename):
     return dirname
 
 
-broken_line_regex = r'([a-z,])\s+([a-z])'
+broken_line_regex = r'([a-z,])\s+([a-z0-9])'
 broken_line_matcher = re.compile(broken_line_regex, flags=re.DOTALL)
+list_item_regex = r'\s*[](\s+)(\w+)'
+list_item_matcher = re.compile(list_item_regex, flags=re.UNICODE)
 
 
 def clean_text(content):
     content = broken_line_matcher.sub('\\1 \\2', content)
+    content = list_item_matcher.sub('\1- \2', content)
 
-    return
+    return content
 
 
 with open('etl-data/scraped.jsonl') as jsonfile:
@@ -122,8 +134,11 @@ with open('etl-data/scraped.jsonl') as jsonfile:
             ocr_filename = ocr(original_filename_noext, filename_p1_3)
             print
 
-            txt_filename = extract_text(original_filename_noext, ocr_filename)
+            ocr_filename_noext = os.path.splitext(ocr_filename)[0]
+            ocr_txt_filename = extract_text(ocr_filename_noext, ocr_filename)
+            txt_filename = extract_text(original_filename_noext, original_filename)
             print
 
             markdown_folder = text_to_markdown(original_filename, txt_filename)
+            #markdown_folder = text_to_markdown(original_filename, ocr_txt_filename)
             print
