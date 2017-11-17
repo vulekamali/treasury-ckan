@@ -14,6 +14,7 @@ class URLItem(scrapy.Item):
     year = scrapy.Field()
     geographic_region = scrapy.Field()
     url = scrapy.Field()
+    path = scrapy.Field()
     name = scrapy.Field()
 
 
@@ -94,12 +95,28 @@ class TreasurySpider(scrapy.Spider):
     def parse_epre_province_chapters(self, response):
         for anchor in response.css('a'):
             if anchor.xpath('text()').re(REGEX_EPRE_VOTE_PDF):
-                url = abs_url(response, anchor)
                 item = URLItem()
+
+                url = abs_url(response, anchor)
+                if url.endswith('.pdf'):
+                    province = response.meta['province']
+                    year = response.meta['year']
+                    directory = os.path.join('etl-data', year, province)
+                    label = anchor.xpath('text()').extract_first().strip()
+                    if not os.path.exists(directory):
+                        os.makedirs(directory)
+                    filename = os.path.join(directory, label + '.pdf')
+                    print "Downloading %s to %s" % (url, filename)
+                    if os.path.isfile(filename):
+                        print "Already exists"
+                    else:
+                        urllib.urlretrieve(url, filename)
+                    item['path'] = filename
+
                 item['url'] = url
-                item['geographic_region'] = response.meta['province']
-                item['year'] = response.meta['year']
-                item['name'] = anchor.xpath('text()').extract_first().strip()
+                item['geographic_region'] = province
+                item['year'] = year
+                item['name'] = label
                 yield item
 
 
