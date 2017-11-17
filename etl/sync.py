@@ -141,7 +141,8 @@ if 'sync-packages' in args.tasks:
                 else:
                     print e
 
-if 'create-groups' in args.tasks:
+
+if 'sync-groups' in args.tasks:
     df_depts = pd.read_csv('metadata/departments.csv')
     years = set(df_depts['financial_year'].tolist())
     geographic_regions = set(df_depts['geographic_region'].tolist())
