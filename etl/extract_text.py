@@ -48,7 +48,7 @@ def extract_text(basename, ocr_filename):
     return txt_filename
 
 
-overview_matcher = re.compile(r'\n(?:1\.)?\s*Overview\n\s*(?P<overview_content>.+)(?:Review of the current financial year|$)', flags=re.DOTALL + re.IGNORECASE)
+overview_matcher = re.compile(r'\n(?:1\.)?\s*Overview\n\s*(?P<overview_content>.+)(?:Review of the current financ(?:ial|e) year|$)', flags=re.DOTALL + re.IGNORECASE)
 
 wanted_headings = [
     'Broad policies, priorities and strategic goals',
@@ -162,14 +162,18 @@ def text_to_markdown(basename, txt_filename, item):
     return dirname, found_subsections, file_metadata
 
 
+page_number_regex = r'\n\s*\d+\s*\n'
+page_number_matcher = re.compile(page_number_regex)
 broken_line_regex = r'([a-z,])\s+([a-z0-9])'
 broken_line_matcher = re.compile(broken_line_regex, flags=re.DOTALL)
 new_para_regex = r'(\w)\n+([A-Z0-9])'
 new_para_matcher = re.compile(new_para_regex, flags=re.DOTALL)
 list_item_regex = r'\n\s*[^\w](\s+)(\w+)'
 list_item_matcher = re.compile(list_item_regex)
-bullet_regex = r'\n(\s*)[oe*-]+\b(\s+)(\w+)'
+bullet_regex = r'\n(\s*)[oe* -]+\s+(\w+)'
 bullet_matcher = re.compile(bullet_regex)
+stray_bullet_regex = r'\s+e\s+'
+stray_bullet_matcher = re.compile(stray_bullet_regex)
 printable = set(string.printable)
 header_regex = '^.{0,20}Estimates of Provincial Revenue and Expenditure.{0,20}$'
 header_matcher = re.compile(header_regex, flags=re.MULTILINE)
@@ -177,10 +181,12 @@ header_matcher = re.compile(header_regex, flags=re.MULTILINE)
 
 def clean_text(content):
     content = header_matcher.sub('', content)
+    content = page_number_matcher.sub('\n', content)
     content = broken_line_matcher.sub('\\1 \\2', content)
     content = list_item_matcher.sub('\n\\1- \\2', content)
-    content = bullet_matcher.sub('\n\\1- \\3', content)
     content = new_para_matcher.sub('\\1\n\n\\2', content)
+    content = bullet_matcher.sub('\n\\1- \\2', content)
+    content = bullet_matcher.sub('\n- ', content)
     content = filter(lambda x: x in printable, content)
 
     return content
