@@ -1,4 +1,5 @@
 from ckanapi import RemoteCKAN, ValidationError
+from ckanapi.errors import NotFound
 import argparse
 import csv
 import sys
@@ -172,7 +173,8 @@ if 'sync-packages' in args.tasks:
                 package = ckan.action.package_create(**package_fields)
                 print package
             except ValidationError, e:
-                if e.error_dict.get(u'id', None) == [u'Dataset id already exists']:
+                if e.error_dict.get(u'id', None) == [u'Dataset id already exists'] or \
+                   e.error_dict.get(u'name', None) == [u'That URL is already in use.']:
                     print "Package exists. Updating."
                     package = ckan.action.package_patch(**package_fields)
                     print package
@@ -201,8 +203,10 @@ if 'create-groups' in args.tasks:
                 {'key': 'Financial Year', 'value': financial_year},
             ],
         }
-        if ckan.action.group_show(id=gid):
-            raise Exception("don't overwrite existing group")
-        group = ckan.action.group_create(**group_fields)
-        print group
+        try:
+            ckan.action.group_show(id=gid)
+            print "Not recreating group"
+        except NotFound:
+            group = ckan.action.group_create(**group_fields)
+            print group
         print
