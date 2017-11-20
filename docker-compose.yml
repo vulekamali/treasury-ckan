@@ -18,16 +18,14 @@ services:
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
         - CKAN_SITE_URL=http://localhost/
         - CKAN___BEAKER__SESSION__SECRET=supersecret
-    env_file: env.dev
+    env_file: env.prod
     volumes:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default
+      - ../ckanext-satreasury/:/ckanext-satreasury
 
   datapusher:
-    # image: openup/ckan-datapusher
-    build:
-      context: ../ckan-datapusher-dokku/
-      dockerfile: Dockerfile-deps
+    image: openup/ckan-datapusher
     ports:
       - "8800:8800"
 
