@@ -88,14 +88,14 @@ def get_vocab_map():
     return vocab_map
 
 
-if 'sync-resources' in args.tasks:
+if 'upload-resources' in args.tasks:
     with open(args.resources_file) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             print
             sphere = row['sphere']
             geographic_region = row['geographic_region']
-            financial_year = row['year']
+            financial_year = finyear[row['financial_year']]
             department_name = row['department_name']
             pid = package_id(sphere, geographic_region, department_name, financial_year)
             print pid
@@ -158,7 +158,6 @@ if 'sync-packages' in args.tasks:
                     { 'key': 'Vote Number', 'value': row['vote_number'] },
                     { 'key': 'vote_number', 'value': row['vote_number'] },
                     { 'key': 'geographic_region_slug', 'value': slugify(geo_region) },
-                    { 'key': 'sphere', 'value': sphere },
                 ],
                 'owner_org': 'national-treasury'
             }
