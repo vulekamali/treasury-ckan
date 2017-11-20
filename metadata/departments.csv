@@ -1,371 +1,491 @@
-financial_year,geographic_region,vote_number,department_name,chapter_title
-2015,Eastern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Eastern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2015,Eastern Cape,3,Health,Vote 03 : Health
-2015,Eastern Cape,4,Social Development,Vote 04 : Social Development
-2015,Eastern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
-2015,Eastern Cape,6,Education,Vote 06 : Education
-2015,Eastern Cape,7,Local Government and Traditional Affairs,Vote 07 : Local Government and Traditional Affairs
-2015,Eastern Cape,8,Rural Development and Agrarian Reform,Vote 08 : Rural Development and Agrarian Reform
-2015,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism","Vote 09 : Economic Development, Environmental Affairs and Tourism"
-2015,Eastern Cape,10,Transport,Vote 10 : Transport
-2015,Eastern Cape,11,Human Settlements,Vote 11 : Human Settlements
-2015,Eastern Cape,12,Provincial Treasury,Vote 12 : Provincial Treasury
-2015,Eastern Cape,14,"Sport, Art and Culture","Vote 14 : Sport, Art and Culture"
-2015,Eastern Cape,15,Safety and Liaison,Vote 15 : Safety and Liaison
-2015,Free State,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Free State,2,Free State Legislature,Vote 02 : Free State Legislature
-2015,Free State,3,"Economic Development, Tourism and Environmental Affairs","Vote 03 : Economic Development, Tourism and Environmental Affairs"
-2015,Free State,4,Provincial Treasury,Vote 04 : Provincial Treasury
-2015,Free State,5,Health,Vote 05 : Health
-2015,Free State,6,Education,Vote 06 : Education
-2015,Free State,7,Social Development,Vote 07 : Social Development
-2015,Free State,8,Cooperative Governance and Traditional Affairs,Vote 08 : Cooperative Governance and Traditional Affairs
-2015,Free State,9,Public Works,Vote 09 : Public Works
-2015,Free State,10,"Police, Roads and Transport","Vote 10 : Police, Roads and Transport"
-2015,Free State,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
-2015,Free State,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
-2015,Free State,13,Human Settlements,Vote 13 : Human Settlements
-2015,Gauteng,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Gauteng,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2015,Gauteng,3,Economic Development,Vote 03 : Economic Development
-2015,Gauteng,4,Health,Vote 04 : Health
-2015,Gauteng,5,Education,Vote 05 : Education
-2015,Gauteng,6,Social Development,Vote 06 : Social Development
-2015,Gauteng,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
-2015,Gauteng,8,Human Settlements,Vote 08 : Human Settlements
-2015,Gauteng,9,Roads and Trasport,Vote 09 : Roads and Trasport
-2015,Gauteng,10,Community Safety,Vote 10 : Community Safety
-2015,Gauteng,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
-2015,Gauteng,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
-2015,Gauteng,13,Finance,Vote 13 : Finance
-2015,Gauteng,14,Gauteng Provincial Treasury,Vote 14 : Gauteng Provincial Treasury
-2015,Gauteng,15,Infrastructure Development,Vote 15 : Infrastructure Development
-2015,KwaZulu-Natal,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,KwaZulu-Natal,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2015,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development","Vote 03 : Agriculture, Environmental Affairs and Rural Development"
-2015,KwaZulu-Natal,4,Economic Development and Tourism,Vote 04 : Economic Development and Tourism
-2015,KwaZulu-Natal,5,Education,Vote 05 : Education
-2015,KwaZulu-Natal,6,Provincial Treasury,Vote 06 : Provincial Treasury
-2015,KwaZulu-Natal,7,Health,Vote 07 : Health
-2015,KwaZulu-Natal,8,Human Settlements,Vote 08 : Human Settlements
-2015,KwaZulu-Natal,9,Community Safety and Liaison,Vote 09 : Community Safety and Liaison
-2015,KwaZulu-Natal,10,The Royal Household,Vote 10 : The Royal Household
-2015,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs,Vote 11 : Co-operative Governance and Traditional Affairs
-2015,KwaZulu-Natal,12,Transport,Vote 12 : Transport
-2015,KwaZulu-Natal,13,Social Development,Vote 13 : Social Development
-2015,KwaZulu-Natal,14,Public Works,Vote 14 : Public Works
-2015,KwaZulu-Natal,15,Arts and Culture,Vote 15 : Arts and Culture
-2015,KwaZulu-Natal,16,Sport and Recreation,Vote 16 : Sport and Recreation
-2015,Limpopo,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Limpopo,2,Limpopo Legislature,Vote 02 : Limpopo Legislature
-2015,Limpopo,3,Education,Vote 03 : Education
-2015,Limpopo,4,Agriculture,Vote 04 : Agriculture
-2015,Limpopo,5,Provincial Treasury,Vote 05 : Provincial Treasury
-2015,Limpopo,6,"Economic Development, Environmental Affairs and Tourism","Vote 06 : Economic Development, Environmental Affairs and Tourism"
-2015,Limpopo,7,Health,Vote 07 : Health
-2015,Limpopo,8,Roads and Transport,Vote 08 : Roads and Transport
-2015,Limpopo,9,Public Works,Vote 09 : Public Works
-2015,Limpopo,10,"Safety, Security and Liaison","Vote 10 : Safety, Security and Liaison"
-2015,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs","Vote 11 : Co-operative Governance, Human Settlement and Traditional Affairs"
-2015,Limpopo,12,Social Development,Vote 12 : Social Development
-2015,Limpopo,13,"Sport, Arts and Culture","Vote 13 : Sport, Arts and Culture"
-2015,Mpumalanga,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Mpumalanga,2,Mpumalanga Provincial Legislature,Vote 02 : Mpumalanga Provincial Legislature
-2015,Mpumalanga,3,Finance,Vote 03 : Finance
-2015,Mpumalanga,4,Co-operative Governance and Traditional Affairs,Vote 04 : Co-operative Governance and Traditional Affairs
-2015,Mpumalanga,5,"Agricultural, Rural Development and Land Administration","Vote 05 : Agricultural, Rural Development and Land Administration"
-2015,Mpumalanga,6,"Economic Development, Environment and Tourism","Vote 06 : Economic Development, Environment and Tourism"
-2015,Mpumalanga,7,Education,Vote 07 : Education
-2015,Mpumalanga,8,"Public Works, Roads and Transport","Vote 08 : Public Works, Roads and Transport"
-2015,Mpumalanga,9,"Community Safety, Security and Liaison","Vote 09 : Community Safety, Security and Liaison"
-2015,Mpumalanga,10,Health,Vote 10 : Health
-2015,Mpumalanga,11,"Culture, Sport and Recreation","Vote 11 : Culture, Sport and Recreation"
-2015,Mpumalanga,12,Social Development,Vote 12 : Social Development
-2015,Mpumalanga,13,Human Settlements,Vote 13 : Human Settlements
-2015,Northern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Northern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2015,Northern Cape,3,"Transport, Safety and Liaison","Vote 03 : Transport, Safety and Liaison"
-2015,Northern Cape,4,Education,Vote 04 : Education
-2015,Northern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
-2015,Northern Cape,6,Economic Development and Tourism,Vote 06 : Economic Development and Tourism
-2015,Northern Cape,7,"Sport, Arts and Culture","Vote 07 : Sport, Arts and Culture"
-2015,Northern Cape,8,Provincial Treasury,Vote 08 : Provincial Treasury
-2015,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs","Vote 09 : Cooperative Governance, Human Settlement and Traditional Affairs"
-2015,Northern Cape,10,Health,Vote 10 : Health
-2015,Northern Cape,11,Social Development,Vote 11 : Social Development
-2015,Northern Cape,12,"Agriculture, Land Reform and Rural Development","Vote 12 : Agriculture, Land Reform and Rural Development"
-2015,Northern Cape,13,Environment and Nature Conservation,Vote 13 : Environment and Nature Conservation
-2015,North West,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,North West,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2015,North West,3,Health,Vote 03 : Health
-2015,North West,4,"Sport, Arts and Culture","Vote 04 : Sport, Arts and Culture"
-2015,North West,5,Public Safety and Liaison,Vote 05 : Public Safety and Liaison
-2015,North West,6,"Economic Development, Environment, Conservation and Tourism","Vote 06 : Economic Development, Environment, Conservation and Tourism"
-2015,North West,7,Finance,Vote 07 : Finance
-2015,North West,8,Education,Vote 08 : Education
-2015,North West,9,Local Government and Traditional Affairs,Vote 09 : Local Government and Traditional Affairs
-2015,North West,11,"Public Works, Roads and Transport","Vote 11 : Public Works, Roads and Transport"
-2015,North West,12,Social Development,Vote 12 : Social Development
-2015,North West,13,Agricultural and Rural Development,Vote 13 : Agricultural and Rural Development
-2015,North West,15,Human Settlements,Vote 15 : Human Settlements
-2015,Western Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2015,Western Cape,2,Provincial Parliament,Vote 02 : Provincial Parliament
-2015,Western Cape,3,Provincial Treasury,Vote 03 : Provincial Treasury
-2015,Western Cape,4,Community Safety,Vote 04 : Community Safety
-2015,Western Cape,5,Education,Vote 05 : Education
-2015,Western Cape,6,Health,Vote 06 : Health
-2015,Western Cape,7,Social Development,Vote 07 : Social Development
-2015,Western Cape,8,Human Settlements,Vote 08 : Human Settlements
-2015,Western Cape,9,Environmental Affairs and Development Planning,Vote 09 : Environmental Affairs and Development Planning
-2015,Western Cape,10,Transport and Public Works,Vote 10 : Transport and Public Works
-2015,Western Cape,11,Agriculture,Vote 11 : Agriculture
-2015,Western Cape,12,Economical Development and Tourism,Vote 12 : Economical Development and Tourism
-2015,Western Cape,13,Cultural Affairs and Sport,Vote 13 : Cultural Affairs and Sport
-2015,Western Cape,14,Local Government,Vote 14 : Local Government
-2016,Eastern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Eastern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2016,Eastern Cape,3,Health,Vote 03 : Health
-2016,Eastern Cape,4,Social Development,Vote 04 : Social Development
-2016,Eastern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
-2016,Eastern Cape,6,Education,Vote 06 : Education
-2016,Eastern Cape,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
-2016,Eastern Cape,8,Rural Development and Agrarian Reform,Vote 08 : Rural Development and Agrarian Reform
-2016,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism","Vote 09 : Economic Development, Environmental Affairs and Tourism"
-2016,Eastern Cape,10,Transport,Vote 10 : Transport
-2016,Eastern Cape,11,Human Settlements,Vote 11 : Human Settlements
-2016,Eastern Cape,12,Provincial Treasury,Vote 12 : Provincial Treasury
-2016,Eastern Cape,14,"Sport, Art and Culture","Vote 14 : Sport, Art and Culture"
-2016,Eastern Cape,15,Safety and Liaison,Vote 15 : Safety and Liaison
-2016,Free State,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Free State,2,Free State Legislature,Vote 02 : Free State Legislature
-2016,Free State,3,"Department of Economic and Small Business Development, Tourism and Environmental Affairs","Vote 03 : Department of Economic and Small Business Development, Tourism and Environmental Affairs"
-2016,Free State,4,Provincial Treasury,Vote 04 : Provincial Treasury
-2016,Free State,5,Health,Vote 05 : Health
-2016,Free State,6,Education,Vote 06 : Education
-2016,Free State,7,Social Development,Vote 07 : Social Development
-2016,Free State,8,Cooperative Governance and Traditional Affairs,Vote 08 : Cooperative Governance and Traditional Affairs
-2016,Free State,9,Public Works and Infrastructure,Vote 09 : Public Works and Infrastructure
-2016,Free State,10,"Police, Roads and Transport","Vote 10 : Police, Roads and Transport"
-2016,Free State,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
-2016,Free State,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
-2016,Free State,13,Human Settlements,Vote 13 : Human Settlements
-2016,Gauteng,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Gauteng,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2016,Gauteng,3,Economic Development,Vote 03 : Economic Development
-2016,Gauteng,4,Health,Vote 04 : Health
-2016,Gauteng,5,Education,Vote 05 : Education
-2016,Gauteng,6,Social Development,Vote 06 : Social Development
-2016,Gauteng,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
-2016,Gauteng,8,Human Settlements,Vote 08 : Human Settlements
-2016,Gauteng,9,Roads and Trasport,Vote 09 : Roads and Trasport
-2016,Gauteng,10,Community Safety,Vote 10 : Community Safety
-2016,Gauteng,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
-2016,Gauteng,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
-2016,Gauteng,13,E-Government,Vote 13 : E-Government
-2016,Gauteng,14,Gauteng Provincial Treasury,Vote 14 : Gauteng Provincial Treasury
-2016,Gauteng,15,Infrastructure Development,Vote 15 : Infrastructure Development
-2016,KwaZulu-Natal,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,KwaZulu-Natal,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2016,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development","Vote 03 : Agriculture, Environmental Affairs and Rural Development"
-2016,KwaZulu-Natal,4,Economic Development and Tourism,Vote 04 : Economic Development and Tourism
-2016,KwaZulu-Natal,5,Education,Vote 05 : Education
-2016,KwaZulu-Natal,6,Provincial Treasury,Vote 06 : Provincial Treasury
-2016,KwaZulu-Natal,7,Health,Vote 07 : Health
-2016,KwaZulu-Natal,8,Human Settlements,Vote 08 : Human Settlements
-2016,KwaZulu-Natal,9,Community Safety and Liaison,Vote 09 : Community Safety and Liaison
-2016,KwaZulu-Natal,10,Sports and Recreation,Vote 10 : Sports and Recreation
-2016,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs,Vote 11 : Co-operative Governance and Traditional Affairs
-2016,KwaZulu-Natal,12,Transport,Vote 12 : Transport
-2016,KwaZulu-Natal,13,Social Development,Vote 13 : Social Development
-2016,KwaZulu-Natal,14,Public Works,Vote 14 : Public Works
-2016,KwaZulu-Natal,15,Arts and Culture,Vote 15 : Arts and Culture
-2016,Limpopo,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Limpopo,2,Limpopo Legislature,Vote 02 : Limpopo Legislature
-2016,Limpopo,3,Education,Vote 03 : Education
-2016,Limpopo,4,Agriculture and Rural Development,Vote 04 : Agriculture and Rural Development
-2016,Limpopo,5,Provincial Treasury,Vote 05 : Provincial Treasury
-2016,Limpopo,6,"Economic Development, Environmental Affairs and Tourism","Vote 06 : Economic Development, Environmental Affairs and Tourism"
-2016,Limpopo,7,Health,Vote 07 : Health
-2016,Limpopo,8,Transport,Vote 08 : Transport
-2016,Limpopo,9,"Public Works, Roads and Infrastructure","Vote 09 : Public Works, Roads and Infrastructure"
-2016,Limpopo,10,"Safety, Security and Liaison","Vote 10 : Safety, Security and Liaison"
-2016,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs","Vote 11 : Co-operative Governance, Human Settlement and Traditional Affairs"
-2016,Limpopo,12,Social Development,Vote 12 : Social Development
-2016,Limpopo,13,"Sport, Arts and Culture","Vote 13 : Sport, Arts and Culture"
-2016,Mpumalanga,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Mpumalanga,2,Mpumalanga Provincial Legislature,Vote 02 : Mpumalanga Provincial Legislature
-2016,Mpumalanga,3,Provincial Treasury,Vote 03 : Provincial Treasury
-2016,Mpumalanga,4,Co-operative Governance and Traditional Affairs,Vote 04 : Co-operative Governance and Traditional Affairs
-2016,Mpumalanga,5,"Agricultural, Rural Development and Land Administration","Vote 05 : Agricultural, Rural Development and Land Administration"
-2016,Mpumalanga,6,"Economic Development, Environment and Tourism","Vote 06 : Economic Development, Environment and Tourism"
-2016,Mpumalanga,7,Education,Vote 07 : Education
-2016,Mpumalanga,8,"Public Works, Roads and Transport","Vote 08 : Public Works, Roads and Transport"
-2016,Mpumalanga,9,"Community Safety, Security and Liaison","Vote 09 : Community Safety, Security and Liaison"
-2016,Mpumalanga,10,Health,Vote 10 : Health
-2016,Mpumalanga,11,"Culture, Sport and Recreation","Vote 11 : Culture, Sport and Recreation"
-2016,Mpumalanga,12,Social Development,Vote 12 : Social Development
-2016,Mpumalanga,13,Human Settlements,Vote 13 : Human Settlements
-2016,Northern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Northern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2016,Northern Cape,3,"Transport, Safety and Liaison","Vote 03 : Transport, Safety and Liaison"
-2016,Northern Cape,4,Education,Vote 04 : Education
-2016,Northern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
-2016,Northern Cape,6,Economic Development and Tourism,Vote 06 : Economic Development and Tourism
-2016,Northern Cape,7,"Sport, Arts and Culture","Vote 07 : Sport, Arts and Culture"
-2016,Northern Cape,8,Provincial Treasury,Vote 08 : Provincial Treasury
-2016,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs","Vote 09 : Cooperative Governance, Human Settlement and Traditional Affairs"
-2016,Northern Cape,10,Health,Vote 10 : Health
-2016,Northern Cape,11,Social Development,Vote 11 : Social Development
-2016,Northern Cape,12,"Agriculture, Land Reform and Rural Development","Vote 12 : Agriculture, Land Reform and Rural Development"
-2016,Northern Cape,13,Environment and Nature Conservation,Vote 13 : Environment and Nature Conservation
-2016,North West,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,North West,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2016,North West,3,Health,Vote 03 : Health
-2016,North West,4,"Culture, Arts and Traditional Affairs","Vote 04 : Culture, Arts and Traditional Affairs"
-2016,North West,5,Community Safety and Transport Management,Vote 05 : Community Safety and Transport Management
-2016,North West,6,Economy and Entreprise Development,Vote 06 : Economy and Entreprise Development
-2016,North West,7,Finance,Vote 07 : Finance
-2016,North West,8,Education and Sports Development,Vote 08 : Education and Sports Development
-2016,North West,9,Local Government and Human Settlements,Vote 09 : Local Government and Human Settlements
-2016,North West,10,Tourism,Vote 10 : Tourism
-2016,North West,11,Public Works and Roads,Vote 11 : Public Works and Roads
-2016,North West,12,Social Development,Vote 12 : Social Development
-2016,North West,13,Rural Environment and Agricultural Development,Vote 13 : Rural Environment and Agricultural Development
-2016,Western Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2016,Western Cape,2,Provincial Parliament,Vote 02 : Provincial Parliament
-2016,Western Cape,3,Provincial Treasury,Vote 03 : Provincial Treasury
-2016,Western Cape,4,Community Safety,Vote 04 : Community Safety
-2016,Western Cape,5,Education,Vote 05 : Education
-2016,Western Cape,6,Health,Vote 06 : Health
-2016,Western Cape,7,Social Development,Vote 07 : Social Development
-2016,Western Cape,8,Human Settlements,Vote 08 : Human Settlements
-2016,Western Cape,9,Environmental Affairs and Development Planning,Vote 09 : Environmental Affairs and Development Planning
-2016,Western Cape,10,Transport and Public Works,Vote 10 : Transport and Public Works
-2016,Western Cape,11,Agriculture,Vote 11 : Agriculture
-2016,Western Cape,12,Economical Development and Tourism,Vote 12 : Economical Development and Tourism
-2016,Western Cape,13,Cultural Affairs and Sport,Vote 13 : Cultural Affairs and Sport
-2016,Western Cape,14,Local Government,Vote 14 : Local Government
-2017,Eastern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Eastern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2017,Eastern Cape,3,Health,Vote 03 : Health
-2017,Eastern Cape,4,Social Development,Vote 04 : Social Development
-2017,Eastern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
-2017,Eastern Cape,6,Education,Vote 06 : Education
-2017,Eastern Cape,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
-2017,Eastern Cape,8,Rural Development and Agrarian Reform,Vote 08 : Rural Development and Agrarian Reform
-2017,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism","Vote 09 : Economic Development, Environmental Affairs and Tourism"
-2017,Eastern Cape,10,Transport,Vote 10 : Transport
-2017,Eastern Cape,11,Human Settlements,Vote 11 : Human Settlements
-2017,Eastern Cape,12,Provincial Treasury,Vote 12 : Provincial Treasury
-2017,Eastern Cape,14,"Sport, Art and Culture","Vote 14 : Sport, Art and Culture"
-2017,Eastern Cape,15,Safety and Liaison,Vote 15 : Safety and Liaison
-2017,Free State,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Free State,2,Free State Legislature,Vote 02 : Free State Legislature
-2017,Free State,3,"Department of Economic and Small Business Development, Tourism and Environmental Affairs","Vote 03 : Department of Economic and Small Business Development, Tourism and Environmental Affairs"
-2017,Free State,4,Provincial Treasury,Vote 04 : Provincial Treasury
-2017,Free State,5,Health,Vote 05 : Health
-2017,Free State,6,Education,Vote 06 : Education
-2017,Free State,7,Social Development,Vote 07 : Social Development
-2017,Free State,8,Cooperative Governance and Traditional Affairs,Vote 08 : Cooperative Governance and Traditional Affairs
-2017,Free State,9,Public Works and Infrastructure,Vote 09 : Public Works and Infrastructure
-2017,Free State,10,"Police, Roads and Transport","Vote 10 : Police, Roads and Transport"
-2017,Free State,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
-2017,Free State,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
-2017,Free State,13,Human Settlements,Vote 13 : Human Settlements
-2017,Gauteng,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Gauteng,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2017,Gauteng,3,Economic Development,Vote 03 : Economic Development
-2017,Gauteng,4,Health,Vote 04 : Health
-2017,Gauteng,5,Education,Vote 05 : Education
-2017,Gauteng,6,Social Development,Vote 06 : Social Development
-2017,Gauteng,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
-2017,Gauteng,8,Human Settlements,Vote 08 : Human Settlements
-2017,Gauteng,9,Roads and Trasport,Vote 09 : Roads and Trasport
-2017,Gauteng,10,Community Safety,Vote 10 : Community Safety
-2017,Gauteng,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
-2017,Gauteng,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
-2017,Gauteng,13,E-Government,Vote 13 : E-Government
-2017,Gauteng,14,Gauteng Provincial Treasury,Vote 14 : Gauteng Provincial Treasury
-2017,Gauteng,15,Infrastructure Development,Vote 15 : Infrastructure Development
-2017,KwaZulu-Natal,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,KwaZulu-Natal,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2017,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development","Vote 03 : Agriculture, Environmental Affairs and Rural Development"
-2017,KwaZulu-Natal,4,Economic Development and Tourism,Vote 04 : Economic Development and Tourism
-2017,KwaZulu-Natal,5,Education,Vote 05 : Education
-2017,KwaZulu-Natal,6,Provincial Treasury,Vote 06 : Provincial Treasury
-2017,KwaZulu-Natal,7,Health,Vote 07 : Health
-2017,KwaZulu-Natal,8,Human Settlements,Vote 08 : Human Settlements
-2017,KwaZulu-Natal,9,Community Safety and Liaison,Vote 09 : Community Safety and Liaison
-2017,KwaZulu-Natal,10,Sports and Recreation,Vote 10 : Sports and Recreation
-2017,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs,Vote 11 : Co-operative Governance and Traditional Affairs
-2017,KwaZulu-Natal,12,Transport,Vote 12 : Transport
-2017,KwaZulu-Natal,13,Social Development,Vote 13 : Social Development
-2017,KwaZulu-Natal,14,Public Works,Vote 14 : Public Works
-2017,KwaZulu-Natal,15,Arts and Culture,Vote 15 : Arts and Culture
-2017,Limpopo,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Limpopo,2,Limpopo Legislature,Vote 02 : Limpopo Legislature
-2017,Limpopo,3,Education,Vote 03 : Education
-2017,Limpopo,4,Agriculture and Rural Development,Vote 04 : Agriculture and Rural Development
-2017,Limpopo,5,Provincial Treasury,Vote 05 : Provincial Treasury
-2017,Limpopo,6,"Economic Development, Environmental Affairs and Tourism","Vote 06 : Economic Development, Environmental Affairs and Tourism"
-2017,Limpopo,7,Health,Vote 07 : Health
-2017,Limpopo,8,Transport,Vote 08 : Transport
-2017,Limpopo,9,"Public Works, Roads and Infrastructure","Vote 09 : Public Works, Roads and Infrastructure"
-2017,Limpopo,10,"Safety, Security and Liaison","Vote 10 : Safety, Security and Liaison"
-2017,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs","Vote 11 : Co-operative Governance, Human Settlement and Traditional Affairs"
-2017,Limpopo,12,Social Development,Vote 12 : Social Development
-2017,Limpopo,13,"Sport, Arts and Culture","Vote 13 : Sport, Arts and Culture"
-2017,Mpumalanga,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Mpumalanga,2,Mpumalanga Provincial Legislature,Vote 02 : Mpumalanga Provincial Legislature
-2017,Mpumalanga,3,Provincial Treasury,Vote 03 : Provincial Treasury
-2017,Mpumalanga,4,Co-operative Governance and Traditional Affairs,Vote 04 : Co-operative Governance and Traditional Affairs
-2017,Mpumalanga,5,"Agricultural, Rural Development and Land Administration","Vote 05 : Agricultural, Rural Development and Land Administration"
-2017,Mpumalanga,6,"Economic Development, Environment and Tourism","Vote 06 : Economic Development, Environment and Tourism"
-2017,Mpumalanga,7,Education,Vote 07 : Education
-2017,Mpumalanga,8,"Public Works, Roads and Transport","Vote 08 : Public Works, Roads and Transport"
-2017,Mpumalanga,9,"Community Safety, Security and Liaison","Vote 09 : Community Safety, Security and Liaison"
-2017,Mpumalanga,10,Health,Vote 10 : Health
-2017,Mpumalanga,11,"Culture, Sport and Recreation","Vote 11 : Culture, Sport and Recreation"
-2017,Mpumalanga,12,Social Development,Vote 12 : Social Development
-2017,Mpumalanga,13,Human Settlements,Vote 13 : Human Settlements
-2017,Northern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Northern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2017,Northern Cape,3,"Transport, Safety and Liaison","Vote 03 : Transport, Safety and Liaison"
-2017,Northern Cape,4,Education,Vote 04 : Education
-2017,Northern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
-2017,Northern Cape,6,Economic Development and Tourism,Vote 06 : Economic Development and Tourism
-2017,Northern Cape,7,"Sport, Arts and Culture","Vote 07 : Sport, Arts and Culture"
-2017,Northern Cape,8,Provincial Treasury,Vote 08 : Provincial Treasury
-2017,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs","Vote 09 : Cooperative Governance, Human Settlement and Traditional Affairs"
-2017,Northern Cape,10,Health,Vote 10 : Health
-2017,Northern Cape,11,Social Development,Vote 11 : Social Development
-2017,Northern Cape,12,"Agriculture, Land Reform and Rural Development","Vote 12 : Agriculture, Land Reform and Rural Development"
-2017,Northern Cape,13,Environment and Nature Conservation,Vote 13 : Environment and Nature Conservation
-2017,North West,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,North West,2,Provincial Legislature,Vote 02 : Provincial Legislature
-2017,North West,3,Health,Vote 03 : Health
-2017,North West,4,"Culture, Arts and Traditional Affairs","Vote 04 : Culture, Arts and Traditional Affairs"
-2017,North West,5,Community Safety and Transport Management,Vote 05 : Community Safety and Transport Management
-2017,North West,6,Economy and Entreprise Development,Vote 06 : Economy and Entreprise Development
-2017,North West,7,Finance,Vote 07 : Finance
-2017,North West,8,Education and Sports Development,Vote 08 : Education and Sports Development
-2017,North West,9,Local Government and Human Settlements,Vote 09 : Local Government and Human Settlements
-2017,North West,10,Tourism,Vote 10 : Tourism
-2017,North West,11,Public Works and Roads,Vote 11 : Public Works and Roads
-2017,North West,12,Social Development,Vote 12 : Social Development
-2017,North West,13,Rural Environment and Agricultural Development,Vote 13 : Rural Environment and Agricultural Development
-2017,Western Cape,1,Office of the Premier,Vote 01 : Office of the Premier
-2017,Western Cape,2,Provincial Parliament,Vote 02 : Provincial Parliament
-2017,Western Cape,3,Provincial Treasury,Vote 03 : Provincial Treasury
-2017,Western Cape,4,Community Safety,Vote 04 : Community Safety
-2017,Western Cape,5,Education,Vote 05 : Education
-2017,Western Cape,6,Health,Vote 06 : Health
-2017,Western Cape,7,Social Development,Vote 07 : Social Development
-2017,Western Cape,8,Human Settlements,Vote 08 : Human Settlements
-2017,Western Cape,9,Environmental Affairs and Development Planning,Vote 09 : Environmental Affairs and Development Planning
-2017,Western Cape,10,Transport and Public Works,Vote 10 : Transport and Public Works
-2017,Western Cape,11,Agriculture,Vote 11 : Agriculture
-2017,Western Cape,12,Economical Development and Tourism,Vote 12 : Economical Development and Tourism
-2017,Western Cape,13,Cultural Affairs and Sport,Vote 13 : Cultural Affairs and Sport
-2017,Western Cape,14,Local Government,Vote 14 : Local Government
+financial_year,sphere,geographic_region,vote_number,department_name,chapter_title
+2015,provincial,Eastern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Eastern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2015,provincial,Eastern Cape,3,Health,Vote 03 : Health
+2015,provincial,Eastern Cape,4,Social Development,Vote 04 : Social Development
+2015,provincial,Eastern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
+2015,provincial,Eastern Cape,6,Education,Vote 06 : Education
+2015,provincial,Eastern Cape,7,Local Government and Traditional Affairs,Vote 07 : Local Government and Traditional Affairs
+2015,provincial,Eastern Cape,8,Rural Development and Agrarian Reform,Vote 08 : Rural Development and Agrarian Reform
+2015,provincial,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism","Vote 09 : Economic Development, Environmental Affairs and Tourism"
+2015,provincial,Eastern Cape,10,Transport,Vote 10 : Transport
+2015,provincial,Eastern Cape,11,Human Settlements,Vote 11 : Human Settlements
+2015,provincial,Eastern Cape,12,Provincial Treasury,Vote 12 : Provincial Treasury
+2015,provincial,Eastern Cape,14,"Sport, Art and Culture","Vote 14 : Sport, Art and Culture"
+2015,provincial,Eastern Cape,15,Safety and Liaison,Vote 15 : Safety and Liaison
+2015,provincial,Free State,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Free State,2,Free State Legislature,Vote 02 : Free State Legislature
+2015,provincial,Free State,3,"Economic Development, Tourism and Environmental Affairs","Vote 03 : Economic Development, Tourism and Environmental Affairs"
+2015,provincial,Free State,4,Provincial Treasury,Vote 04 : Provincial Treasury
+2015,provincial,Free State,5,Health,Vote 05 : Health
+2015,provincial,Free State,6,Education,Vote 06 : Education
+2015,provincial,Free State,7,Social Development,Vote 07 : Social Development
+2015,provincial,Free State,8,Cooperative Governance and Traditional Affairs,Vote 08 : Cooperative Governance and Traditional Affairs
+2015,provincial,Free State,9,Public Works,Vote 09 : Public Works
+2015,provincial,Free State,10,"Police, Roads and Transport","Vote 10 : Police, Roads and Transport"
+2015,provincial,Free State,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
+2015,provincial,Free State,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
+2015,provincial,Free State,13,Human Settlements,Vote 13 : Human Settlements
+2015,provincial,Gauteng,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Gauteng,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2015,provincial,Gauteng,3,Economic Development,Vote 03 : Economic Development
+2015,provincial,Gauteng,4,Health,Vote 04 : Health
+2015,provincial,Gauteng,5,Education,Vote 05 : Education
+2015,provincial,Gauteng,6,Social Development,Vote 06 : Social Development
+2015,provincial,Gauteng,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
+2015,provincial,Gauteng,8,Human Settlements,Vote 08 : Human Settlements
+2015,provincial,Gauteng,9,Roads and Trasport,Vote 09 : Roads and Trasport
+2015,provincial,Gauteng,10,Community Safety,Vote 10 : Community Safety
+2015,provincial,Gauteng,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
+2015,provincial,Gauteng,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
+2015,provincial,Gauteng,13,Finance,Vote 13 : Finance
+2015,provincial,Gauteng,14,Gauteng Provincial Treasury,Vote 14 : Gauteng Provincial Treasury
+2015,provincial,Gauteng,15,Infrastructure Development,Vote 15 : Infrastructure Development
+2015,provincial,KwaZulu-Natal,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,KwaZulu-Natal,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2015,provincial,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development","Vote 03 : Agriculture, Environmental Affairs and Rural Development"
+2015,provincial,KwaZulu-Natal,4,Economic Development and Tourism,Vote 04 : Economic Development and Tourism
+2015,provincial,KwaZulu-Natal,5,Education,Vote 05 : Education
+2015,provincial,KwaZulu-Natal,6,Provincial Treasury,Vote 06 : Provincial Treasury
+2015,provincial,KwaZulu-Natal,7,Health,Vote 07 : Health
+2015,provincial,KwaZulu-Natal,8,Human Settlements,Vote 08 : Human Settlements
+2015,provincial,KwaZulu-Natal,9,Community Safety and Liaison,Vote 09 : Community Safety and Liaison
+2015,provincial,KwaZulu-Natal,10,The Royal Household,Vote 10 : The Royal Household
+2015,provincial,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs,Vote 11 : Co-operative Governance and Traditional Affairs
+2015,provincial,KwaZulu-Natal,12,Transport,Vote 12 : Transport
+2015,provincial,KwaZulu-Natal,13,Social Development,Vote 13 : Social Development
+2015,provincial,KwaZulu-Natal,14,Public Works,Vote 14 : Public Works
+2015,provincial,KwaZulu-Natal,15,Arts and Culture,Vote 15 : Arts and Culture
+2015,provincial,KwaZulu-Natal,16,Sport and Recreation,Vote 16 : Sport and Recreation
+2015,provincial,Limpopo,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Limpopo,2,Limpopo Legislature,Vote 02 : Limpopo Legislature
+2015,provincial,Limpopo,3,Education,Vote 03 : Education
+2015,provincial,Limpopo,4,Agriculture,Vote 04 : Agriculture
+2015,provincial,Limpopo,5,Provincial Treasury,Vote 05 : Provincial Treasury
+2015,provincial,Limpopo,6,"Economic Development, Environmental Affairs and Tourism","Vote 06 : Economic Development, Environmental Affairs and Tourism"
+2015,provincial,Limpopo,7,Health,Vote 07 : Health
+2015,provincial,Limpopo,8,Roads and Transport,Vote 08 : Roads and Transport
+2015,provincial,Limpopo,9,Public Works,Vote 09 : Public Works
+2015,provincial,Limpopo,10,"Safety, Security and Liaison","Vote 10 : Safety, Security and Liaison"
+2015,provincial,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs","Vote 11 : Co-operative Governance, Human Settlement and Traditional Affairs"
+2015,provincial,Limpopo,12,Social Development,Vote 12 : Social Development
+2015,provincial,Limpopo,13,"Sport, Arts and Culture","Vote 13 : Sport, Arts and Culture"
+2015,provincial,Mpumalanga,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Mpumalanga,2,Mpumalanga Provincial Legislature,Vote 02 : Mpumalanga Provincial Legislature
+2015,provincial,Mpumalanga,3,Finance,Vote 03 : Finance
+2015,provincial,Mpumalanga,4,Co-operative Governance and Traditional Affairs,Vote 04 : Co-operative Governance and Traditional Affairs
+2015,provincial,Mpumalanga,5,"Agricultural, Rural Development and Land Administration","Vote 05 : Agricultural, Rural Development and Land Administration"
+2015,provincial,Mpumalanga,6,"Economic Development, Environment and Tourism","Vote 06 : Economic Development, Environment and Tourism"
+2015,provincial,Mpumalanga,7,Education,Vote 07 : Education
+2015,provincial,Mpumalanga,8,"Public Works, Roads and Transport","Vote 08 : Public Works, Roads and Transport"
+2015,provincial,Mpumalanga,9,"Community Safety, Security and Liaison","Vote 09 : Community Safety, Security and Liaison"
+2015,provincial,Mpumalanga,10,Health,Vote 10 : Health
+2015,provincial,Mpumalanga,11,"Culture, Sport and Recreation","Vote 11 : Culture, Sport and Recreation"
+2015,provincial,Mpumalanga,12,Social Development,Vote 12 : Social Development
+2015,provincial,Mpumalanga,13,Human Settlements,Vote 13 : Human Settlements
+2015,provincial,Northern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Northern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2015,provincial,Northern Cape,3,"Transport, Safety and Liaison","Vote 03 : Transport, Safety and Liaison"
+2015,provincial,Northern Cape,4,Education,Vote 04 : Education
+2015,provincial,Northern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
+2015,provincial,Northern Cape,6,Economic Development and Tourism,Vote 06 : Economic Development and Tourism
+2015,provincial,Northern Cape,7,"Sport, Arts and Culture","Vote 07 : Sport, Arts and Culture"
+2015,provincial,Northern Cape,8,Provincial Treasury,Vote 08 : Provincial Treasury
+2015,provincial,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs","Vote 09 : Cooperative Governance, Human Settlement and Traditional Affairs"
+2015,provincial,Northern Cape,10,Health,Vote 10 : Health
+2015,provincial,Northern Cape,11,Social Development,Vote 11 : Social Development
+2015,provincial,Northern Cape,12,"Agriculture, Land Reform and Rural Development","Vote 12 : Agriculture, Land Reform and Rural Development"
+2015,provincial,Northern Cape,13,Environment and Nature Conservation,Vote 13 : Environment and Nature Conservation
+2015,provincial,North West,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,North West,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2015,provincial,North West,3,Health,Vote 03 : Health
+2015,provincial,North West,4,"Sport, Arts and Culture","Vote 04 : Sport, Arts and Culture"
+2015,provincial,North West,5,Public Safety and Liaison,Vote 05 : Public Safety and Liaison
+2015,provincial,North West,6,"Economic Development, Environment, Conservation and Tourism","Vote 06 : Economic Development, Environment, Conservation and Tourism"
+2015,provincial,North West,7,Finance,Vote 07 : Finance
+2015,provincial,North West,8,Education,Vote 08 : Education
+2015,provincial,North West,9,Local Government and Traditional Affairs,Vote 09 : Local Government and Traditional Affairs
+2015,provincial,North West,11,"Public Works, Roads and Transport","Vote 11 : Public Works, Roads and Transport"
+2015,provincial,North West,12,Social Development,Vote 12 : Social Development
+2015,provincial,North West,13,Agricultural and Rural Development,Vote 13 : Agricultural and Rural Development
+2015,provincial,North West,15,Human Settlements,Vote 15 : Human Settlements
+2015,provincial,Western Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2015,provincial,Western Cape,2,Provincial Parliament,Vote 02 : Provincial Parliament
+2015,provincial,Western Cape,3,Provincial Treasury,Vote 03 : Provincial Treasury
+2015,provincial,Western Cape,4,Community Safety,Vote 04 : Community Safety
+2015,provincial,Western Cape,5,Education,Vote 05 : Education
+2015,provincial,Western Cape,6,Health,Vote 06 : Health
+2015,provincial,Western Cape,7,Social Development,Vote 07 : Social Development
+2015,provincial,Western Cape,8,Human Settlements,Vote 08 : Human Settlements
+2015,provincial,Western Cape,9,Environmental Affairs and Development Planning,Vote 09 : Environmental Affairs and Development Planning
+2015,provincial,Western Cape,10,Transport and Public Works,Vote 10 : Transport and Public Works
+2015,provincial,Western Cape,11,Agriculture,Vote 11 : Agriculture
+2015,provincial,Western Cape,12,Economical Development and Tourism,Vote 12 : Economical Development and Tourism
+2015,provincial,Western Cape,13,Cultural Affairs and Sport,Vote 13 : Cultural Affairs and Sport
+2015,provincial,Western Cape,14,Local Government,Vote 14 : Local Government
+2016,provincial,Eastern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Eastern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2016,provincial,Eastern Cape,3,Health,Vote 03 : Health
+2016,provincial,Eastern Cape,4,Social Development,Vote 04 : Social Development
+2016,provincial,Eastern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
+2016,provincial,Eastern Cape,6,Education,Vote 06 : Education
+2016,provincial,Eastern Cape,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
+2016,provincial,Eastern Cape,8,Rural Development and Agrarian Reform,Vote 08 : Rural Development and Agrarian Reform
+2016,provincial,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism","Vote 09 : Economic Development, Environmental Affairs and Tourism"
+2016,provincial,Eastern Cape,10,Transport,Vote 10 : Transport
+2016,provincial,Eastern Cape,11,Human Settlements,Vote 11 : Human Settlements
+2016,provincial,Eastern Cape,12,Provincial Treasury,Vote 12 : Provincial Treasury
+2016,provincial,Eastern Cape,14,"Sport, Art and Culture","Vote 14 : Sport, Art and Culture"
+2016,provincial,Eastern Cape,15,Safety and Liaison,Vote 15 : Safety and Liaison
+2016,provincial,Free State,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Free State,2,Free State Legislature,Vote 02 : Free State Legislature
+2016,provincial,Free State,3,"Department of Economic and Small Business Development, Tourism and Environmental Affairs","Vote 03 : Department of Economic and Small Business Development, Tourism and Environmental Affairs"
+2016,provincial,Free State,4,Provincial Treasury,Vote 04 : Provincial Treasury
+2016,provincial,Free State,5,Health,Vote 05 : Health
+2016,provincial,Free State,6,Education,Vote 06 : Education
+2016,provincial,Free State,7,Social Development,Vote 07 : Social Development
+2016,provincial,Free State,8,Cooperative Governance and Traditional Affairs,Vote 08 : Cooperative Governance and Traditional Affairs
+2016,provincial,Free State,9,Public Works and Infrastructure,Vote 09 : Public Works and Infrastructure
+2016,provincial,Free State,10,"Police, Roads and Transport","Vote 10 : Police, Roads and Transport"
+2016,provincial,Free State,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
+2016,provincial,Free State,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
+2016,provincial,Free State,13,Human Settlements,Vote 13 : Human Settlements
+2016,provincial,Gauteng,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Gauteng,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2016,provincial,Gauteng,3,Economic Development,Vote 03 : Economic Development
+2016,provincial,Gauteng,4,Health,Vote 04 : Health
+2016,provincial,Gauteng,5,Education,Vote 05 : Education
+2016,provincial,Gauteng,6,Social Development,Vote 06 : Social Development
+2016,provincial,Gauteng,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
+2016,provincial,Gauteng,8,Human Settlements,Vote 08 : Human Settlements
+2016,provincial,Gauteng,9,Roads and Trasport,Vote 09 : Roads and Trasport
+2016,provincial,Gauteng,10,Community Safety,Vote 10 : Community Safety
+2016,provincial,Gauteng,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
+2016,provincial,Gauteng,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
+2016,provincial,Gauteng,13,E-Government,Vote 13 : E-Government
+2016,provincial,Gauteng,14,Gauteng Provincial Treasury,Vote 14 : Gauteng Provincial Treasury
+2016,provincial,Gauteng,15,Infrastructure Development,Vote 15 : Infrastructure Development
+2016,provincial,KwaZulu-Natal,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,KwaZulu-Natal,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2016,provincial,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development","Vote 03 : Agriculture, Environmental Affairs and Rural Development"
+2016,provincial,KwaZulu-Natal,4,Economic Development and Tourism,Vote 04 : Economic Development and Tourism
+2016,provincial,KwaZulu-Natal,5,Education,Vote 05 : Education
+2016,provincial,KwaZulu-Natal,6,Provincial Treasury,Vote 06 : Provincial Treasury
+2016,provincial,KwaZulu-Natal,7,Health,Vote 07 : Health
+2016,provincial,KwaZulu-Natal,8,Human Settlements,Vote 08 : Human Settlements
+2016,provincial,KwaZulu-Natal,9,Community Safety and Liaison,Vote 09 : Community Safety and Liaison
+2016,provincial,KwaZulu-Natal,10,Sports and Recreation,Vote 10 : Sports and Recreation
+2016,provincial,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs,Vote 11 : Co-operative Governance and Traditional Affairs
+2016,provincial,KwaZulu-Natal,12,Transport,Vote 12 : Transport
+2016,provincial,KwaZulu-Natal,13,Social Development,Vote 13 : Social Development
+2016,provincial,KwaZulu-Natal,14,Public Works,Vote 14 : Public Works
+2016,provincial,KwaZulu-Natal,15,Arts and Culture,Vote 15 : Arts and Culture
+2016,provincial,Limpopo,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Limpopo,2,Limpopo Legislature,Vote 02 : Limpopo Legislature
+2016,provincial,Limpopo,3,Education,Vote 03 : Education
+2016,provincial,Limpopo,4,Agriculture and Rural Development,Vote 04 : Agriculture and Rural Development
+2016,provincial,Limpopo,5,Provincial Treasury,Vote 05 : Provincial Treasury
+2016,provincial,Limpopo,6,"Economic Development, Environmental Affairs and Tourism","Vote 06 : Economic Development, Environmental Affairs and Tourism"
+2016,provincial,Limpopo,7,Health,Vote 07 : Health
+2016,provincial,Limpopo,8,Transport,Vote 08 : Transport
+2016,provincial,Limpopo,9,"Public Works, Roads and Infrastructure","Vote 09 : Public Works, Roads and Infrastructure"
+2016,provincial,Limpopo,10,"Safety, Security and Liaison","Vote 10 : Safety, Security and Liaison"
+2016,provincial,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs","Vote 11 : Co-operative Governance, Human Settlement and Traditional Affairs"
+2016,provincial,Limpopo,12,Social Development,Vote 12 : Social Development
+2016,provincial,Limpopo,13,"Sport, Arts and Culture","Vote 13 : Sport, Arts and Culture"
+2016,provincial,Mpumalanga,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Mpumalanga,2,Mpumalanga Provincial Legislature,Vote 02 : Mpumalanga Provincial Legislature
+2016,provincial,Mpumalanga,3,Provincial Treasury,Vote 03 : Provincial Treasury
+2016,provincial,Mpumalanga,4,Co-operative Governance and Traditional Affairs,Vote 04 : Co-operative Governance and Traditional Affairs
+2016,provincial,Mpumalanga,5,"Agricultural, Rural Development and Land Administration","Vote 05 : Agricultural, Rural Development and Land Administration"
+2016,provincial,Mpumalanga,6,"Economic Development, Environment and Tourism","Vote 06 : Economic Development, Environment and Tourism"
+2016,provincial,Mpumalanga,7,Education,Vote 07 : Education
+2016,provincial,Mpumalanga,8,"Public Works, Roads and Transport","Vote 08 : Public Works, Roads and Transport"
+2016,provincial,Mpumalanga,9,"Community Safety, Security and Liaison","Vote 09 : Community Safety, Security and Liaison"
+2016,provincial,Mpumalanga,10,Health,Vote 10 : Health
+2016,provincial,Mpumalanga,11,"Culture, Sport and Recreation","Vote 11 : Culture, Sport and Recreation"
+2016,provincial,Mpumalanga,12,Social Development,Vote 12 : Social Development
+2016,provincial,Mpumalanga,13,Human Settlements,Vote 13 : Human Settlements
+2016,provincial,Northern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Northern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2016,provincial,Northern Cape,3,"Transport, Safety and Liaison","Vote 03 : Transport, Safety and Liaison"
+2016,provincial,Northern Cape,4,Education,Vote 04 : Education
+2016,provincial,Northern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
+2016,provincial,Northern Cape,6,Economic Development and Tourism,Vote 06 : Economic Development and Tourism
+2016,provincial,Northern Cape,7,"Sport, Arts and Culture","Vote 07 : Sport, Arts and Culture"
+2016,provincial,Northern Cape,8,Provincial Treasury,Vote 08 : Provincial Treasury
+2016,provincial,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs","Vote 09 : Cooperative Governance, Human Settlement and Traditional Affairs"
+2016,provincial,Northern Cape,10,Health,Vote 10 : Health
+2016,provincial,Northern Cape,11,Social Development,Vote 11 : Social Development
+2016,provincial,Northern Cape,12,"Agriculture, Land Reform and Rural Development","Vote 12 : Agriculture, Land Reform and Rural Development"
+2016,provincial,Northern Cape,13,Environment and Nature Conservation,Vote 13 : Environment and Nature Conservation
+2016,provincial,North West,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,North West,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2016,provincial,North West,3,Health,Vote 03 : Health
+2016,provincial,North West,4,"Culture, Arts and Traditional Affairs","Vote 04 : Culture, Arts and Traditional Affairs"
+2016,provincial,North West,5,Community Safety and Transport Management,Vote 05 : Community Safety and Transport Management
+2016,provincial,North West,6,Economy and Entreprise Development,Vote 06 : Economy and Entreprise Development
+2016,provincial,North West,7,Finance,Vote 07 : Finance
+2016,provincial,North West,8,Education and Sports Development,Vote 08 : Education and Sports Development
+2016,provincial,North West,9,Local Government and Human Settlements,Vote 09 : Local Government and Human Settlements
+2016,provincial,North West,10,Tourism,Vote 10 : Tourism
+2016,provincial,North West,11,Public Works and Roads,Vote 11 : Public Works and Roads
+2016,provincial,North West,12,Social Development,Vote 12 : Social Development
+2016,provincial,North West,13,Rural Environment and Agricultural Development,Vote 13 : Rural Environment and Agricultural Development
+2016,provincial,Western Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2016,provincial,Western Cape,2,Provincial Parliament,Vote 02 : Provincial Parliament
+2016,provincial,Western Cape,3,Provincial Treasury,Vote 03 : Provincial Treasury
+2016,provincial,Western Cape,4,Community Safety,Vote 04 : Community Safety
+2016,provincial,Western Cape,5,Education,Vote 05 : Education
+2016,provincial,Western Cape,6,Health,Vote 06 : Health
+2016,provincial,Western Cape,7,Social Development,Vote 07 : Social Development
+2016,provincial,Western Cape,8,Human Settlements,Vote 08 : Human Settlements
+2016,provincial,Western Cape,9,Environmental Affairs and Development Planning,Vote 09 : Environmental Affairs and Development Planning
+2016,provincial,Western Cape,10,Transport and Public Works,Vote 10 : Transport and Public Works
+2016,provincial,Western Cape,11,Agriculture,Vote 11 : Agriculture
+2016,provincial,Western Cape,12,Economical Development and Tourism,Vote 12 : Economical Development and Tourism
+2016,provincial,Western Cape,13,Cultural Affairs and Sport,Vote 13 : Cultural Affairs and Sport
+2016,provincial,Western Cape,14,Local Government,Vote 14 : Local Government
+2017,provincial,Eastern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Eastern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2017,provincial,Eastern Cape,3,Health,Vote 03 : Health
+2017,provincial,Eastern Cape,4,Social Development,Vote 04 : Social Development
+2017,provincial,Eastern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
+2017,provincial,Eastern Cape,6,Education,Vote 06 : Education
+2017,provincial,Eastern Cape,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
+2017,provincial,Eastern Cape,8,Rural Development and Agrarian Reform,Vote 08 : Rural Development and Agrarian Reform
+2017,provincial,Eastern Cape,9,"Economic Development, Environmental Affairs and Tourism","Vote 09 : Economic Development, Environmental Affairs and Tourism"
+2017,provincial,Eastern Cape,10,Transport,Vote 10 : Transport
+2017,provincial,Eastern Cape,11,Human Settlements,Vote 11 : Human Settlements
+2017,provincial,Eastern Cape,12,Provincial Treasury,Vote 12 : Provincial Treasury
+2017,provincial,Eastern Cape,14,"Sport, Art and Culture","Vote 14 : Sport, Art and Culture"
+2017,provincial,Eastern Cape,15,Safety and Liaison,Vote 15 : Safety and Liaison
+2017,provincial,Free State,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Free State,2,Free State Legislature,Vote 02 : Free State Legislature
+2017,provincial,Free State,3,"Department of Economic and Small Business Development, Tourism and Environmental Affairs","Vote 03 : Department of Economic and Small Business Development, Tourism and Environmental Affairs"
+2017,provincial,Free State,4,Provincial Treasury,Vote 04 : Provincial Treasury
+2017,provincial,Free State,5,Health,Vote 05 : Health
+2017,provincial,Free State,6,Education,Vote 06 : Education
+2017,provincial,Free State,7,Social Development,Vote 07 : Social Development
+2017,provincial,Free State,8,Cooperative Governance and Traditional Affairs,Vote 08 : Cooperative Governance and Traditional Affairs
+2017,provincial,Free State,9,Public Works and Infrastructure,Vote 09 : Public Works and Infrastructure
+2017,provincial,Free State,10,"Police, Roads and Transport","Vote 10 : Police, Roads and Transport"
+2017,provincial,Free State,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
+2017,provincial,Free State,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
+2017,provincial,Free State,13,Human Settlements,Vote 13 : Human Settlements
+2017,provincial,Gauteng,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Gauteng,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2017,provincial,Gauteng,3,Economic Development,Vote 03 : Economic Development
+2017,provincial,Gauteng,4,Health,Vote 04 : Health
+2017,provincial,Gauteng,5,Education,Vote 05 : Education
+2017,provincial,Gauteng,6,Social Development,Vote 06 : Social Development
+2017,provincial,Gauteng,7,Cooperative Governance and Traditional Affairs,Vote 07 : Cooperative Governance and Traditional Affairs
+2017,provincial,Gauteng,8,Human Settlements,Vote 08 : Human Settlements
+2017,provincial,Gauteng,9,Roads and Trasport,Vote 09 : Roads and Trasport
+2017,provincial,Gauteng,10,Community Safety,Vote 10 : Community Safety
+2017,provincial,Gauteng,11,Agriculture and Rural Development,Vote 11 : Agriculture and Rural Development
+2017,provincial,Gauteng,12,"Sport, Arts, Culture and Recreation","Vote 12 : Sport, Arts, Culture and Recreation"
+2017,provincial,Gauteng,13,E-Government,Vote 13 : E-Government
+2017,provincial,Gauteng,14,Gauteng Provincial Treasury,Vote 14 : Gauteng Provincial Treasury
+2017,provincial,Gauteng,15,Infrastructure Development,Vote 15 : Infrastructure Development
+2017,provincial,KwaZulu-Natal,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,KwaZulu-Natal,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2017,provincial,KwaZulu-Natal,3,"Agriculture, Environmental Affairs and Rural Development","Vote 03 : Agriculture, Environmental Affairs and Rural Development"
+2017,provincial,KwaZulu-Natal,4,Economic Development and Tourism,Vote 04 : Economic Development and Tourism
+2017,provincial,KwaZulu-Natal,5,Education,Vote 05 : Education
+2017,provincial,KwaZulu-Natal,6,Provincial Treasury,Vote 06 : Provincial Treasury
+2017,provincial,KwaZulu-Natal,7,Health,Vote 07 : Health
+2017,provincial,KwaZulu-Natal,8,Human Settlements,Vote 08 : Human Settlements
+2017,provincial,KwaZulu-Natal,9,Community Safety and Liaison,Vote 09 : Community Safety and Liaison
+2017,provincial,KwaZulu-Natal,10,Sports and Recreation,Vote 10 : Sports and Recreation
+2017,provincial,KwaZulu-Natal,11,Co-operative Governance and Traditional Affairs,Vote 11 : Co-operative Governance and Traditional Affairs
+2017,provincial,KwaZulu-Natal,12,Transport,Vote 12 : Transport
+2017,provincial,KwaZulu-Natal,13,Social Development,Vote 13 : Social Development
+2017,provincial,KwaZulu-Natal,14,Public Works,Vote 14 : Public Works
+2017,provincial,KwaZulu-Natal,15,Arts and Culture,Vote 15 : Arts and Culture
+2017,provincial,Limpopo,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Limpopo,2,Limpopo Legislature,Vote 02 : Limpopo Legislature
+2017,provincial,Limpopo,3,Education,Vote 03 : Education
+2017,provincial,Limpopo,4,Agriculture and Rural Development,Vote 04 : Agriculture and Rural Development
+2017,provincial,Limpopo,5,Provincial Treasury,Vote 05 : Provincial Treasury
+2017,provincial,Limpopo,6,"Economic Development, Environmental Affairs and Tourism","Vote 06 : Economic Development, Environmental Affairs and Tourism"
+2017,provincial,Limpopo,7,Health,Vote 07 : Health
+2017,provincial,Limpopo,8,Transport,Vote 08 : Transport
+2017,provincial,Limpopo,9,"Public Works, Roads and Infrastructure","Vote 09 : Public Works, Roads and Infrastructure"
+2017,provincial,Limpopo,10,"Safety, Security and Liaison","Vote 10 : Safety, Security and Liaison"
+2017,provincial,Limpopo,11,"Co-operative Governance, Human Settlement and Traditional Affairs","Vote 11 : Co-operative Governance, Human Settlement and Traditional Affairs"
+2017,provincial,Limpopo,12,Social Development,Vote 12 : Social Development
+2017,provincial,Limpopo,13,"Sport, Arts and Culture","Vote 13 : Sport, Arts and Culture"
+2017,provincial,Mpumalanga,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Mpumalanga,2,Mpumalanga Provincial Legislature,Vote 02 : Mpumalanga Provincial Legislature
+2017,provincial,Mpumalanga,3,Provincial Treasury,Vote 03 : Provincial Treasury
+2017,provincial,Mpumalanga,4,Co-operative Governance and Traditional Affairs,Vote 04 : Co-operative Governance and Traditional Affairs
+2017,provincial,Mpumalanga,5,"Agricultural, Rural Development and Land Administration","Vote 05 : Agricultural, Rural Development and Land Administration"
+2017,provincial,Mpumalanga,6,"Economic Development, Environment and Tourism","Vote 06 : Economic Development, Environment and Tourism"
+2017,provincial,Mpumalanga,7,Education,Vote 07 : Education
+2017,provincial,Mpumalanga,8,"Public Works, Roads and Transport","Vote 08 : Public Works, Roads and Transport"
+2017,provincial,Mpumalanga,9,"Community Safety, Security and Liaison","Vote 09 : Community Safety, Security and Liaison"
+2017,provincial,Mpumalanga,10,Health,Vote 10 : Health
+2017,provincial,Mpumalanga,11,"Culture, Sport and Recreation","Vote 11 : Culture, Sport and Recreation"
+2017,provincial,Mpumalanga,12,Social Development,Vote 12 : Social Development
+2017,provincial,Mpumalanga,13,Human Settlements,Vote 13 : Human Settlements
+2017,provincial,Northern Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Northern Cape,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2017,provincial,Northern Cape,3,"Transport, Safety and Liaison","Vote 03 : Transport, Safety and Liaison"
+2017,provincial,Northern Cape,4,Education,Vote 04 : Education
+2017,provincial,Northern Cape,5,Roads and Public Works,Vote 05 : Roads and Public Works
+2017,provincial,Northern Cape,6,Economic Development and Tourism,Vote 06 : Economic Development and Tourism
+2017,provincial,Northern Cape,7,"Sport, Arts and Culture","Vote 07 : Sport, Arts and Culture"
+2017,provincial,Northern Cape,8,Provincial Treasury,Vote 08 : Provincial Treasury
+2017,provincial,Northern Cape,9,"Cooperative Governance, Human Settlement and Traditional Affairs","Vote 09 : Cooperative Governance, Human Settlement and Traditional Affairs"
+2017,provincial,Northern Cape,10,Health,Vote 10 : Health
+2017,provincial,Northern Cape,11,Social Development,Vote 11 : Social Development
+2017,provincial,Northern Cape,12,"Agriculture, Land Reform and Rural Development","Vote 12 : Agriculture, Land Reform and Rural Development"
+2017,provincial,Northern Cape,13,Environment and Nature Conservation,Vote 13 : Environment and Nature Conservation
+2017,provincial,North West,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,North West,2,Provincial Legislature,Vote 02 : Provincial Legislature
+2017,provincial,North West,3,Health,Vote 03 : Health
+2017,provincial,North West,4,"Culture, Arts and Traditional Affairs","Vote 04 : Culture, Arts and Traditional Affairs"
+2017,provincial,North West,5,Community Safety and Transport Management,Vote 05 : Community Safety and Transport Management
+2017,provincial,North West,6,Economy and Entreprise Development,Vote 06 : Economy and Entreprise Development
+2017,provincial,North West,7,Finance,Vote 07 : Finance
+2017,provincial,North West,8,Education and Sports Development,Vote 08 : Education and Sports Development
+2017,provincial,North West,9,Local Government and Human Settlements,Vote 09 : Local Government and Human Settlements
+2017,provincial,North West,10,Tourism,Vote 10 : Tourism
+2017,provincial,North West,11,Public Works and Roads,Vote 11 : Public Works and Roads
+2017,provincial,North West,12,Social Development,Vote 12 : Social Development
+2017,provincial,North West,13,Rural Environment and Agricultural Development,Vote 13 : Rural Environment and Agricultural Development
+2017,provincial,Western Cape,1,Office of the Premier,Vote 01 : Office of the Premier
+2017,provincial,Western Cape,2,Provincial Parliament,Vote 02 : Provincial Parliament
+2017,provincial,Western Cape,3,Provincial Treasury,Vote 03 : Provincial Treasury
+2017,provincial,Western Cape,4,Community Safety,Vote 04 : Community Safety
+2017,provincial,Western Cape,5,Education,Vote 05 : Education
+2017,provincial,Western Cape,6,Health,Vote 06 : Health
+2017,provincial,Western Cape,7,Social Development,Vote 07 : Social Development
+2017,provincial,Western Cape,8,Human Settlements,Vote 08 : Human Settlements
+2017,provincial,Western Cape,9,Environmental Affairs and Development Planning,Vote 09 : Environmental Affairs and Development Planning
+2017,provincial,Western Cape,10,Transport and Public Works,Vote 10 : Transport and Public Works
+2017,provincial,Western Cape,11,Agriculture,Vote 11 : Agriculture
+2017,provincial,Western Cape,12,Economical Development and Tourism,Vote 12 : Economical Development and Tourism
+2017,provincial,Western Cape,13,Cultural Affairs and Sport,Vote 13 : Cultural Affairs and Sport
+2017,provincial,Western Cape,14,Local Government,Vote 14 : Local Government
+2015,national,South Africa,10,Public Service and Administration,Vote 10 : Public Service and Administration
+2015,national,South Africa,11,Public Works,Vote 11 : Public Works
+2015,national,South Africa,12,Statistics South Africa,Vote 12 : Statistics South Africa
+2015,national,South Africa,13,Women,Vote 13 : Women
+2015,national,South Africa,14,Basic Education,Vote 14 : Basic Education
+2015,national,South Africa,15,Higher Education and Training,Vote 15 : Higher Education and Training
+2015,national,South Africa,16,Health,Vote 16 : Health
+2015,national,South Africa,17,Social Development,Vote 17 : Social Development
+2015,national,South Africa,18,Correctional Services,Vote 18 : Correctional Services
+2015,national,South Africa,19,Defence and Military Veterans,Vote 19 : Defence and Military Veterans
+2015,national,South Africa,1,The Presidency,Vote 01 : The Presidency
+2015,national,South Africa,20,Independent Police Investigative Directorate,Vote 20 : Independent Police Investigative Directorate
+2015,national,South Africa,21,Justice and Constitutional Development,Vote 21 : Justice and Constitutional Development
+2015,national,South Africa,22,Office of the Chief Justice and Judicial Administration,Vote 22 : Office of the Chief Justice and Judicial Administration
+2015,national,South Africa,23,Police,Vote 23 : Police
+2015,national,South Africa,24,Agriculture,Vote 24 : Agriculture
+2015,national,South Africa,25,Economic Development,Vote 25 : Economic Development
+2015,national,South Africa,26,Energy,Vote 26 : Energy
+2015,national,South Africa,27,Environmental Affairs,Vote 27 : Environmental Affairs
+2015,national,South Africa,28,Labour,Vote 28 : Labour
+2015,national,South Africa,29,Mineral Resources,Vote 29 : Mineral Resources
+2015,national,South Africa,2,Parliament,Vote 02 : Parliament
+2015,national,South Africa,30,Science and Technology,Vote 30 : Science and Technology
+2015,national,South Africa,31,Small Business Development,Vote 31 : Small Business Development
+2015,national,South Africa,32,Telecommunications and Postal Services,Vote 32 : Telecommunications and Postal Services
+2015,national,South Africa,33,Tourism,Vote 33 : Tourism
+2015,national,South Africa,34,Trade and Industry,Vote 34 : Trade and Industry
+2015,national,South Africa,35,Transport,Vote 35 : Transport
+2015,national,South Africa,36,Water and Sanitation,Vote 36 : Water and Sanitation
+2015,national,South Africa,37,Arts and Culture,Vote 37 : Arts and Culture
+2015,national,South Africa,38,Human Settlements,Vote 38 : Human Settlements
+2015,national,South Africa,39,Rural Development and Land Reform,Vote 39 : Rural Development and Land Reform
+2015,national,South Africa,3,Communications,Vote 03 : Communications
+2015,national,South Africa,40,Sport and Recreation South Africa,Vote 40 : Sport and Recreation South Africa
+2015,national,South Africa,4,Cooperative Governance and Traditional Affairs,Vote 04 : Cooperative Governance and Traditional Affairs
+2015,national,South Africa,5,Home Affairs,Vote 05 : Home Affairs
+2015,national,South Africa,6,International Relations and Cooperation,Vote 06 : International Relations and Cooperation
+2015,national,South Africa,7,National Treasury,Vote 07 : National Treasury
+2015,national,South Africa,8,Planning,Vote 08 : Planning
+2015,national,South Africa,9,Public Enterprises,Vote 09 : Public Enterprises
+2016,national,South Africa,10,Public Service and Administration,Vote 10 : Public Service and Administration
+2016,national,South Africa,11,Public Works,Vote 11 : Public Works
+2016,national,South Africa,12,Statistics South Africa,Vote 12 : Statistics South Africa
+2016,national,South Africa,13,Women,Vote 13 : Women
+2016,national,South Africa,14,Basic Education,Vote 14 : Basic Education
+2016,national,South Africa,15,Higher Education and Training,Vote 15 : Higher Education and Training
+2016,national,South Africa,16,Health,Vote 16 : Health
+2016,national,South Africa,17,Social Development,Vote 17 : Social Development
+2016,national,South Africa,18,Correctional Services,Vote 18 : Correctional Services
+2016,national,South Africa,19,Defence and Military Veterans,Vote 19 : Defence and Military Veterans
+2016,national,South Africa,1,The Presidency,Vote 01 : The Presidency
+2016,national,South Africa,20,Independent Police Investigative Directorate,Vote 20 : Independent Police Investigative Directorate
+2016,national,South Africa,21,Justice and Constitutional Development,Vote 21 : Justice and Constitutional Development
+2016,national,South Africa,22,Office of the Chief Justice and Judicial Administration,Vote 22 : Office of the Chief Justice and Judicial Administration
+2016,national,South Africa,23,Police,Vote 23 : Police
+2016,national,South Africa,24,Agriculture,Vote 24 : Agriculture
+2016,national,South Africa,25,Economic Development,Vote 25 : Economic Development
+2016,national,South Africa,26,Energy,Vote 26 : Energy
+2016,national,South Africa,27,Environmental Affairs,Vote 27 : Environmental Affairs
+2016,national,South Africa,28,Labour,Vote 28 : Labour
+2016,national,South Africa,29,Mineral Resources,Vote 29 : Mineral Resources
+2016,national,South Africa,2,Parliament,Vote 02 : Parliament
+2016,national,South Africa,30,Science and Technology,Vote 30 : Science and Technology
+2016,national,South Africa,31,Small Business Development,Vote 31 : Small Business Development
+2016,national,South Africa,32,Telecommunications and Postal Services,Vote 32 : Telecommunications and Postal Services
+2016,national,South Africa,33,Tourism,Vote 33 : Tourism
+2016,national,South Africa,34,Trade and Industry,Vote 34 : Trade and Industry
+2016,national,South Africa,35,Transport,Vote 35 : Transport
+2016,national,South Africa,36,Water and Sanitation,Vote 36 : Water and Sanitation
+2016,national,South Africa,37,Arts and Culture,Vote 37 : Arts and Culture
+2016,national,South Africa,38,Human Settlements,Vote 38 : Human Settlements
+2016,national,South Africa,39,Rural Development and Land Reform,Vote 39 : Rural Development and Land Reform
+2016,national,South Africa,3,Communications,Vote 03 : Communications
+2016,national,South Africa,40,Sport and Recreation South Africa,Vote 40 : Sport and Recreation South Africa
+2016,national,South Africa,4,Cooperative Governance and Traditional Affairs,Vote 04 : Cooperative Governance and Traditional Affairs
+2016,national,South Africa,5,Home Affairs,Vote 05 : Home Affairs
+2016,national,South Africa,6,International Relations and Cooperation,Vote 06 : International Relations and Cooperation
+2016,national,South Africa,7,National Treasury,Vote 07 : National Treasury
+2016,national,South Africa,8,Planning,Vote 08 : Planning
+2016,national,South Africa,9,Public Enterprises,Vote 09 : Public Enterprises
+2017,national,South Africa,10,Public Service and Administration,Vote 10 : Public Service and Administration
+2017,national,South Africa,11,Public Works,Vote 11 : Public Works
+2017,national,South Africa,12,Statistics South Africa,Vote 12 : Statistics South Africa
+2017,national,South Africa,13,Women,Vote 13 : Women
+2017,national,South Africa,14,Basic Education,Vote 14 : Basic Education
+2017,national,South Africa,15,Higher Education and Training,Vote 15 : Higher Education and Training
+2017,national,South Africa,16,Health,Vote 16 : Health
+2017,national,South Africa,17,Social Development,Vote 17 : Social Development
+2017,national,South Africa,18,Correctional Services,Vote 18 : Correctional Services
+2017,national,South Africa,19,Defence and Military Veterans,Vote 19 : Defence and Military Veterans
+2017,national,South Africa,1,The Presidency,Vote 01 : The Presidency
+2017,national,South Africa,20,Independent Police Investigative Directorate,Vote 20 : Independent Police Investigative Directorate
+2017,national,South Africa,21,Justice and Constitutional Development,Vote 21 : Justice and Constitutional Development
+2017,national,South Africa,22,Office of the Chief Justice and Judicial Administration,Vote 22 : Office of the Chief Justice and Judicial Administration
+2017,national,South Africa,23,Police,Vote 23 : Police
+2017,national,South Africa,24,"Agriculture, Forestry and Fisheries","Vote 24 : Agriculture, Forestry and Fisheries"
+2017,national,South Africa,25,Economic Development,Vote 25 : Economic Development
+2017,national,South Africa,26,Energy,Vote 26 : Energy
+2017,national,South Africa,27,Environmental Affairs,Vote 27 : Environmental Affairs
+2017,national,South Africa,28,Labour,Vote 28 : Labour
+2017,national,South Africa,29,Mineral Resources,Vote 29 : Mineral Resources
+2017,national,South Africa,2,Parliament,Vote 02 : Parliament
+2017,national,South Africa,30,Science and Technology,Vote 30 : Science and Technology
+2017,national,South Africa,31,Small Business Development,Vote 31 : Small Business Development
+2017,national,South Africa,32,Telecommunications and Postal Services,Vote 32 : Telecommunications and Postal Services
+2017,national,South Africa,33,Tourism,Vote 33 : Tourism
+2017,national,South Africa,34,Trade and Industry,Vote 34 : Trade and Industry
+2017,national,South Africa,35,Transport,Vote 35 : Transport
+2017,national,South Africa,36,Water and Sanitation,Vote 36 : Water and Sanitation
+2017,national,South Africa,37,Arts and Culture,Vote 37 : Arts and Culture
+2017,national,South Africa,38,Human Settlements,Vote 38 : Human Settlements
+2017,national,South Africa,39,Rural Development and Land Reform,Vote 39 : Rural Development and Land Reform
+2017,national,South Africa,3,Communications,Vote 03 : Communications
+2017,national,South Africa,40,Sport and Recreation South Africa,Vote 40 : Sport and Recreation South Africa
+2017,national,South Africa,4,Cooperative Governance and Traditional Affairs,Vote 04 : Cooperative Governance and Traditional Affairs
+2017,national,South Africa,5,Home Affairs,Vote 05 : Home Affairs
+2017,national,South Africa,6,International Relations and Cooperation,Vote 06 : International Relations and Cooperation
+2017,national,South Africa,7,National Treasury,Vote 07 : National Treasury
+2017,national,South Africa,8,"Planning, Monitoring and Evaluation","Vote 08 : Planning, Monitoring and Evaluation"
+2017,national,South Africa,9,Public Enterprises,Vote 09 : Public Enterprises
