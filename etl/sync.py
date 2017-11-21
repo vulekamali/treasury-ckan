@@ -14,7 +14,6 @@ parser.add_argument('tasks', metavar='task', type=str, nargs='+',
 parser.add_argument('--apikey', help='authentication key')
 parser.add_argument('--instance', help='CKAN instance root URL')
 parser.add_argument('--resources-file', help='CSV with resource data')
-parser.add_argument('--resources-base', help='base local directory for resource files')
 
 args = parser.parse_args()
 
@@ -80,7 +79,6 @@ def package_title(sphere ,geographic_region, department_name, financial_year):
         raise Exception('unknown sphere %r' % sphere)
 
 
-
 def get_vocab_map():
     vocab_map = {}
     for vocab in ckan.action.vocabulary_list():
@@ -88,7 +86,44 @@ def get_vocab_map():
     return vocab_map
 
 
-if 'upload-resources' in args.tasks:
+def upload_resource(pid, name, path=None, url=None):
+    package = ckan.action.package_show(id=pid)
+    resources = package['resources']
+    matches = [r for r in resources if r['name'] == name]
+    print name, path
+    if matches:
+        print 'Resource Exists'
+    else:
+        if url:
+            print ckan.action.resource_create(
+                package_id=pid,
+                url=url,
+                name=name,
+            )
+        else:
+            noextension, extension = os.path.splitext(path)
+            print ckan.action.resource_create(
+                package_id=pid,
+                name=name,
+                upload=open(path, 'rb')
+            )
+
+
+if 'upload-sections' in args.tasks:
+    with open('etl-data/ene_sections.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            print
+            sphere = row['sphere']
+            geographic_region = 'South Africa'
+            financial_year = finyear[row['financial_year']]
+            department_name = row['department_name']
+            pid = package_id(sphere, geographic_region, department_name, financial_year)
+            print pid
+            name = "ENE Section - %s" % row['heading']
+            upload_resource(pid, name, path=row['path'])
+
+if 'upload-chapters' in args.tasks:
     with open(args.resources_file) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
@@ -99,30 +134,7 @@ if 'upload-resources' in args.tasks:
             department_name = row['department_name']
             pid = package_id(sphere, geographic_region, department_name, financial_year)
             print pid
-            package = packagecache.get(pid, None)
-            if not package:
-                package = ckan.action.package_show(id=pid)
-                packagecache[pid] = package
-            resources = package['resources']
-            matches = [r for r in resources if r['name'] == row['name']]
-            print row['name'], row['normalised_path']
-            if matches:
-                print 'Resource Exists'
-            else:
-                if row['url']:
-                    print ckan.action.resource_create(
-                        package_id=pid,
-                        url=row['url'],
-                        name=row['name'],
-                    )
-                else:
-                    path = args.resources_base + row['path']
-                    noextension, extension = os.path.splitext(path)
-                    print ckan.action.resource_create(
-                        package_id=pid,
-                        name=row['name'],
-                        upload=open(path, 'rb')
-                    )
+            upload_resource(pid, row['name'], row['normalised_path'], row['url'])
 
 if 'sync-packages' in args.tasks:
     with open('metadata/departments.csv') as csvfile:
