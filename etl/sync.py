@@ -6,7 +6,6 @@ import sys
 import os
 from slugify import slugify
 import pandas as pd
-from util import merge
 
 
 parser = argparse.ArgumentParser(description='Bring CKAN up to date with a local representation of what it should look like.')
@@ -153,12 +152,13 @@ if 'sync-packages' in args.tasks:
                       'name': financial_year },
                 ],
                 'extras': [
-                    { 'key': 'department_name', 'value': dept_name },
-                    { 'key': 'Department Name', 'value': dept_name },
-                    { 'key': 'department_name_slug', 'value': slugify(dept_name) },
-                    { 'key': 'Vote Number', 'value': row['vote_number'] },
-                    { 'key': 'vote_number', 'value': row['vote_number'] },
-                    { 'key': 'geographic_region_slug', 'value': slugify(geo_region) },
+                    {'key': 'department_name', 'value': dept_name},
+                    {'key': 'Department Name', 'value': dept_name},
+                    {'key': 'department_name_slug', 'value': slugify(dept_name)},
+                    {'key': 'Vote Number', 'value': row['vote_number']},
+                    {'key': 'vote_number', 'value': row['vote_number']},
+                    {'key': 'geographic_region_slug', 'value': slugify(geo_region)},
+                    {'key': 'organisational_unit', 'value': 'department'},
                 ],
                 'owner_org': 'national-treasury'
             }
@@ -181,7 +181,7 @@ if 'sync-packages' in args.tasks:
                 else:
                     print e
 
-if 'create-groups' in args.tasks:
+if 'sync-groups' in args.tasks:
     cols = ['financial_year', 'geographic_region', 'sphere']
     df_depts = pd.read_csv('metadata/departments.csv', usecols=cols)
     df_depts = df_depts.drop_duplicates()
@@ -198,15 +198,23 @@ if 'create-groups' in args.tasks:
             'name': gid,
             'title': group_title(sphere, geographic_region, financial_year),
             'extras': [
-                {'key': 'Sphere', 'value': sphere},
+                {'key': 'sphere', 'value': sphere},
                 {'key': 'Geographic Region', 'value': geographic_region},
+                {'key': 'geographic_region', 'value': geographic_region},
+                {'key': 'geographic_region_slug', 'value': slugify(geographic_region)},
                 {'key': 'Financial Year', 'value': financial_year},
+                {'key': 'financial_year', 'value': financial_year},
+                {'key': 'organisational_unit', 'value': 'government'},
             ],
+            'state': 'active',
         }
         try:
-            ckan.action.group_show(id=gid)
-            print "Not recreating group"
+            group = ckan.action.group_show(id=gid, include_datasets=True)
+            print "Updating existing group"
+            group.update(group_fields)
+            group = ckan.action.group_update(**group)
         except NotFound:
-            group = ckan.action.group_create(**group_fields)
-            print group
+            print "Creating group"
+            group = ckan.action.group_update(**group_fields)
+        print group
         print
