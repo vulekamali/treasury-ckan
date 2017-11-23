@@ -6,7 +6,10 @@ RUN pip install ckanext-envvars \
                 git+https://github.com/keitaroinc/ckanext-s3filestore.git@v0.0.8 \
                 git+https://github.com/OpenUpSA/ckanext-satreasury.git@master \
                 -e git+https://github.com/ckan/ckanext-googleanalytics.git@v2.0.2#egg=ckanext-googleanalytics \
-                git+https://github.com/OpenUpSA/ckanext-gdoc.git@master
+                git+https://github.com/OpenUpSA/ckanext-gdoc.git@master \
+                -e git+https://github.com/stadt-karlsruhe/ckanext-extractor@v0.3.1#egg=ckanext-extractor \
+ && pip install -r src/ckanext-extractor/requirements.txt
+
 
 RUN ln -s ./src/ckan/ckan/config/who.ini /who.ini
 ADD ckan.ini /ckan.ini
