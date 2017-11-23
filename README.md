@@ -202,10 +202,24 @@ http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create
 
 ### CKAN Celery
 
+On the server
+
+```
 dokku apps:create ckan-celery
+sudo cp /home/dokku/ckan/ENV /home/dokku/ckan-celery/ENV
+dokku config:set ckan-celery DOKKU_DOCKERFILE_START_CMD="paster --plugin=ckan celeryd -c ckan.ini"
+dokku config:set ckan-celery C_FORCE_ROOT=1
+dokku config:set ckan-celery CELERY_RDBSIG=1
+dokku config:set ckan-celery CELERYD_MAX_TASKS_PER_CHILD=1 CELERYD_TASK_TIME_LIMIT=600
+```
 
+Where you've checked out this repo
+```
+git remote add dokku-celery dokku@treasury1.openup.org.za:ckan-celery
+git push dokku-celery master
+```
 
-git remote add dokku-celery dokku@treasury1.openup.org.za:ckan
+Then [initialise the database tables for ckanext-extractor](https://github.com/stadt-karlsruhe/ckanext-extractor/tree/v0.3.1#configure-ckan) and [check that it's working ok](https://github.com/stadt-karlsruhe/ckanext-extractor/tree/v0.3.1#test-your-installation)
 
 Setting up development environment
 ----------------------------------
