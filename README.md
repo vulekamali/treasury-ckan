@@ -200,6 +200,13 @@ crontab -e
 
 http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create-the-nginx-config-file or cloudflare?
 
+### CKAN Celery
+
+dokku apps:create ckan-celery
+
+
+git remote add dokku-celery dokku@treasury1.openup.org.za:ckan
+
 Setting up development environment
 ----------------------------------
 
