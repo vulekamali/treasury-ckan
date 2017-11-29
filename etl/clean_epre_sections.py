@@ -1,4 +1,4 @@
-import re
+import regex as re
 import csv
 import os
 import yaml
@@ -6,6 +6,7 @@ import yaml
 
 basedir = '../data/provincial/temps'
 
+count = 0
 
 for year in os.listdir(basedir):
     if re.match(r'\d{4}', year):
@@ -26,6 +27,19 @@ for year in os.listdir(basedir):
                             print file_path
                             for line in front_matter.split("\n"):
                                 key, value = line.split(":", 1)
-                                metadata[key] = value
+                                metadata[key] = value.strip()
+                            metadata['department_name'] = metadata['name'].split(':')[1]
+
                             print metadata
-                            print content[:100]
+
+                            regex = r"^\s*(?:# *(?P<heading>[\w ]+)[\r\n]+(?P<content>[^#]+))+\s*$"
+                            match = re.match(regex, content, flags=re.MULTILINE)
+                            if match:
+                                for capture in match.captures():
+                                    print "%r" % capture
+                                count += 1
+                                print count
+                            else:
+                                print "%s" % content
+                                if not content.strip() == "":
+                                    raise Exception()
