@@ -6,6 +6,49 @@ import yaml
 
 basedir = '../data/provincial/temps'
 
+
+def parse_file(text_file):
+    print
+    print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    print file_path
+
+    file_text = text_file.read()
+    front_matter, content = file_text.split("---")
+    front_matter = front_matter.strip()
+    print front_matter
+    metadata = {}
+    for line in front_matter.split("\n"):
+        key, value = line.split(":", 1)
+        metadata[key] = value.strip()
+    metadata['department_name'] = metadata['name'].split(':')[1]
+
+    #print metadata
+
+    regex = r"^\s*(?P<section># *(?P<heading>[\w ]+)[\r\n]+(?P<content>[^#]+))+\s*$"
+    match = re.match(regex, content, flags=re.MULTILINE)
+    if match:
+        captures = match.capturesdict()
+        for idx, section in enumerate(captures['section']):
+            print captures['heading'][idx]
+            print "=========\n"
+            print captures['content'][idx]
+        return True
+    else:
+        print "%s" % content
+        abstract_path = os.path.join(year, geographic_region, filename)
+        if content.strip() == '':
+            autoblanks.write('"%s"\n"' % abstract_path)
+            print "#### blank"
+            return
+
+        if file_path in incompletes:
+            print "#### known incomplete"
+        else:
+            print abstract_path
+            print
+            raise Exception("%r" % file_path)
+
+
 count = 0
 
 incompletes = set()
@@ -30,40 +73,6 @@ with open('../data/provincial/temps/autoblanks.csv', 'wb') as autoblanks:
                         if filename.endswith('.txt'):
                             file_path = os.path.join(geographic_region_path, filename)
                             with open(file_path) as text_file:
-                                print
-                                print "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-                                print file_path
-
-                                file_text = text_file.read()
-                                front_matter, content = file_text.split("---")
-                                front_matter = front_matter.strip()
-                                print front_matter
-                                metadata = {}
-                                for line in front_matter.split("\n"):
-                                    key, value = line.split(":", 1)
-                                    metadata[key] = value.strip()
-                                metadata['department_name'] = metadata['name'].split(':')[1]
-
-                                #print metadata
-
-                                regex = r"^\s*(?:# *(?P<heading>[\w ]+)[\r\n]+(?P<content>[^#]+))+\s*$"
-                                match = re.match(regex, content, flags=re.MULTILINE)
-                                if match:
-                                    for capture in match.captures():
-                                        print "%r" % capture
+                                if parse_file(text_file):
                                     count += 1
                                     print count
-                                else:
-                                    print "%s" % content
-                                    abstract_path = os.path.join(year, geographic_region, filename)
-                                    if content.strip() == '':
-                                        autoblanks.write('"%s"\n' % abstract_path)
-                                        print "#### blank"
-                                        continue
-
-                                    if file_path in incompletes:
-                                        print "#### known incomplete"
-                                    else:
-                                        print abstract_path
-                                        print
-                                        raise Exception("%r" % file_path)
