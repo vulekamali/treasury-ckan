@@ -4,7 +4,7 @@ import os
 import yaml
 
 
-basedir = '../data/provincial/temps'
+basedir = '../data/provincial/temps2'
 
 
 def parse_file(text_file, epre_sections_writer):
@@ -67,11 +67,11 @@ def parse_file(text_file, epre_sections_writer):
 count = 0
 
 incompletes = set()
-with open('../data/provincial/temps/missing.csv') as missings_file:
+with open('../data/provincial/temps2/missing.csv') as missings_file:
     reader = csv.DictReader(missings_file)
     for row in reader:
         incompletes.add(os.path.join(basedir, row['text_file']))
-with open('../data/provincial/temps/autoblanks.csv') as autoblanks_file:
+with open('../data/provincial/temps2/autoblanks.csv') as autoblanks_file:
     reader = csv.DictReader(autoblanks_file)
     for row in reader:
         incompletes.add(os.path.join(basedir, row['text_file']))
@@ -87,7 +87,7 @@ with open('etl-data/epre_sections.csv', 'wb') as epre_sections:
     ]
     epre_sections_writer = csv.DictWriter(epre_sections, fieldnames=headings)
     epre_sections_writer.writeheader()
-    with open('../data/provincial/temps/autoblanks.csv', 'wb') as autoblanks:
+    with open('../data/provincial/temps2/autoblanks.csv', 'wb') as autoblanks:
         autoblanks.write("text_file\n")
         for year in os.listdir(basedir):
             if re.match(r'\d{4}', year):
