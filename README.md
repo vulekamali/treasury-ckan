@@ -149,11 +149,27 @@ docker volume create --name ckan-filestore
 dokku docker-options:add ckan run,deploy --volume ckan-filestore:/var/lib/ckan/default
 ```
 
-Allow large file uploads by creating an nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf` with the following:
+We customise the app nginx config to
+
+- Allow large file uploads
+- Allow a longer request timeout
+- Redirect www to non-www (because peope WILL add www to links they shouldn't)
+
+*This breaks letsencrypt renewal so uncomment these and reload nginx to renew the letsencrypt certificate*
+
+Add the following nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf`:
 
 ```
 client_max_body_size 100M;
 client_body_timeout 120s;
+
+if ($host = www.budgetportal.openup.org.za) {
+  return 301 $scheme://budgetportal.openup.org.za$request_uri;
+}
+
+if ($host = www.treasurydata.openup.org.za) {
+  return 301 $scheme://treasurydata.openup.org.za$request_uri;
+}
 ```
 
 Then let nginx load it
