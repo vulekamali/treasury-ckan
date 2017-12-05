@@ -38,6 +38,7 @@
   ["TIFF", "TIFF Image File", "image/tiff", []],
   ["ODB", "OpenDocument Database", "application/vnd.oasis.opendocument.database", []],
   ["TXT", "Text File", "text/plain", []],
+  ["MD", "Markdown-formatted text", "text/markdown", []],
   ["DCR", "Adobe Shockwave format", "application/x-director", []],
   ["ODF", "OpenDocument Math Formula", "application/vnd.oasis.opendocument.formula", []],
   ["ODG", "OpenDocument Image", "application/vnd.oasis.opendocument.graphics", []],

@@ -18,7 +18,7 @@ services:
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
         - CKAN_SITE_URL=http://localhost/
         - CKAN___BEAKER__SESSION__SECRET=supersecret
-    env_file: env.prod
+    env_file: env.dev
     volumes:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default

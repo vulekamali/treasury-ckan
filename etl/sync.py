@@ -86,42 +86,55 @@ def get_vocab_map():
     return vocab_map
 
 
-def upload_resource(pid, name, path=None, url=None):
+def upload_resource(pid, name, path=None, url=None, mimetype=None, update_data=False, update_metadata=False):
     package = ckan.action.package_show(id=pid)
     resources = package['resources']
     matches = [r for r in resources if r['name'] == name]
     print name, path
-    if matches:
-        print 'Resource Exists'
-    else:
+    resource_fields = {
+        'package_id': pid,
+        'name': name,
+    }
+    if mimetype:
+        resource_fields['mimetype'] = mimetype
+
+    if (matches and update_data) or not matches:
         if url:
-            print ckan.action.resource_create(
-                package_id=pid,
-                url=url,
-                name=name,
-            )
+            resource_fields['url'] = url
         else:
-            noextension, extension = os.path.splitext(path)
-            print ckan.action.resource_create(
-                package_id=pid,
-                name=name,
-                upload=open(path, 'rb')
-            )
+            resource_fields['upload'] = open(path, 'rb')
+
+    if matches:
+        print "Exists"
+        if update_metadata:
+            print "Updating"
+            resource_fields['id'] = matches[0]['id']
+            print ckan.action.resource_patch(**resource_fields)
+        else:
+            print "Not updating"
+    else:
+        print ckan.action.resource_create(**resource_fields)
 
 
 if 'upload-sections' in args.tasks:
-    with open('etl-data/ene_sections.csv') as csvfile:
+    with open(args.resources_file) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             print
             sphere = row['sphere']
-            geographic_region = 'South Africa'
             financial_year = finyear[row['financial_year']]
             department_name = row['department_name']
+            if sphere == 'national':
+                geographic_region = 'South Africa'
+                name = "ENE Section - %s" % row['heading']
+            elif sphere == 'provincial':
+                geographic_region = row['geographic_region']
+                name = "EPRE Section - %s" % row['heading']
+            else:
+                raise Exception('unexpected sphere')
             pid = package_id(sphere, geographic_region, department_name, financial_year)
             print pid
-            name = "ENE Section - %s" % row['heading']
-            upload_resource(pid, name, path=row['path'])
+            upload_resource(pid, name, path=row['path'], mimetype="text/markdown", update_metadata=False, update_data=False)
 
 if 'upload-chapters' in args.tasks:
     with open(args.resources_file) as csvfile:
