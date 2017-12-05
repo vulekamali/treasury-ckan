@@ -86,7 +86,7 @@ def get_vocab_map():
     return vocab_map
 
 
-def upload_resource(pid, name, path=None, url=None, mimetype=None, replace=False):
+def upload_resource(pid, name, path=None, url=None, mimetype=None, update_data=False, update_metadata=False):
     package = ckan.action.package_show(id=pid)
     resources = package['resources']
     matches = [r for r in resources if r['name'] == name]
@@ -98,15 +98,20 @@ def upload_resource(pid, name, path=None, url=None, mimetype=None, replace=False
     if mimetype:
         resource_fields['mimetype'] = mimetype
 
-    if (matches and replace) or not matches:
+    if (matches and update_data) or not matches:
         if url:
             resource_fields['url'] = url
         else:
             resource_fields['upload'] = open(path, 'rb')
 
     if matches:
-        resource_fields['id'] = matches[0]['id']
-        print ckan.action.resource_patch(**resource_fields)
+        print "Exists"
+        if update_metadata:
+            print "Updating"
+            resource_fields['id'] = matches[0]['id']
+            print ckan.action.resource_patch(**resource_fields)
+        else:
+            print "Not updating"
     else:
         print ckan.action.resource_create(**resource_fields)
 
@@ -129,7 +134,7 @@ if 'upload-sections' in args.tasks:
                 raise Exception('unexpected sphere')
             pid = package_id(sphere, geographic_region, department_name, financial_year)
             print pid
-            upload_resource(pid, name, path=row['path'], mimetype="text/markdown", replace=True)
+            upload_resource(pid, name, path=row['path'], mimetype="text/markdown", update_metadata=False, update_data=False)
 
 if 'upload-chapters' in args.tasks:
     with open(args.resources_file) as csvfile:
