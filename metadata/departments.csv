@@ -384,7 +384,7 @@ financial_year,sphere,geographic_region,vote_number,department_name,chapter_titl
 2015,national,South Africa,21,Justice and Constitutional Development,Vote 21 : Justice and Constitutional Development
 2015,national,South Africa,22,Office of the Chief Justice and Judicial Administration,Vote 22 : Office of the Chief Justice and Judicial Administration
 2015,national,South Africa,23,Police,Vote 23 : Police
-2015,national,South Africa,24,Agriculture,Vote 24 : Agriculture
+2015,national,South Africa,24,"Agriculture, Forestry and Fisheries","Vote 24 : Agriculture, Forestry and Fisheries"
 2015,national,South Africa,25,Economic Development,Vote 25 : Economic Development
 2015,national,South Africa,26,Energy,Vote 26 : Energy
 2015,national,South Africa,27,Environmental Affairs,Vote 27 : Environmental Affairs
@@ -407,7 +407,7 @@ financial_year,sphere,geographic_region,vote_number,department_name,chapter_titl
 2015,national,South Africa,5,Home Affairs,Vote 05 : Home Affairs
 2015,national,South Africa,6,International Relations and Cooperation,Vote 06 : International Relations and Cooperation
 2015,national,South Africa,7,National Treasury,Vote 07 : National Treasury
-2015,national,South Africa,8,Planning,Vote 08 : Planning
+2015,national,South Africa,8,"Planning, Monitoring and Evaluation","Vote 08 : Planning, Monitoring and Evaluation"
 2015,national,South Africa,9,Public Enterprises,Vote 09 : Public Enterprises
 2016,national,South Africa,10,Public Service and Administration,Vote 10 : Public Service and Administration
 2016,national,South Africa,11,Public Works,Vote 11 : Public Works
@@ -424,7 +424,7 @@ financial_year,sphere,geographic_region,vote_number,department_name,chapter_titl
 2016,national,South Africa,21,Justice and Constitutional Development,Vote 21 : Justice and Constitutional Development
 2016,national,South Africa,22,Office of the Chief Justice and Judicial Administration,Vote 22 : Office of the Chief Justice and Judicial Administration
 2016,national,South Africa,23,Police,Vote 23 : Police
-2016,national,South Africa,24,Agriculture,Vote 24 : Agriculture
+2016,national,South Africa,24,"Agriculture, Forestry and Fisheries","Vote 24 : Agriculture, Forestry and Fisheries"
 2016,national,South Africa,25,Economic Development,Vote 25 : Economic Development
 2016,national,South Africa,26,Energy,Vote 26 : Energy
 2016,national,South Africa,27,Environmental Affairs,Vote 27 : Environmental Affairs
@@ -447,7 +447,7 @@ financial_year,sphere,geographic_region,vote_number,department_name,chapter_titl
 2016,national,South Africa,5,Home Affairs,Vote 05 : Home Affairs
 2016,national,South Africa,6,International Relations and Cooperation,Vote 06 : International Relations and Cooperation
 2016,national,South Africa,7,National Treasury,Vote 07 : National Treasury
-2016,national,South Africa,8,Planning,Vote 08 : Planning
+2016,national,South Africa,8,"Planning, Monitoring and Evaluation","Vote 08 : Planning, Monitoring and Evaluation"
 2016,national,South Africa,9,Public Enterprises,Vote 09 : Public Enterprises
 2017,national,South Africa,10,Public Service and Administration,Vote 10 : Public Service and Administration
 2017,national,South Africa,11,Public Works,Vote 11 : Public Works
