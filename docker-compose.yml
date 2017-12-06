@@ -22,10 +22,13 @@ services:
     volumes:
       - ./ckan.ini:/ckan.ini
       - ckan-filestore:/var/lib/ckan/default
-      - ../ckanext-satreasury/:/ckanext-satreasury
+      - ../ckanext-satreasury/:/src/ckanext-satreasury
 
   datapusher:
-    image: openup/ckan-datapusher
+    # image: openup/ckan-datapusher
+    build:
+      context: ../ckan-datapusher-dokku/
+      dockerfile: Dockerfile-deps
     ports:
       - "8800:8800"
 
