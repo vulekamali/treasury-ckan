@@ -210,6 +210,7 @@ if 'sync-groups' in args.tasks:
     cols = ['financial_year', 'geographic_region', 'sphere']
     df_depts = pd.read_csv('metadata/departments.csv', usecols=cols)
     df_depts = df_depts.drop_duplicates()
+    vocab_map = get_vocab_map()
     for index, row in df_depts.iterrows():
         year_int = row['financial_year']
         financial_year = finyear[str(year_int)]
@@ -232,6 +233,10 @@ if 'sync-groups' in args.tasks:
                 {'key': 'organisational_unit', 'value': 'government'},
             ],
             'state': 'active',
+            'tags': [
+                { 'vocabulary_id': vocab_map['governments'],
+                  'name': geographic_region },
+            ],
         }
         try:
             group = ckan.action.group_show(id=gid, include_datasets=True)
