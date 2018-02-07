@@ -313,3 +313,9 @@ pyhon etl/normalize.py
 This writes `etl-data/scraped_normalised.csv` which you can then correct manually. The list of manual corrections should always be saved in metadata/fuzzy_normalisation_fixes.csv
 
 We then save `etl-data/scraped_normalised.csv` as `metadata/epre_fienames.csv` and run `etl/rename.py` which will add the `department_name` and `normalised_path` columns, and copy the files from the scraped path to the normalised path.
+
+
+Troubleshooting
+===============
+
+- If ckan can't connect to solr after rebuilding ckan-solr, restart ckan - I think it's something to do with docker linking the containers. I think Docker needs to link ckan to the new ckan-solr container which happens on restart.
