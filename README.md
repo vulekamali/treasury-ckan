@@ -248,6 +248,28 @@ crontab -e
 
 ### HTTP Cache
 
+
+#### CloudFront
+
+Create a Cache Behaviour
+
+- Path pattern: `/`
+- Viewer Protocol Policy: `Redirect HTTP to HTTPS`
+- Cache Based on Selected Request Headers: `Whitelist`
+  - Add custom `x-ckan-api-key`
+  - Add standard `Authorization`
+- Object Caching: `Customise` and set all TTLs to something sensible like 1800 (30 minutes)
+- Forward Cookies: `Whitelist`
+  - add `auth_tkt`
+- Query String Forwarding and Caching: `Forward all, cache based on all`
+- Compress Objects Automatically: `yes`
+
+To enable, ensure it's above the default. To disable, ensure it's below the default.
+
+To invalidate, create an Invalidation with the relevant path, e.g. /* for everything in the Distribution.
+
+#### Nginx
+
 To enable the nginx cache, uncomment `proxy_ignore_headers` in `/home/dokku/ckan/nginx.conf.d/ckan.conf` and reload `nginx:
 
 ```
@@ -257,6 +279,8 @@ sudo service nginx reload
 It is important to exempt any authenticated requests from caching. Authenticated requests can be made by the AUTH_TKT cookie, and the Authorization or X-CKAN-AUTH-Key headers. For this reason, publicly-accessible requests should not use authentication.
 
 http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create-the-nginx-config-file
+
+To invalidate: `find /path/to/your/cache -type f -delete`
 
 
 ### CKAN Celery
