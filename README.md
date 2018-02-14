@@ -21,8 +21,7 @@ This CKAN installation depends on
  - Redis - as a queue for background processes
  - S3 - object (file) storage
  - [CKAN DataPusher](https://github.com/OpenUpSA/ckan-datapusher) - [while limited](https://github.com/ckan/ckan/pull/3911), this might help us quickly access data programmatically.
-
-It is recommended to use an HTTP cache in front of CKAN in production.
+ - NGINX - caching (when needed)
 
 Setting up in production
 ------------------------
@@ -155,20 +154,44 @@ We customise the app nginx config to
 - Allow a longer request timeout
 - Redirect www to non-www (because peope WILL add www to links they shouldn't)
 - Log to a second file showing the hostname used to access the server
+- To be prepared for caching when needed.
 
 *This breaks letsencrypt renewal so uncomment these and reload nginx to renew the letsencrypt certificate*
 
-Add the followin to the logging part of the `http` block of `/etc/nginx/nginx.conf`:
+Add the following to the logging part of the `http` block of `/etc/nginx/nginx.conf`:
 
 ```
     log_format combined '$remote_addr - $remote_user [$time_local] '
                         '"$request" $status $body_bytes_sent '
                         '"$http_referer" "$http_user_agent"';
+
+    proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=ckan:30m max_size=250m;
+    proxy_temp_path /tmp/nginx_proxy 1 2;
 ```
 
 Add the following nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf`:
 
 ```
+## Caching
+
+proxy_cache ckan;
+
+# Don't cache or served cached copies when any of these authentication
+# cookies or headers are set.
+proxy_cache_bypass $cookie_auth_tkt$http_x_ckan_api_key$http_authorization;
+proxy_no_cache $cookie_auth_tkt$http_x_ckan_api_key$http_authorization;
+
+proxy_cache_valid 30m;
+proxy_cache_key $host$scheme$proxy_host$request_uri;
+
+## Uncomment to debug caching
+# add_header X-Proxy-Cache $upstream_cache_status;
+
+# Uncomment the next line to enable caching
+# proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+
+## ---
+
 client_max_body_size 100M;
 client_body_timeout 120s;
 
@@ -225,7 +248,40 @@ crontab -e
 
 ### HTTP Cache
 
-http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create-the-nginx-config-file or cloudflare?
+
+#### CloudFront
+
+Create a Cache Behaviour
+
+- Path pattern: `/`
+- Viewer Protocol Policy: `Redirect HTTP to HTTPS`
+- Cache Based on Selected Request Headers: `Whitelist`
+  - Add custom `x-ckan-api-key`
+  - Add standard `Authorization`
+- Object Caching: `Customise` and set all TTLs to something sensible like 1800 (30 minutes)
+- Forward Cookies: `Whitelist`
+  - add `auth_tkt`
+- Query String Forwarding and Caching: `Forward all, cache based on all`
+- Compress Objects Automatically: `yes`
+
+To enable, ensure it's above the default. To disable, ensure it's below the default.
+
+To invalidate, create an Invalidation with the relevant path, e.g. /* for everything in the Distribution.
+
+#### Nginx
+
+To enable the nginx cache, uncomment `proxy_ignore_headers` in `/home/dokku/ckan/nginx.conf.d/ckan.conf` and reload `nginx:
+
+```
+sudo service nginx reload
+```
+
+It is important to exempt any authenticated requests from caching. Authenticated requests can be made by the AUTH_TKT cookie, and the Authorization or X-CKAN-AUTH-Key headers. For this reason, publicly-accessible requests should not use authentication.
+
+http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create-the-nginx-config-file
+
+To invalidate: `find /path/to/your/cache -type f -delete`
+
 
 ### CKAN Celery
 
