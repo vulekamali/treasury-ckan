@@ -24,6 +24,17 @@ services:
       - ckan-filestore:/var/lib/ckan/default
       - ../ckanext-satreasury/:/src/ckanext-satreasury
 
+#   celery:
+#     build: .
+#     environment:
+#       - C_FORCE_ROOT=TRUE
+#       - CKAN_SITE_URL=http://localhost
+#       - CKAN_SOLR_URL=http://solr:8983/solr/ckan
+#     env_file: env.dev
+#     volumes:
+#       - ./ckan.ini:/ckan.ini
+#     command: paster --plugin=ckan celeryd -c /ckan.ini
+
   datapusher:
     # image: openup/ckan-datapusher
     build:
@@ -33,11 +44,11 @@ services:
       - "8800:8800"
 
   solr:
-    image: ckan/solr:latest
+    build: ../ckan-solr-dokku
     ports:
         - "8983:8983"
     volumes:
-      - solr-data:/opt/solr/server/solr/ckan
+      - solr-data:/opt/solr/server/solr/ckan/data
 
   redis:
     image: redis:latest
