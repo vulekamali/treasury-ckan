@@ -33,11 +33,11 @@ services:
       - "8800:8800"
 
   solr:
-    image: ckan/solr:latest
+    build: ../ckan-solr-dokku
     ports:
         - "8983:8983"
     volumes:
-      - solr-data:/opt/solr/server/solr/ckan
+      - solr-data:/opt/solr/server/solr/ckan/data
 
   redis:
     image: redis:latest
