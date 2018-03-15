@@ -119,7 +119,9 @@ dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/
                       CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1 \
                       CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4 \
                       NEW_RELIC_APP_NAME="Treasury CKAN" \
-                      NEW_RELIC_LICENSE_KEY=...
+                      NEW_RELIC_LICENSE_KEY=... \
+                      CKAN_DISCOURSE_URL= \
+                      CKAN_DISCOURSE_SSO_SECRET=
 ```
 
 Link CKAN and Redis
