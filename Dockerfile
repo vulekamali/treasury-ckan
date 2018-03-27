@@ -11,7 +11,7 @@ RUN pip install ckanext-envvars \
                 -e git+https://github.com/stadt-karlsruhe/ckanext-extractor@v0.3.1#egg=ckanext-extractor \
  && pip install -r src/ckanext-extractor/requirements.txt
 
-RUN ln -s ./src/ckan/ckan/config/who.ini /who.ini
+ADD who.ini /who.ini
 ADD ckan.ini /ckan.ini
 ADD resource_formats.json /resource_formats.json
 
