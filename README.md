@@ -206,6 +206,20 @@ if ($host = www.budgetportal.openup.org.za) {
 if ($host = www.treasurydata.openup.org.za) {
   return 301 $scheme://treasurydata.openup.org.za$request_uri;
 }
+
+## ---
+
+# The X-Frame-Options header indicates whether a browser should be allowed
+# to render a page within a frame or iframe.
+add_header X-Frame-Options SAMEORIGIN;
+
+# MIME type sniffing security protection
+#	There are very few edge cases where you wouldn't want this enabled.
+add_header X-Content-Type-Options nosniff;
+
+# The X-XSS-Protection header is used by Internet Explorer version 8+
+# The header instructs IE to enable its inbuilt anti-cross-site scripting filter.
+add_header X-XSS-Protection "1; mode=block";
 ```
 
 Then let nginx load it
