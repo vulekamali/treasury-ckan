@@ -9,6 +9,7 @@ RUN pip install ckanext-envvars \
                 -e git+https://github.com/ckan/ckanext-googleanalytics.git@v2.0.2#egg=ckanext-googleanalytics \
                 git+https://github.com/OpenUpSA/ckanext-gdoc.git@master \
                 -e git+https://github.com/stadt-karlsruhe/ckanext-extractor@v0.3.1#egg=ckanext-extractor \
+                -e git+https://github.com/stadt-karlsruhe/ckanext-discovery@v0.1.1#egg=ckanext-discovery \
  && pip install -r src/ckanext-extractor/requirements.txt
 
 ADD who.ini /who.ini
