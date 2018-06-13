@@ -311,6 +311,21 @@ Setting up development environment
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
+Clone this repo and supporting repos:
+
+```
+git clone https://github.com/OpenUpSA/treasury-ckan
+git clone https://github.com/OpenUpSA/ckan-solr-dokku
+git clone https://github.com/OpenUpSA/ckanext-satreasury
+git clone https://github.com/OpenUpSA/ckan-datapusher
+```
+
+Move into the `treasury-ckan` directory:
+
+```
+cd treasury-ckan
+```
+
 - create database
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
