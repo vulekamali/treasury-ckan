@@ -314,10 +314,11 @@ While you can set up CKAN directly on your OS, docker-compose is useful to devel
 Clone this repo and supporting repos:
 
 ```
-git clone https://github.com/OpenUpSA/treasury-ckan
-git clone https://github.com/OpenUpSA/ckan-solr-dokku
-git clone https://github.com/OpenUpSA/ckanext-satreasury
-git clone https://github.com/OpenUpSA/ckan-datapusher
+git clone https://github.com/OpenUpSA/treasury-ckan.git
+git clone https://github.com/OpenUpSA/ckan-solr-dokku.git
+git clone https://github.com/OpenUpSA/ckanext-satreasury.git
+git clone https://github.com/OpenUpSA/ckan-datapusher.git
+git clone https://github.com/OpenUpSA/ckanext-discourse-sso-client.git
 ```
 
 Move into the `treasury-ckan` directory:
