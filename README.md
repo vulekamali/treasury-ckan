@@ -316,21 +316,28 @@ Clone this repo and supporting repos:
 ```
 git clone https://github.com/OpenUpSA/treasury-ckan.git
 git clone https://github.com/OpenUpSA/ckan-solr-dokku.git
-git clone https://github.com/OpenUpSA/ckanext-satreasury.git
 git clone https://github.com/OpenUpSA/ckan-datapusher.git
+git clone https://github.com/OpenUpSA/ckanext-satreasury.git
 git clone https://github.com/OpenUpSA/ckanext-discourse-sso-client.git
 ```
 
-Move into the `treasury-ckan` directory:
+Setup development entry points:
 
 ```
-cd treasury-ckan
+cd ckanext-satreasury
+python setup.py egg_info
+cd ../ckanext-discourse-sso-client
+python setup.py egg_info
+cd ../treasury-ckan
 ```
 
 - create database
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-Start services
+  
+Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
+  
+Now start the containers and their services:
 
 ```
 docker-compose up
@@ -356,6 +363,8 @@ docker-compose exec ckan bash
 cd src/ckan
 paster sysadmin add admin email="admin@admin.admin" -c /ckan.ini
 ```
+
+Visit https://localhost:80 and login with username `admin` and the password you set above.
 
 ### Rebuilding the search index
 
