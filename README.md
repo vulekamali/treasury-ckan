@@ -356,7 +356,7 @@ Extract, Transform, Load (ETL)
 
 Estimates of Provincial Revenue and Expenditure (EPRE) and Estimates of National Expenditure (ENE) are added by https://github.com/OpenUpSA/budget-portal/.
 
-Other categories of governmen dataset are added using `bin/sync_datasets.py`
+Other categories of government dataset are added using `bin/sync_datasets.py`
 
 Troubleshooting
 ===============
