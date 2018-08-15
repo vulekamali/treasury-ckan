@@ -46,10 +46,10 @@ for resource in resources:
 
 if args.count_formats:
     print "Format counts:"
-    mimetype_counts = defaultdict(int)
+    format_counts = defaultdict(int)
     for resource in non_uploads:
-        mimetype_counts[resource['format']] += 1
-    for format, count in mimetype_counts.iteritems():
+        format_counts[resource['format']] += 1
+    for format, count in format_counts.iteritems():
         print format, count
     print
 
