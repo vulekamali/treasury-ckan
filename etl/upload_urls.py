@@ -21,7 +21,7 @@ upload_formats = [
 def download_file(url):
     tempdir = mkdtemp(prefix="budgetportal")
     print "Downloading %s" % url
-    basename = os.path.basename(urlparse.urlparse(url).path)
+    basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
     filename = os.path.join(tempdir, basename)
     return tempdir, urllib.urlretrieve(url, filename)[0]
 
