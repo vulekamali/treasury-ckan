@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description='Bring CKAN up to date with a local
 parser.add_argument('--apikey', help='authentication key')
 parser.add_argument('--instance', help='CKAN instance root URL')
 parser.add_argument('--count-formats', default=False, action='store_true', help='Count the number of non-uploaded files in each format')
+parser.add_argument('--list-urls', default=False, action='store_true', help='List the non-uploaded URLs')
 
 args = parser.parse_args()
 
@@ -27,3 +28,7 @@ if args.count_formats:
     for format, count in mimetype_counts.iteritems():
         print format, count
     print
+
+if args.list_urls:
+    for resource in non_uploads:
+        print resource['format'], resource['url']
