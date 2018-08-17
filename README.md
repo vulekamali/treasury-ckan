@@ -311,10 +311,33 @@ Setting up development environment
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
+Clone this repo and supporting repos:
+
+```
+git clone https://github.com/OpenUpSA/treasury-ckan.git
+git clone https://github.com/OpenUpSA/ckan-solr-dokku.git
+git clone https://github.com/OpenUpSA/ckan-datapusher.git
+git clone https://github.com/OpenUpSA/ckanext-satreasury.git
+git clone https://github.com/OpenUpSA/ckanext-discourse-sso-client.git
+```
+
+Setup development entry points:
+
+```
+cd ckanext-satreasury
+python setup.py egg_info
+cd ../ckanext-discourse-sso-client
+python setup.py egg_info
+cd ../treasury-ckan
+```
+
 - create database
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-Start services
+  
+Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
+  
+Now start the containers and their services:
 
 ```
 docker-compose up
@@ -341,6 +364,8 @@ cd src/ckan
 paster sysadmin add admin email="admin@admin.admin" -c /ckan.ini
 ```
 
+Visit https://localhost:80 and login with username `admin` and the password you set above.
+
 ### Rebuilding the search index
 
 You might need to rebuild the search index, e.g. if you newly/re-created the docker volume holding the `ckan` solr core data.
@@ -354,38 +379,9 @@ paster --plugin=ckan search-index rebuild -c /ckan.ini
 Extract, Transform, Load (ETL)
 ------------------------------
 
-To start with, this will document the partly manual and irregular process of getting the data together and uploaded to CKAN.
+Estimates of Provincial Revenue and Expenditure (EPRE) and Estimates of National Expenditure (ENE) are added by https://github.com/OpenUpSA/budget-portal/.
 
-### Estimates of Provincial Revenue and Expenditure (EPRE)
-
-EPREs are scraped from treasury.gov.za and stored under `etl-data`. These should not be added to git. The folder is therefore gitignored.
-
-Metadata from the scrape is also stored there, as specified by `--output`. We use Line-delimited JSON objects `jl` because the CSV output doesn't handle the two different types of items.
-
-```
-scrapy runspider --output=etl-data/scraped.jsonl --output-format=jsonl etl/scraper.py
-```
-
-A list of department names and vote numbers for each provincial government is produced from the EPRE chapters.
-
-```
-cat  etl-data/scraped.jsonl |grep pdf|egrep "(2015|2016|2017)"|jq -r '"\(.year),\(.geographic_region),\"\(.name)\""'|sort>etl-data/departments.csv
-```
-
-Use the "Text to columns" function of a spreadsheet program to split vote number and department name. Add column headers and save as `metadata/departments.csv`
-
-The spreadsheet filenames don't match the PDF names which represent the department names. We also want the per-vote spreadsheet names to match the chapter PDFs because they should be viewed together.
-
-We use `etl/normalize.py` to do the bulk of that. Since it's doing fuzzy matching, it makes mistakes, and you'll have to view the results and do some manual fixes. ***Beware that provinces have different for their departments and they can't just be normalised across provinces***.
-
-```
-pyhon etl/normalize.py
-```
-
-This writes `etl-data/scraped_normalised.csv` which you can then correct manually. The list of manual corrections should always be saved in metadata/fuzzy_normalisation_fixes.csv
-
-We then save `etl-data/scraped_normalised.csv` as `metadata/epre_fienames.csv` and run `etl/rename.py` which will add the `department_name` and `normalised_path` columns, and copy the files from the scraped path to the normalised path.
-
+Other categories of government dataset are added using `bin/sync_datasets.py`
 
 Troubleshooting
 ===============
