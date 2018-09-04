@@ -1,0 +1,16 @@
+version: "2.2"
+
+services:
+  datapusher:
+    networks:
+      ckan:
+        aliases:
+          - ckan-datapusher
+    build:
+      context: ../ckan-datapusher-dokku/
+      dockerfile: Dockerfile
+    ports:
+      - "8800:8800"
+    volumes:
+      - ../ckan-datapusher-dokku/datapusher_settings.py:/datapusher_settings.py
+      - ../../../datapusher/datapusher:/src/datapusher/datapusher
