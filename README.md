@@ -118,8 +118,6 @@ dokku config:set ckan CKAN_SQLALCHEMY_URL=postgres://ckan_default:password@host/
                       CKAN___CKANEXT__S3FILESTORE__HOST_NAME=http://s3-eu-west-1.amazonaws.com/treasury-data-portal \
                       CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1 \
                       CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4 \
-                      NEW_RELIC_APP_NAME="Treasury CKAN" \
-                      NEW_RELIC_LICENSE_KEY=... \
                       CKAN_DISCOURSE_URL= \
                       CKAN_DISCOURSE_SSO_SECRET=
 ```
@@ -334,9 +332,9 @@ cd ../treasury-ckan
 - create database
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-  
+
 Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
-  
+
 Now start the containers and their services:
 
 ```
