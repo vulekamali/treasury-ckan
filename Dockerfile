@@ -15,7 +15,5 @@ ADD who.ini /who.ini
 ADD ckan.ini /ckan.ini
 ADD resource_formats.json /resource_formats.json
 
-ADD newrelic.ini /newrelic.ini
-ENV NEW_RELIC_CONFIG_FILE=/newrelic.ini
 
-CMD ["newrelic-admin", "run-program", "gunicorn", "--workers", "2", "--worker-class", "gevent", "--paste", "ckan.ini", "-t", "600", "--log-file", "-"]
+CMD ["gunicorn", "--workers", "2", "--worker-class", "gevent", "--paste", "ckan.ini", "-t", "600", "--log-file", "-"]
