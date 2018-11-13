@@ -1,6 +1,8 @@
 FROM openup/ckan:deps-latest
 MAINTAINER OpenUp
 
+WORKDIR /
+
 RUN pip install ckanext-envvars \
                 boto3 \
                 git+https://github.com/keitaroinc/ckanext-s3filestore.git@v0.0.8 \
@@ -15,8 +17,5 @@ ADD Procfile /Procfile
 ADD who.ini /who.ini
 ADD ckan.ini /ckan.ini
 ADD resource_formats.json /resource_formats.json
-
-ADD newrelic.ini /newrelic.ini
-ENV NEW_RELIC_CONFIG_FILE=/newrelic.ini
 
 CMD ["gunicorn", "--workers", "2", "--worker-class", "gevent", "--paste", "ckan.ini", "-t", "600", "--log-file", "-"]
