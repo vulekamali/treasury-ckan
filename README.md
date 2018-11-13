@@ -174,6 +174,7 @@ Add the following to the logging part of the `http` block of `/etc/nginx/nginx.c
 Add the following nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf`:
 
 ```
+
 ## Caching
 
 proxy_cache ckan;
@@ -250,6 +251,12 @@ paster db init -c /ckan.ini
 paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
 ```
 
+Start the worker:
+
+```
+dokku ps:scale ckan worker=1
+```
+
 Setup cron jobs.
 
 ```
@@ -297,24 +304,6 @@ It is important to exempt any authenticated requests from caching. Authenticated
 http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create-the-nginx-config-file
 
 To invalidate: `find /path/to/your/cache -type f -delete`
-
-
-### CKAN Celery
-
-On the server
-
-```
-dokku apps:create ckan-celery
-dokku config:set ckan-celery DOKKU_DOCKERFILE_START_CMD=paster --plugin=ckan celeryd -c ckan.ini
-```
-
-In your dev environment:
-
-```
-git remote add dokku-celery dokku@treasury1.openup.org.za:ckan-celery
-```
-
-Then you can ` git push dokku-celery`.
 
 Setting up development environment
 ----------------------------------
