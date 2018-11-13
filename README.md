@@ -301,10 +301,20 @@ To invalidate: `find /path/to/your/cache -type f -delete`
 
 ### CKAN Celery
 
+On the server
+
+```
 dokku apps:create ckan-celery
+dokku config:set ckan-celery DOKKU_DOCKERFILE_START_CMD=paster --plugin=ckan celeryd -c ckan.ini
+```
 
+In your dev environment:
 
-git remote add dokku-celery dokku@treasury1.openup.org.za:ckan
+```
+git remote add dokku-celery dokku@treasury1.openup.org.za:ckan-celery
+```
+
+Then you can ` git push dokku-celery`.
 
 Setting up development environment
 ----------------------------------
@@ -334,9 +344,9 @@ cd ../treasury-ckan
 - create database
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-  
+
 Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
-  
+
 Now start the containers and their services:
 
 ```
