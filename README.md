@@ -364,6 +364,7 @@ The data is persisted using a docker volume.
 Setting up the database consists of the following steps:
 - Starting the database container with `docker-compose`
 - Entering the running container and setting up roles and databases with `psql`
+- Starting another CKAN container instance and running paster to set up more database configurations
 
 First, start up the `db` container:
 
