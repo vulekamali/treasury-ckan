@@ -306,10 +306,14 @@ dokku apps:create ckan-celery
 
 git remote add dokku-celery dokku@treasury1.openup.org.za:ckan
 
-Setting up development environment
+Development Environment Setup
 ----------------------------------
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
+
+For development, it is easiest to use docker-compose to build your development environment.
+
+### 1. Clone and build
 
 Clone this repo and supporting repos:
 
@@ -331,7 +335,59 @@ python setup.py egg_info
 cd ../treasury-ckan
 ```
 
-- create database
+### 2. Set up the postgres database:
+Setting up the database consists of the following steps:
+- Starting the database container with `docker-compose`
+- Entering the running container and setting up roles and databases with `psql`
+
+First, start up the `db` container:
+
+`docker-compose up db`
+
+Wait for the container to start up, then from a different terminal:
+
+`docker container ls`
+
+The output should be similar to:
+
+```docker
+CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                    NAMES
+9d9cf604ba5d        treasury-ckan_ckan   "paster serve ckan.i…"   22 minutes ago      Up About a minute   0.0.0.0:80->5000/tcp     treasury-ckan_ckan_1
+9138ea0e8c94        postgres:9.4         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:5433->5432/tcp   treasury-ckan_db_1
+3e0228f9b488        redis:latest         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   6379/tcp                 treasury-ckan_redis_1
+0c02b1e3b046        treasury-ckan_solr   "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:8983->8983/tcp   treasury-ckan_solr_1
+
+```
+
+Look for the postgres image ID, in this case it's `9138ea0e8c94`. Make note of your container's ID.
+
+Now enter the container, so that we can set up the database:
+
+`docker exec -it 9138ea0e8c94 bash`
+
+You should now be inside the container, and see a prompt similar to `postgres=# `
+
+Set up the database, by following these instructions (please choose your own password):
+```postgresql
+psql -U postgres 
+create user ckan_default with password 'supergoodpassword';
+alter role ckan_default with login;
+alter user ckan_default with superuser;
+create database ckan_default with owner ckan_default;
+create user datastore_default with password 'supergoodpassword';
+create database datastore_Default with owner ckan_default;
+
+```
+
+Now exit the container (ctrl-D) and go back to your original terminal running the container.
+
+Restart the services with:
+
+`docker-compose down && docker-compose up`
+
+If all goes well, you should now be able to navigate to `localhost:80` and see CKAN's homepage.
+
+#
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
   
