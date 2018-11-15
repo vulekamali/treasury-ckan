@@ -174,6 +174,7 @@ Add the following to the logging part of the `http` block of `/etc/nginx/nginx.c
 Add the following nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf`:
 
 ```
+
 ## Caching
 
 proxy_cache ckan;
@@ -250,6 +251,12 @@ paster db init -c /ckan.ini
 paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
 ```
 
+Start the worker:
+
+```
+dokku ps:scale ckan worker=1
+```
+
 Setup cron jobs.
 
 ```
@@ -298,14 +305,6 @@ http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create
 
 To invalidate: `find /path/to/your/cache -type f -delete`
 
-
-### CKAN Celery
-
-dokku apps:create ckan-celery
-
-
-git remote add dokku-celery dokku@treasury1.openup.org.za:ckan
-
 Setting up development environment
 ----------------------------------
 
@@ -334,9 +333,9 @@ cd ../treasury-ckan
 - create database
 - create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-  
+
 Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
-  
+
 Now start the containers and their services:
 
 ```
