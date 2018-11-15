@@ -335,7 +335,32 @@ python setup.py egg_info
 cd ../treasury-ckan
 ```
 
-### 2. Set up the postgres database:
+### 2. Edit configuration files
+
+- Create a file titled `env.dev` in the project root, with the following standard content:
+```
+CKAN_SSO_SECRET=d836444a9e4084d5b224a60c208dce14
+CKAN_SSO_URL=http://accounts.local:8000/ckan/sso
+CKAN_SSO_LOGOUT_URL=http://localhost:8000/accounts/logout
+
+CKAN_SATREASURY_BUILD_TRIGGER_ENABLED=False
+CKAN_SITE_URL=http://ckan:5000
+```
+  - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
+  
+- Remove certain ckan plugins we don't strictly need in development mode. 
+Edit `ckan.ini` and for the `plugins` entry, remove: 
+    - s3filestore
+    - discourse-sso-client
+    - datastore 
+    - datapusher
+
+### 3. Set up the postgres database:
+For development, setting up the database in a postgres container is much easier than
+running it on your host machine.
+
+The data is persisted using a docker volume.
+
 Setting up the database consists of the following steps:
 - Starting the database container with `docker-compose`
 - Entering the running container and setting up roles and databases with `psql`
@@ -379,50 +404,24 @@ create database datastore_Default with owner ckan_default;
 
 ```
 
-Now exit the container (ctrl-D) and go back to your original terminal running the container.
+Now exit the container (ctrl-D) and run a CKAN container instance to finish the database
+setup:
+
+```bash
+docker-compose exec ckan bash
+cd src/ckan
+paster db init -c /ckan.ini
+paster datastore set-permissions -c /ckan.ini
+paster sysadmin add admin email="you@domain.com" -c /ckan.ini
+```
 
 Restart the services with:
 
 `docker-compose down && docker-compose up`
 
-If all goes well, you should now be able to navigate to `localhost:80` and see CKAN's homepage.
+Visit `https://localhost:80` and login with username `admin` and the password you set above.
 
-#
-- create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
-  - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-  
-Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
-  
-Now start the containers and their services:
-
-```
-docker-compose up
-```
-
-Set up database. First we start a shell in the ckan container, then change
-directory to so that the paster commands are found, then we run the paster
-command which sets up the database stuff. Finally the SQL for setting up
-permissions for the datastore extension. Execute these using a postgres
-superuser.
-
-```
-docker-compose exec ckan bash
-cd src/ckan
-paster db init -c /ckan.ini
-paster datastore set-permissions -c /ckan.ini
-```
-
-First sysadmin user
-
-```
-docker-compose exec ckan bash
-cd src/ckan
-paster sysadmin add admin email="admin@admin.admin" -c /ckan.ini
-```
-
-Visit https://localhost:80 and login with username `admin` and the password you set above.
-
-### Rebuilding the search index
+#### Rebuilding the search index
 
 You might need to rebuild the search index, e.g. if you newly/re-created the docker volume holding the `ckan` solr core data.
 
@@ -432,14 +431,12 @@ cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
 ```
 
-Extract, Transform, Load (ETL)
-------------------------------
+#### Extract, Transform, Load (ETL)
 
 Estimates of Provincial Revenue and Expenditure (EPRE) and Estimates of National Expenditure (ENE) are added by https://github.com/OpenUpSA/budget-portal/.
 
 Other categories of government dataset are added using `bin/sync_datasets.py`
 
-Troubleshooting
-===============
+#### Troubleshooting
 
 - If ckan can't connect to solr after rebuilding ckan-solr, restart ckan - I think it's something to do with docker linking the containers. I think Docker needs to link ckan to the new ckan-solr container which happens on restart.
