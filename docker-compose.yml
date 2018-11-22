@@ -25,6 +25,7 @@ services:
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
       - ../ckanext-satreasury/:/src/ckanext-satreasury
+      - ../ckanext-extractor/:/src/ckanext-extractor
       - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
     command: paster serve ckan.ini
 
@@ -44,6 +45,7 @@ services:
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
       - ../ckanext-satreasury/:/src/ckanext-satreasury
+      - ../ckanext-extractor/:/src/ckanext-extractor
       - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
     command: paster --plugin=ckan jobs worker --config /ckan.ini
 
