@@ -12,4 +12,4 @@ ADD requirement-setuptools.txt .
 ADD requirements.txt .
 RUN pip install -r requirement-setuptools.txt
 RUN pip install -r requirements.txt
-RUN pip install -e 'git+https://github.com/OpenUpSA/ckan.git@ckan-2.7.2-openup#egg=ckan'
+RUN pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.5#egg=ckan'
