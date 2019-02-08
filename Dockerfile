@@ -1,4 +1,4 @@
-FROM openup/ckan:deps-latest
+FROM vulekamali/ckan:deps-latest
 MAINTAINER OpenUp
 
 WORKDIR /
