@@ -174,6 +174,7 @@ Add the following to the logging part of the `http` block of `/etc/nginx/nginx.c
 Add the following nginx config file (and directory if needed) at `/home/dokku/ckan/nginx.conf.d/ckan.conf`:
 
 ```
+
 ## Caching
 
 proxy_cache ckan;
@@ -250,6 +251,12 @@ paster db init -c /ckan.ini
 paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
 ```
 
+Start the worker:
+
+```
+dokku ps:scale ckan worker=1
+```
+
 Setup cron jobs.
 
 ```
@@ -298,15 +305,7 @@ http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create
 
 To invalidate: `find /path/to/your/cache -type f -delete`
 
-
-### CKAN Celery
-
-dokku apps:create ckan-celery
-
-
-git remote add dokku-celery dokku@treasury1.openup.org.za:ckan
-
-Development Environment Setup
+Setting up development environment
 ----------------------------------
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
@@ -347,13 +346,11 @@ CKAN_SATREASURY_BUILD_TRIGGER_ENABLED=False
 CKAN_SITE_URL=http://ckan:5000
 ```
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
-  
-- Remove certain ckan plugins we don't strictly need in development mode. 
-Edit `ckan.ini` and for the `plugins` entry, remove: 
+
+- Remove certain ckan plugins we don't strictly need in development mode.
+
+Edit `ckan.ini` and for the `plugins` entry, remove:
     - s3filestore
-    - discourse-sso-client
-    - datastore 
-    - datapusher
 
 ### 3. Set up the postgres database:
 For development, setting up the database in a postgres container is much easier than
@@ -382,6 +379,12 @@ CONTAINER ID        IMAGE                COMMAND                  CREATED       
 9138ea0e8c94        postgres:9.4         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:5433->5432/tcp   treasury-ckan_db_1
 3e0228f9b488        redis:latest         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   6379/tcp                 treasury-ckan_redis_1
 0c02b1e3b046        treasury-ckan_solr   "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:8983->8983/tcp   treasury-ckan_solr_1
+=======
+
+Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
+
+Now start the containers and their services:
+>>>>>>> master
 
 ```
 
@@ -395,7 +398,7 @@ You should now be inside the container, and see a prompt similar to `postgres=# 
 
 Set up the database, by following these instructions (please choose your own password):
 ```postgresql
-psql -U postgres 
+psql -U postgres
 create user ckan_default with password 'supergoodpassword';
 alter role ckan_default with login;
 alter user ckan_default with superuser;
