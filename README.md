@@ -310,6 +310,10 @@ Setting up development environment
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
+For development, it is easiest to use docker-compose to build your development environment.
+
+### 1. Clone and build
+
 Clone this repo and supporting repos:
 
 ```
@@ -330,42 +334,98 @@ python setup.py egg_info
 cd ../treasury-ckan
 ```
 
-- create database
-- create a file `env.dev` in the project root, based on `env.tmpl` with DB and S3 bucket config
+### 2. Edit configuration files
+
+- Create a file titled `env.dev` in the project root, with the following standard content:
+```
+CKAN_SSO_SECRET=d836444a9e4084d5b224a60c208dce14
+CKAN_SSO_URL=http://accounts.local:8000/ckan/sso
+CKAN_SSO_LOGOUT_URL=http://localhost:8000/accounts/logout
+
+CKAN_SATREASURY_BUILD_TRIGGER_ENABLED=False
+CKAN_SITE_URL=http://ckan:5000
+```
   - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
+
+- Remove certain ckan plugins we don't strictly need in development mode.
+
+Edit `ckan.ini` and for the `plugins` entry, remove:
+    - s3filestore
+
+### 3. Set up the postgres database:
+For development, setting up the database in a postgres container is much easier than
+running it on your host machine.
+
+The data is persisted using a docker volume.
+
+Setting up the database consists of the following steps:
+- Starting the database container with `docker-compose`
+- Entering the running container and setting up roles and databases with `psql`
+- Starting another CKAN container instance and running paster to set up more database configurations
+
+First, start up the `db` container:
+
+`docker-compose up db`
+
+Wait for the container to start up, then from a different terminal:
+
+`docker container ls`
+
+The output should be similar to:
+
+```docker
+CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                    NAMES
+9d9cf604ba5d        treasury-ckan_ckan   "paster serve ckan.i…"   22 minutes ago      Up About a minute   0.0.0.0:80->5000/tcp     treasury-ckan_ckan_1
+9138ea0e8c94        postgres:9.4         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:5433->5432/tcp   treasury-ckan_db_1
+3e0228f9b488        redis:latest         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   6379/tcp                 treasury-ckan_redis_1
+0c02b1e3b046        treasury-ckan_solr   "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:8983->8983/tcp   treasury-ckan_solr_1
+=======
 
 Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
 
 Now start the containers and their services:
+>>>>>>> master
 
 ```
-docker-compose up
+
+Look for the postgres image ID, in this case it's `9138ea0e8c94`. Make note of your container's ID.
+
+Now enter the container, so that we can set up the database:
+
+`docker exec -it 9138ea0e8c94 bash`
+
+You should now be inside the container, and see a prompt similar to `postgres=# `
+
+Set up the database, by following these instructions (please choose your own password):
+```postgresql
+psql -U postgres
+create user ckan_default with password 'supergoodpassword';
+alter role ckan_default with login;
+alter user ckan_default with superuser;
+create database ckan_default with owner ckan_default;
+create user datastore_default with password 'supergoodpassword';
+create database datastore_Default with owner ckan_default;
+
 ```
 
-Set up database. First we start a shell in the ckan container, then change
-directory to so that the paster commands are found, then we run the paster
-command which sets up the database stuff. Finally the SQL for setting up
-permissions for the datastore extension. Execute these using a postgres
-superuser.
+Now exit the container (ctrl-D) and run a CKAN container instance to finish the database
+setup:
 
-```
+```bash
 docker-compose exec ckan bash
 cd src/ckan
 paster db init -c /ckan.ini
 paster datastore set-permissions -c /ckan.ini
+paster sysadmin add admin email="you@domain.com" -c /ckan.ini
 ```
 
-First sysadmin user
+Restart the services with:
 
-```
-docker-compose exec ckan bash
-cd src/ckan
-paster sysadmin add admin email="admin@admin.admin" -c /ckan.ini
-```
+`docker-compose down && docker-compose up`
 
-Visit https://localhost:80 and login with username `admin` and the password you set above.
+Visit `https://localhost:80` and login with username `admin` and the password you set above.
 
-### Rebuilding the search index
+#### Rebuilding the search index
 
 You might need to rebuild the search index, e.g. if you newly/re-created the docker volume holding the `ckan` solr core data.
 
@@ -375,14 +435,12 @@ cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
 ```
 
-Extract, Transform, Load (ETL)
-------------------------------
+#### Extract, Transform, Load (ETL)
 
 Estimates of Provincial Revenue and Expenditure (EPRE) and Estimates of National Expenditure (ENE) are added by https://github.com/OpenUpSA/budget-portal/.
 
 Other categories of government dataset are added using `bin/sync_datasets.py`
 
-Troubleshooting
-===============
+#### Troubleshooting
 
 - If ckan can't connect to solr after rebuilding ckan-solr, restart ckan - I think it's something to do with docker linking the containers. I think Docker needs to link ckan to the new ckan-solr container which happens on restart.

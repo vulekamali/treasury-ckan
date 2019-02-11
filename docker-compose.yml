@@ -5,12 +5,10 @@ version: "2.2"
 # able to connect to the DB, then most likely the DB has not
 # started up quickly enough. Just do "docker-compose up ckan"
 # again to retry
+
 services:
   ckan:
     build: .
-    links:
-        - solr
-        - redis
     ports:
         - "80:5000"
         - "5000:5000"
@@ -19,6 +17,9 @@ services:
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
         - CKAN_SITE_URL=http://ckan:5000/
         - CKAN___BEAKER__SESSION__SECRET=supersecret
+        - CKAN_SQLALCHEMY_URL=postgres://ckan_default@db/ckan_default
+        - CKAN_DATASTORE_WRITE_URL=postgres://ckan_default@db/datastore_default
+        - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
     env_file: env.dev
     volumes:
       - ./ckan.ini:/ckan.ini
@@ -28,17 +29,25 @@ services:
       - ../ckanext-extractor/:/src/ckanext-extractor
       - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
     command: paster serve ckan.ini
+    depends_on:
+      - solr
+      - redis
+      - db
 
   ckan-worker:
     build: .
-    links:
-        - solr
-        - redis
+    depends_on:
+      - solr
+      - redis
+      - db
     environment:
         - CKAN_REDIS_URL=redis://redis:6379/0
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
         - CKAN_SITE_URL=http://ckan:5000/
         - CKAN___BEAKER__SESSION__SECRET=supersecret
+        - CKAN_SQLALCHEMY_URL=postgres://ckan_default@db/ckan_default
+        - CKAN_DATASTORE_WRITE_URL=postgres://ckan_default@db/datastore_default
+        - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
     env_file: env.dev
     volumes:
       - ./ckan.ini:/ckan.ini
@@ -69,6 +78,14 @@ services:
   redis:
     image: redis:latest
 
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+    - "5433:5432"
+
 volumes:
   solr-data:
   ckan-filestore:
+  db-data:
