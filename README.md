@@ -366,6 +366,12 @@ Set up permissions for the datastore plugin:
 docker-compose run ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG | docker-compose exec -T db psql --set ON_ERROR_STOP=on --single-transaction -U postgres
 ```
 
+Set up the database for `ckanext-extractor`
+
+```
+docker-compose run ckan paster --plugin=ckanext-extractor init -c /ckan.ini
+```
+
 Set up the hostnames `ckan` and `accounts` to point to `127.0.0.1` in your `hosts` file. This is needed so that ckan's dependencies can refer to it using the internal docker network hostname, and so that you can then access absolute URLs based on that hostname from outside the docker network (on the host computer).
 
 If you need to work with SSO, run Datamanager with something like the following to let CKAN use it for authentication:
