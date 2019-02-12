@@ -2,14 +2,18 @@
 Data Portal for the South African National Treasury
 ===================================================
 
-This is the software repository for the South African National Treasury Data Portal.
+This is the software repository for CKAN used as part of the South African National Treasury Data Portal.
 
-We use CKAN to organise the datasets according to various taxonomies and use the CKAN dataset API to make the data discoverable.
+We use CKAN to organise the datasets according to various taxonomies and use the CKAN API to make the data discoverable.
 
-This repository also contains [code and documentation to load and maintain data in CKAN](#extract-transform-load-etl).
+Table of contents
+-----------------
 
-Dockerfile and config to run CKAN in dokku
-------------------------------------------
+- [Setting up in production](#setting-up-in-production)
+- [Setting up development environment](#setting-up-development-environment)
+
+Setting up in production
+------------------------
 
 We run CKAN on the dokku platform. We use dokku's dockerfile deployment method to deploy using the the Dockerfile in this repository. Since there are numerous operating system and python dependencies that ckan relies on, we build an image with these on hub.docker.com using Dockerfile-deps.
 
@@ -22,9 +26,6 @@ This CKAN installation depends on
  - S3 - object (file) storage
  - [CKAN DataPusher](https://github.com/OpenUpSA/ckan-datapusher) - [while limited](https://github.com/ckan/ckan/pull/3911), this might help us quickly access data programmatically.
  - NGINX - caching (when needed)
-
-Setting up in production
-------------------------
 
 We set up Solr and Redis on the same server and use a remote Postgres instance.
 
