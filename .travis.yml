@@ -5,6 +5,8 @@ services:
 
 before_install:
   - sed -i '/s3filestore/d' ./ckan.ini
+  - git clone git@github.com:OpenUpSA/ckan-datapusher.git ../ckan-datapusher
+  - git clone git@github.com:OpenUpSA/ckan-solr-dokku.git ../ckan-solr-dokku
   - docker-compose up -d
   - bin/wait-for-ckan.sh
   - "docker-compose run ckan paster --plugin=ckan db init -c /ckan.ini"
