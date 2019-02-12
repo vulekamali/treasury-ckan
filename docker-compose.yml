@@ -36,7 +36,7 @@ services:
       - solr
       - redis
       - db
-      - datapusher
+      - ckan-datapusher
 
   ckan-worker:
     build: .
@@ -44,6 +44,7 @@ services:
       - solr
       - redis
       - db
+      - ckan-datapusher
     environment:
         - CKAN_REDIS_URL=redis://redis:6379/0
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
@@ -61,7 +62,7 @@ services:
       - ckan-filestore:/var/lib/ckan/default
     command: ["/bin/wait-for-deps.sh", "paster", "--plugin=ckan", "jobs", "worker", "--config", "/ckan.ini"]
 
-  datapusher:
+  ckan-datapusher:
     build:
       context: ../ckan-datapusher
     ports:
