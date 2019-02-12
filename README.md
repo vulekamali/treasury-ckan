@@ -10,7 +10,19 @@ Table of contents
 -----------------
 
 - [Setting up in production](#setting-up-in-production)
+  - [Solr](#solr)
+  - [Redis](#redis)
+  - [Postgres](#postgres)
+  - [S3](#s3)
+  - [CKAN](#ckan)
+  - [HTTP Cache](#http-cache)
 - [Setting up development environment](#setting-up-development-environment)
+  - [Clone and initialise our code](#clone-and-initialise-our-code)
+  - [Edit configuration for development](#edit-configuration-for-development)
+  - [Initialise the database](#initialise-the-database)
+  - [Create a sysadmin user](#create-a-sysadmin-user)
+  - [Set up local hostnames](#set-up-local-hostnames)
+  - [Maintenance](#maintenance)
 
 Setting up in production
 ------------------------
@@ -313,7 +325,7 @@ While you can set up CKAN directly on your OS, docker-compose is useful to devel
 
 For development, it is easiest to use docker-compose to build your development environment.
 
-### 1. Clone and build
+### Clone and initialise our code
 
 Clone this repo and supporting repos:
 
@@ -335,7 +347,7 @@ python setup.py egg_info
 cd ../treasury-ckan
 ```
 
-### 2. Edit configuration files
+### Edit configuration for development
 
 - Remove certain ckan plugins we don't strictly need in development mode.
 
@@ -343,7 +355,7 @@ Edit `ckan.ini` and for the `plugins` entry, remove:
     - s3filestore
     - discourse-sso-client
 
-### 3. Set up the postgres database:
+### Initialise the database
 
 For development, setting up the database in a postgres container is much easier than
 running it on your host machine.
@@ -355,13 +367,7 @@ The data is persisted using a docker volume.
 docker-compose run ckan paster --plugin=ckan db init -c /ckan.ini
 ```
 
-Create your first admin user. When prompted to create the user, enter `y` and press enter.
-
-```
-docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini
-```
-
-Set up permissions for the datastore plugin:
+Set up database permissions for the datastore plugin:
 
 ```
 docker-compose run ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG | docker-compose exec -T db psql --set ON_ERROR_STOP=on -U postgres
@@ -389,15 +395,27 @@ Set up the database for `ckanext-extractor`
 docker-compose run ckan paster --plugin=ckanext-extractor init -c /ckan.ini
 ```
 
+### Create a sysadmin user
+
+Create your first admin user. When prompted to create the user, enter `y` and press enter.
+
+```
+docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini
+```
+
+### Set up local hostnames
+
 Set up the hostnames `ckan` and `accounts` to point to `127.0.0.1` in your `hosts` file. This is needed so that ckan's dependencies can refer to it using the internal docker network hostname, and so that you can then access absolute URLs based on that hostname from outside the docker network (on the host computer).
 
 If you need to work with SSO, run Datamanager with something like the following to let CKAN use it for authentication:
 
+Visit `https://ckan:5000` and login with username `admin` and the password `admin`.
+
+### Maintenance
+
 ```
 DJANGO_SITE_ID=2 HTTP_PROTOCOL=http DISCOURSE_SSO_SECRET=d836444a9e4084d5b224a60c208dce14 CKAN_SSO_URL=http://ckan:5000/user/login EMAIL_HOST=localhost EMAIL_PORT=2525 EMAIL_USE_TLS= CKAN_URL=http://ckan:5000 python manage.py runserver
 ```
-
-Visit `https://ckan:5000` and login with username `admin` and the password you set above.
 
 #### Rebuilding the search index
 
@@ -408,12 +426,6 @@ docker-compose exec ckan bash
 cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
 ```
-
-#### Extract, Transform, Load (ETL)
-
-Estimates of Provincial Revenue and Expenditure (EPRE) and Estimates of National Expenditure (ENE) are added by https://github.com/OpenUpSA/budget-portal/.
-
-Other categories of government dataset are added using `bin/sync_datasets.py`
 
 #### Troubleshooting
 
