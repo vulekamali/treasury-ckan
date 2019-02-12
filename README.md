@@ -342,6 +342,7 @@ Edit `ckan.ini` and for the `plugins` entry, remove:
     - s3filestore
 
 ### 3. Set up the postgres database:
+
 For development, setting up the database in a postgres container is much easier than
 running it on your host machine.
 
@@ -364,7 +365,13 @@ Restart the services with:
 
 `docker-compose down && docker-compose up`
 
-Set up the hostname `ckan` to point to `127.0.0.1` in your `hosts` file. This is needed so that ckan's dependencies can refer to it using the internal docker network hostname, and so that you can then access absolute URLs based on that hostname from outside the docker network (on the host computer).
+Set up the hostnames `ckan` and `accounts` to point to `127.0.0.1` in your `hosts` file. This is needed so that ckan's dependencies can refer to it using the internal docker network hostname, and so that you can then access absolute URLs based on that hostname from outside the docker network (on the host computer).
+
+Run Datamanager with something like the following to let CKAN use it for authentication:
+
+```
+DJANGO_SITE_ID=2 HTTP_PROTOCOL=http DISCOURSE_SSO_SECRET=d836444a9e4084d5b224a60c208dce14 CKAN_SSO_URL=http://ckan:5000/user/login EMAIL_HOST=localhost EMAIL_PORT=2525 EMAIL_USE_TLS= CKAN_URL=http://ckan:5000 python manage.py runserver
+```
 
 Visit `https://ckan:5000` and login with username `admin` and the password you set above.
 

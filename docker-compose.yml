@@ -21,6 +21,9 @@ services:
         - CKAN_DATASTORE_WRITE_URL=postgres://ckan_default@db/datastore_default
         - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
         - CKAN_SATREASURY_BUILD_TRIGGER_ENABLED=False
+        - CKAN_SSO_SECRET=d836444a9e4084d5b224a60c208dce14
+        - CKAN_SSO_URL=http://accounts:8000/ckan/sso
+        - CKAN_SSO_LOGOUT_URL=http://accounts:8000/accounts/logout
     volumes:
       - ./bin/connect-to-postgres.py:/bin/connect-to-postgres.py
       - ./bin/wait-for-postgres.sh:/bin/wait-for-postgres.sh
