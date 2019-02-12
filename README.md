@@ -351,14 +351,13 @@ The data is persisted using a docker volume.
 
 ```
 docker-compose run ckan paster --plugin=ckan db init -c /ckan.ini
-```
+docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini```
 
 
 ```bash
 docker-compose exec ckan bash
 cd src/ckan
 paster datastore set-permissions -c /ckan.ini
-paster sysadmin add admin email="you@domain.com" -c /ckan.ini
 ```
 
 Restart the services with:
