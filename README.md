@@ -9,14 +9,14 @@ We use CKAN to organise the datasets according to various taxonomies and use the
 Table of contents
 -----------------
 
-- [Setting up in production](#setting-up-in-production)
+- [Set up in production](#set-up-in-production)
   - [Solr](#solr)
   - [Redis](#redis)
   - [Postgres](#postgres)
   - [S3](#s3)
   - [CKAN](#ckan)
   - [HTTP Cache](#http-cache)
-- [Setting up development environment](#setting-up-development-environment)
+- [Set up development environment](#set-up-development-environment)
   - [Clone and initialise our code](#clone-and-initialise-our-code)
   - [Edit configuration for development](#edit-configuration-for-development)
   - [Initialise the database](#initialise-the-database)
@@ -24,7 +24,7 @@ Table of contents
   - [Set up local hostnames](#set-up-local-hostnames)
   - [Maintenance](#maintenance)
 
-Setting up in production
+Set up in production
 ------------------------
 
 We run CKAN on the dokku platform. We use dokku's dockerfile deployment method to deploy using the the Dockerfile in this repository. Since there are numerous operating system and python dependencies that ckan relies on, we build an image with these on hub.docker.com using Dockerfile-deps.
@@ -318,7 +318,7 @@ http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create
 
 To invalidate: `find /path/to/your/cache -type f -delete`
 
-Setting up development environment
+Set up development environment
 ----------------------------------
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
