@@ -317,11 +317,11 @@ For development, it is easiest to use docker-compose to build your development e
 Clone this repo and supporting repos:
 
 ```
-git clone https://github.com/OpenUpSA/treasury-ckan.git
-git clone https://github.com/OpenUpSA/ckan-solr-dokku.git
-git clone https://github.com/OpenUpSA/ckan-datapusher.git
-git clone https://github.com/OpenUpSA/ckanext-satreasury.git
-git clone https://github.com/OpenUpSA/ckanext-discourse-sso-client.git
+git clone git@github.com:OpenUpSA/treasury-ckan.git
+git clone git@github.com:OpenUpSA/ckan-solr-dokku.git
+git clone git@github.com:OpenUpSA/ckan-datapusher.git
+git clone git@github.com:OpenUpSA/ckanext-satreasury.git
+git clone git@github.com:OpenUpSA/ckanext-discourse-sso-client.git
 ```
 
 Setup development entry points:
@@ -363,7 +363,23 @@ docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domai
 Set up permissions for the datastore plugin:
 
 ```
-docker-compose run ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG | docker-compose exec -T db psql --set ON_ERROR_STOP=on --single-transaction -U postgres
+docker-compose run ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG | docker-compose exec -T db psql --set ON_ERROR_STOP=on -U postgres
+```
+
+If it's successful it will exit with status code zero (`echo $?`) and look something like
+```
+Starting treasury-ckan_redis_1 ... done
+Starting treasury-ckan_ckan-datapusher_1 ... done
+Starting treasury-ckan_solr_1            ... done
+Starting treasury-ckan_db_1              ... done
+You are now connected to database "datastore_default" as user "postgres".
+REVOKE
+REVOKE
+GRANT
+...
+ALTER VIEW
+GRANT
+
 ```
 
 Set up the database for `ckanext-extractor`
