@@ -340,6 +340,7 @@ cd ../treasury-ckan
 
 Edit `ckan.ini` and for the `plugins` entry, remove:
     - s3filestore
+    - discourse-sso-client
 
 ### 3. Set up the postgres database:
 
@@ -351,22 +352,23 @@ The data is persisted using a docker volume.
 
 ```
 docker-compose run ckan paster --plugin=ckan db init -c /ckan.ini
-docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini```
-
-
-```bash
-docker-compose exec ckan bash
-cd src/ckan
-paster datastore set-permissions -c /ckan.ini
 ```
 
-Restart the services with:
+Create your first admin user. When prompted to create the user, enter `y` and press enter.
 
-`docker-compose down && docker-compose up`
+```
+docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini
+```
+
+Set up permissions for the datastore plugin:
+
+```
+docker-compose run ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG | docker-compose exec -T db psql --set ON_ERROR_STOP=on --single-transaction -U postgres
+```
 
 Set up the hostnames `ckan` and `accounts` to point to `127.0.0.1` in your `hosts` file. This is needed so that ckan's dependencies can refer to it using the internal docker network hostname, and so that you can then access absolute URLs based on that hostname from outside the docker network (on the host computer).
 
-Run Datamanager with something like the following to let CKAN use it for authentication:
+If you need to work with SSO, run Datamanager with something like the following to let CKAN use it for authentication:
 
 ```
 DJANGO_SITE_ID=2 HTTP_PROTOCOL=http DISCOURSE_SSO_SECRET=d836444a9e4084d5b224a60c208dce14 CKAN_SSO_URL=http://ckan:5000/user/login EMAIL_HOST=localhost EMAIL_PORT=2525 EMAIL_USE_TLS= CKAN_URL=http://ckan:5000 python manage.py runserver
