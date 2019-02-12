@@ -26,11 +26,12 @@ services:
         - CKAN_SSO_LOGOUT_URL=http://accounts:8000/accounts/logout
     volumes:
       - ./bin/connect-to-postgres.py:/bin/connect-to-postgres.py
-      - ./bin/wait-for-postgres.sh:/bin/wait-for-postgres.sh
+      - ./bin/connect-to-solr.py:/bin/connect-to-solr.py
+      - ./bin/wait-for-deps.sh:/bin/wait-for-deps.sh
       - ./ckan.ini:/ckan.ini
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
-    command: ["/bin/wait-for-postgres.sh", "paster", "serve", "ckan.ini"]
+    command: ["/bin/wait-for-deps.sh", "paster", "serve", "ckan.ini"]
     depends_on:
       - solr
       - redis
@@ -53,11 +54,12 @@ services:
         - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
     volumes:
       - ./bin/connect-to-postgres.py:/bin/connect-to-postgres.py
-      - ./bin/wait-for-postgres.sh:/bin/wait-for-postgres.sh
+      - ./bin/connect-to-solr.py:/bin/connect-to-solr.py
+      - ./bin/wait-for-deps.sh:/bin/wait-for-deps.sh
       - ./ckan.ini:/ckan.ini
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
-    command: ["/bin/wait-for-postgres.sh", "paster", "--plugin=ckan", "jobs", "worker", "--config", "/ckan.ini"]
+    command: ["/bin/wait-for-deps.sh", "paster", "--plugin=ckan", "jobs", "worker", "--config", "/ckan.ini"]
 
   datapusher:
     build:
