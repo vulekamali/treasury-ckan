@@ -13,10 +13,9 @@ before_script:
   - bin/wait-for-ckan.sh
   - "docker-compose run --rm ckan paster --plugin=ckan db init -c /ckan.ini"
   - docker-compose logs
-  - cat ckan.ini | grep ckan
   - "docker-compose exec -T db echo bob"
-  - "docker-compose run --rm ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG > permissions.sql
-  - cat permissions.sql | docker-compose exec -T db psql --set ON_ERROR_STOP=on -U postgres"
+  - "docker-compose run --rm ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG > permissions.sql"
+  - "cat permissions.sql | docker-compose exec -T db psql --set ON_ERROR_STOP=on -U postgres"
   - "docker-compose run --rm ckan paster --plugin=ckanext-extractor init -c /ckan.ini"
   - 'echo y | docker-compose run --rm ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini'
 
