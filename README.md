@@ -407,6 +407,29 @@ After authenticating on Datamanager, your browser will be redirected back to CKA
 
 ### Maintenance
 
+#### Resetting your development environment
+
+To reset a development environment, you need to remove the docker containers **and the volumes**:
+
+```
+docker-compose down
+```
+
+List the volumes in your docker service to see the names of your named volumes created by docker-compose. The name is usually the name as in `docker-compose.yml` prefixed by the project directory name, e.g.
+
+```
+# docker volume ls
+DRIVER              VOLUME NAME
+...
+local               treasury-ckan_ckan-filestore
+local               treasury-ckan_db-data
+local               treasury-ckan_solr-data
+```
+
+Remove them by name, e.g. `docker volume rm treasury-ckan_db-data`
+
+You can then initialise the containers again as in the instructions above.
+
 #### Rebuilding the search index
 
 You might need to rebuild the search index, e.g. if you newly/re-created the docker volume holding the `ckan` solr core data.
