@@ -364,35 +364,13 @@ The data is persisted using a docker volume.
 
 
 ```
-docker-compose run ckan paster --plugin=ckan db init -c /ckan.ini
-```
-
-Set up database permissions for the datastore plugin:
-
-```
-docker-compose run ckan paster --plugin=ckan datastore set-permissions  -c /ckan.ini | grep -v DEBUG | docker-compose exec -T db psql --set ON_ERROR_STOP=on -U postgres
-```
-
-If it's successful it will exit with status code zero (`echo $?`) and look something like
-```
-Starting treasury-ckan_redis_1 ... done
-Starting treasury-ckan_ckan-datapusher_1 ... done
-Starting treasury-ckan_solr_1            ... done
-Starting treasury-ckan_db_1              ... done
-You are now connected to database "datastore_default" as user "postgres".
-REVOKE
-REVOKE
-GRANT
-...
-ALTER VIEW
-GRANT
-
+docker-compose run --rm ckan paster --plugin=ckan db init -c /ckan.ini
 ```
 
 Set up the database for `ckanext-extractor`
 
 ```
-docker-compose run ckan paster --plugin=ckanext-extractor init -c /ckan.ini
+docker-compose run --rm ckan paster --plugin=ckanext-extractor init -c /ckan.ini
 ```
 
 ### Create a sysadmin user
@@ -400,7 +378,7 @@ docker-compose run ckan paster --plugin=ckanext-extractor init -c /ckan.ini
 Create your first admin user. When prompted to create the user, enter `y` and press enter.
 
 ```
-docker-compose run ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini
+docker-compose run --rm ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini
 ```
 
 ### Set up local hostnames

@@ -84,7 +84,8 @@ services:
     image: postgres:9.4
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./bin/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+      - ./bin/init-db.sh:/docker-entrypoint-initdb.d/1-init-db.sh
+      - ./bin/datastore-permissions.sql:/docker-entrypoint-initdb.d/2-datastore-permissions.sql
     ports:
     - "5433:5432"
 
