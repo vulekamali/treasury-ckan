@@ -3,6 +3,8 @@ language: python
 services:
   - docker
 
+install: []
+
 before_script:
   - sed -i '/s3filestore/d' ./ckan.ini
   - git clone https://github.com/OpenUpSA/ckan-datapusher.git ../ckan-datapusher
