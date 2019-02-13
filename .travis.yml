@@ -3,6 +3,10 @@ language: python
 services:
   - docker
 
+addons:
+  hosts:
+    - ckan
+
 install: []
 
 before_script:
@@ -15,6 +19,5 @@ before_script:
   - "docker-compose run --rm ckan paster --plugin=ckanext-extractor init -c /ckan.ini"
   - 'echo y | docker-compose run --rm ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini'
 
-addons:
-  hosts:
-    - ckan
+script:
+  - curl -f ckan:5000 | grep "Welcome to CKAN"
