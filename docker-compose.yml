@@ -20,19 +20,25 @@ services:
         - CKAN_SQLALCHEMY_URL=postgres://ckan_default@db/ckan_default
         - CKAN_DATASTORE_WRITE_URL=postgres://ckan_default@db/datastore_default
         - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
-    env_file: env.dev
+        - CKAN_SATREASURY_BUILD_TRIGGER_ENABLED=False
+        - CKAN_SSO_SECRET=d836444a9e4084d5b224a60c208dce14
+        - CKAN_SSO_URL=http://accounts:8000/ckan/sso
+        - CKAN_SSO_LOGOUT_URL=http://accounts:8000/accounts/logout
     volumes:
+      - ./bin/connect-to-postgres.py:/bin/connect-to-postgres.py
+      - ./bin/connect-to-solr.py:/bin/connect-to-solr.py
+      - ./bin/wait-for-deps.sh:/bin/wait-for-deps.sh
       - ./ckan.ini:/ckan.ini
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
       - ../ckanext-satreasury/:/src/ckanext-satreasury
-      - ../ckanext-extractor/:/src/ckanext-extractor
       - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
-    command: paster serve ckan.ini
+    command: ["/bin/wait-for-deps.sh", "paster", "serve", "ckan.ini"]
     depends_on:
       - solr
       - redis
       - db
+      - ckan-datapusher
 
   ckan-worker:
     build: .
@@ -40,6 +46,7 @@ services:
       - solr
       - redis
       - db
+      - ckan-datapusher
     environment:
         - CKAN_REDIS_URL=redis://redis:6379/0
         - CKAN_SOLR_URL=http://solr:8983/solr/ckan
@@ -48,23 +55,22 @@ services:
         - CKAN_SQLALCHEMY_URL=postgres://ckan_default@db/ckan_default
         - CKAN_DATASTORE_WRITE_URL=postgres://ckan_default@db/datastore_default
         - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
-    env_file: env.dev
     volumes:
+      - ./bin/connect-to-postgres.py:/bin/connect-to-postgres.py
+      - ./bin/connect-to-solr.py:/bin/connect-to-solr.py
+      - ./bin/wait-for-deps.sh:/bin/wait-for-deps.sh
       - ./ckan.ini:/ckan.ini
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
       - ../ckanext-satreasury/:/src/ckanext-satreasury
-      - ../ckanext-extractor/:/src/ckanext-extractor
       - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
-    command: paster --plugin=ckan jobs worker --config /ckan.ini
+    command: ["/bin/wait-for-deps.sh", "paster", "--plugin=ckan", "jobs", "worker", "--config", "/ckan.ini"]
 
-  # datapusher:
-  #   # image: openup/ckan-datapusher
-  #   build:
-  #     context: ../ckan-datapusher-dokku/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8800:8800"
+  ckan-datapusher:
+    build:
+      context: ../ckan-datapusher
+    ports:
+      - "8800:8800"
 
   solr:
     build: ../ckan-solr-dokku
@@ -82,6 +88,8 @@ services:
     image: postgres:9.4
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./bin/init-db.sh:/docker-entrypoint-initdb.d/1-init-db.sh
+      - ./bin/datastore-permissions.sql:/docker-entrypoint-initdb.d/2-datastore-permissions.sql
     ports:
     - "5433:5432"
 

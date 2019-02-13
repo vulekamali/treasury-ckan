@@ -1,0 +1,23 @@
+language: python
+
+services:
+  - docker
+
+addons:
+  hosts:
+    - ckan
+
+install: []
+
+before_script:
+  - sed -i '/s3filestore/d' ./ckan.ini
+  - git clone https://github.com/OpenUpSA/ckan-datapusher.git ../ckan-datapusher
+  - git clone https://github.com/OpenUpSA/ckan-solr-dokku.git ../ckan-solr-dokku
+  - docker-compose up -d
+  - bin/wait-for-ckan.sh
+  - "docker-compose run --rm ckan paster --plugin=ckan db init -c /ckan.ini"
+  - "docker-compose run --rm ckan paster --plugin=ckanext-extractor init -c /ckan.ini"
+  - 'echo y | docker-compose run --rm ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini'
+
+script:
+  - curl -f ckan:5000 | grep "Welcome to CKAN"

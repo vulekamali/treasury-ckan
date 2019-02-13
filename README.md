@@ -2,14 +2,32 @@
 Data Portal for the South African National Treasury
 ===================================================
 
-This is the software repository for the South African National Treasury Data Portal.
+This is the software repository for CKAN used as part of the South African National Treasury Data Portal.
 
-We use CKAN to organise the datasets according to various taxonomies and use the CKAN dataset API to make the data discoverable.
+We use CKAN to organise the datasets according to various taxonomies and use the CKAN API to make the data discoverable.
 
-This repository also contains [code and documentation to load and maintain data in CKAN](#extract-transform-load-etl).
+Table of contents
+-----------------
 
-Dockerfile and config to run CKAN in dokku
-------------------------------------------
+- [Set up in production](#set-up-in-production)
+  - [Solr](#solr)
+  - [Redis](#redis)
+  - [Postgres](#postgres)
+  - [S3](#s3)
+  - [CKAN](#ckan)
+  - [HTTP Cache](#http-cache)
+- [Set up development environment](#set-up-development-environment)
+  - [Clone and initialise our code](#clone-and-initialise-our-code)
+  - [Edit configuration for development](#edit-configuration-for-development)
+  - [Initialise the database](#initialise-the-database)
+  - [Create a sysadmin user](#create-a-sysadmin-user)
+  - [Set up local hostnames](#set-up-local-hostnames)
+  - [Runtime configuration](#runtime-configuration)
+  - [SSO Authentication in Development](#sso-authentication-in-development)
+  - [Maintenance](#maintenance)
+
+Set up in production
+------------------------
 
 We run CKAN on the dokku platform. We use dokku's dockerfile deployment method to deploy using the the Dockerfile in this repository. Since there are numerous operating system and python dependencies that ckan relies on, we build an image with these on hub.docker.com using Dockerfile-deps.
 
@@ -22,9 +40,6 @@ This CKAN installation depends on
  - S3 - object (file) storage
  - [CKAN DataPusher](https://github.com/OpenUpSA/ckan-datapusher) - [while limited](https://github.com/ckan/ckan/pull/3911), this might help us quickly access data programmatically.
  - NGINX - caching (when needed)
-
-Setting up in production
-------------------------
 
 We set up Solr and Redis on the same server and use a remote Postgres instance.
 
@@ -305,23 +320,25 @@ http://docs.ckan.org/en/ckan-2.7.0/maintaining/installing/deployment.html#create
 
 To invalidate: `find /path/to/your/cache -type f -delete`
 
-Setting up development environment
+Set up development environment
 ----------------------------------
 
 While you can set up CKAN directly on your OS, docker-compose is useful to develop and test the docker/dokku-specific aspects.
 
 For development, it is easiest to use docker-compose to build your development environment.
 
-### 1. Clone and build
+The default development setup doesn't use `discourse-sso-client` because that requires running vulekamali Datamanager side-by-side for authentication. [See how to enable that](#sso-authentication-in-development) for development of `discourse-sso-client`.
+
+### Clone and initialise our code
 
 Clone this repo and supporting repos:
 
 ```
-git clone https://github.com/OpenUpSA/treasury-ckan.git
-git clone https://github.com/OpenUpSA/ckan-solr-dokku.git
-git clone https://github.com/OpenUpSA/ckan-datapusher.git
-git clone https://github.com/OpenUpSA/ckanext-satreasury.git
-git clone https://github.com/OpenUpSA/ckanext-discourse-sso-client.git
+git clone git@github.com:OpenUpSA/treasury-ckan.git
+git clone git@github.com:OpenUpSA/ckan-solr-dokku.git
+git clone git@github.com:OpenUpSA/ckan-datapusher.git
+git clone git@github.com:OpenUpSA/ckanext-satreasury.git
+git clone git@github.com:OpenUpSA/ckanext-discourse-sso-client.git
 ```
 
 Setup development entry points:
@@ -334,96 +351,97 @@ python setup.py egg_info
 cd ../treasury-ckan
 ```
 
-### 2. Edit configuration files
-
-- Create a file titled `env.dev` in the project root, with the following standard content:
-```
-CKAN_SSO_SECRET=d836444a9e4084d5b224a60c208dce14
-CKAN_SSO_URL=http://accounts.local:8000/ckan/sso
-CKAN_SSO_LOGOUT_URL=http://localhost:8000/accounts/logout
-
-CKAN_SATREASURY_BUILD_TRIGGER_ENABLED=False
-CKAN_SITE_URL=http://ckan:5000
-```
-  - To help you avoid committing sensitive information in this file to git, env* is hidden by gitignore.
+### Edit configuration for development
 
 - Remove certain ckan plugins we don't strictly need in development mode.
 
 Edit `ckan.ini` and for the `plugins` entry, remove:
     - s3filestore
+    - discourse-sso-client
 
-### 3. Set up the postgres database:
+### Initialise the database
+
 For development, setting up the database in a postgres container is much easier than
 running it on your host machine.
 
 The data is persisted using a docker volume.
 
-Setting up the database consists of the following steps:
-- Starting the database container with `docker-compose`
-- Entering the running container and setting up roles and databases with `psql`
-- Starting another CKAN container instance and running paster to set up more database configurations
-
-First, start up the `db` container:
-
-`docker-compose up db`
-
-Wait for the container to start up, then from a different terminal:
-
-`docker container ls`
-
-The output should be similar to:
-
-```docker
-CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                    NAMES
-9d9cf604ba5d        treasury-ckan_ckan   "paster serve ckan.i…"   22 minutes ago      Up About a minute   0.0.0.0:80->5000/tcp     treasury-ckan_ckan_1
-9138ea0e8c94        postgres:9.4         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:5433->5432/tcp   treasury-ckan_db_1
-3e0228f9b488        redis:latest         "docker-entrypoint.s…"   22 minutes ago      Up About a minute   6379/tcp                 treasury-ckan_redis_1
-0c02b1e3b046        treasury-ckan_solr   "docker-entrypoint.s…"   22 minutes ago      Up About a minute   0.0.0.0:8983->8983/tcp   treasury-ckan_solr_1
-=======
-
-Remove certain ckan plugins we don't strictly need in development mode. Edit `ckan.ini` and for the `plugins` entry, remove: s3filestore, discourse-sso-client, datastore and datapusher.
-
-Now start the containers and their services:
->>>>>>> master
 
 ```
-
-Look for the postgres image ID, in this case it's `9138ea0e8c94`. Make note of your container's ID.
-
-Now enter the container, so that we can set up the database:
-
-`docker exec -it 9138ea0e8c94 bash`
-
-You should now be inside the container, and see a prompt similar to `postgres=# `
-
-Set up the database, by following these instructions (please choose your own password):
-```postgresql
-psql -U postgres
-create user ckan_default with password 'supergoodpassword';
-alter role ckan_default with login;
-alter user ckan_default with superuser;
-create database ckan_default with owner ckan_default;
-create user datastore_default with password 'supergoodpassword';
-create database datastore_Default with owner ckan_default;
-
+docker-compose run --rm ckan paster --plugin=ckan db init -c /ckan.ini
 ```
 
-Now exit the container (ctrl-D) and run a CKAN container instance to finish the database
-setup:
+Set up the database for `ckanext-extractor`
 
-```bash
-docker-compose exec ckan bash
-cd src/ckan
-paster db init -c /ckan.ini
-paster datastore set-permissions -c /ckan.ini
-paster sysadmin add admin email="you@domain.com" -c /ckan.ini
+```
+docker-compose run --rm ckan paster --plugin=ckanext-extractor init -c /ckan.ini
 ```
 
-Restart the services with:
+### Create a sysadmin user
 
-`docker-compose down && docker-compose up`
+Create your first admin user. When prompted to create the user, enter `y` and press enter.
 
-Visit `https://localhost:80` and login with username `admin` and the password you set above.
+```
+docker-compose run --rm ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini
+```
+
+### Set up local hostnames
+
+Set up the hostnames `ckan` and `accounts` to point to `127.0.0.1` in your `hosts` file. This is needed so that ckan's dependencies can refer to it using the internal docker network hostname, and so that you can then access absolute URLs based on that hostname from outside the docker network (on the host computer).
+
+If you need to work with SSO, run Datamanager with something like the following to let CKAN use it for authentication:
+
+### Runtime configuration
+
+Visit `https://ckan:5000` and login with username `admin` and the password `admin`.
+
+Set the homepage layout and colour scheme
+
+1. Click the hammer icon at the top right, beside the link to admin's profile
+2. Select the Config tab
+3. Change Style to Green
+4. Change Homepage to `Search, introductoray area and stats`
+
+Create an organisation named National Treasury. Ensure the slug is `national-treasury`.
+
+### SSO Authentication in Development
+
+To use SSO authentication in development, run vulekamali Datamanager on the same machine with configuration to enable SSO (same SSO secret, etc) e.g.
+
+```
+DJANGO_SITE_ID=2 HTTP_PROTOCOL=http DISCOURSE_SSO_SECRET=d836444a9e4084d5b224a60c208dce14 CKAN_SSO_URL=http://ckan:5000/user/login EMAIL_HOST=localhost EMAIL_PORT=2525 EMAIL_USE_TLS= CKAN_URL=http://ckan:5000 python manage.py runserver
+```
+
+Re-enable the `discourse-sso-client` plugin in `ckan.ini` and restart ckan, e.g. with `docker-compose restart ckan`.
+
+Now the login button on `ckan:5000` will redirect you to authenticate with a user on Datamanager. It's easiest to use username+password authentication with a user created in Datamanager.
+
+After authenticating on Datamanager, your browser will be redirected back to CKAN. That user is not a sysadmin by default. Make them a sysadmin using something like `docker-compose run --rm ckan paster --plugin=ckan sysadmin add datamanageruser` where `datamanageruser` is whatever username automatically got generated for you in CKAN after your first SSO login.
+
+### Maintenance
+
+#### Resetting your development environment
+
+To reset a development environment, you need to remove the docker containers **and the volumes**:
+
+```
+docker-compose down
+```
+
+List the volumes in your docker service to see the names of your named volumes created by docker-compose. The name is usually the name as in `docker-compose.yml` prefixed by the project directory name, e.g.
+
+```
+# docker volume ls
+DRIVER              VOLUME NAME
+...
+local               treasury-ckan_ckan-filestore
+local               treasury-ckan_db-data
+local               treasury-ckan_solr-data
+```
+
+Remove them by name, e.g. `docker volume rm treasury-ckan_db-data`
+
+You can then initialise the containers again as in the instructions above.
 
 #### Rebuilding the search index
 
@@ -434,12 +452,6 @@ docker-compose exec ckan bash
 cd src/ckan
 paster --plugin=ckan search-index rebuild -c /ckan.ini
 ```
-
-#### Extract, Transform, Load (ETL)
-
-Estimates of Provincial Revenue and Expenditure (EPRE) and Estimates of National Expenditure (ENE) are added by https://github.com/OpenUpSA/budget-portal/.
-
-Other categories of government dataset are added using `bin/sync_datasets.py`
 
 #### Troubleshooting
 
