@@ -325,6 +325,8 @@ While you can set up CKAN directly on your OS, docker-compose is useful to devel
 
 For development, it is easiest to use docker-compose to build your development environment.
 
+The default development setup doesn't use `discourse-sso-client` because that requires running vulekamali Datamanager side-by-side for authentication. [See how to enable that](#sso-authentication-in-development) for development of `discourse-sso-client`.
+
 ### Clone and initialise our code
 
 Clone this repo and supporting repos:
@@ -389,11 +391,21 @@ If you need to work with SSO, run Datamanager with something like the following 
 
 Visit `https://ckan:5000` and login with username `admin` and the password `admin`.
 
-### Maintenance
+### SSO Authentication in Development
+
+To use SSO authentication in development, run vulekamali Datamanager on the same machine with configuration to enable SSO (same SSO secret, etc) e.g.
 
 ```
 DJANGO_SITE_ID=2 HTTP_PROTOCOL=http DISCOURSE_SSO_SECRET=d836444a9e4084d5b224a60c208dce14 CKAN_SSO_URL=http://ckan:5000/user/login EMAIL_HOST=localhost EMAIL_PORT=2525 EMAIL_USE_TLS= CKAN_URL=http://ckan:5000 python manage.py runserver
 ```
+
+Re-enable the `discourse-sso-client` plugin in `ckan.ini` and restart ckan, e.g. with `docker-compose restart ckan`.
+
+Now the login button on `ckan:5000` will redirect you to authenticate with a user on Datamanager. It's easiest to use username+password authentication with a user created in Datamanager.
+
+After authenticating on Datamanager, your browser will be redirected back to CKAN. That user is not a sysadmin by default. Make them a sysadmin using something like `docker-compose run --rm ckan paster --plugin=ckan sysadmin add datamanageruser` where `datamanageruser` is whatever username automatically got generated for you in CKAN after your first SSO login.
+
+### Maintenance
 
 #### Rebuilding the search index
 
