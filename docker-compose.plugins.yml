@@ -1,0 +1,12 @@
+version: "2.2"
+
+services:
+  ckan-worker:
+    volumes:
+      - ../ckanext-satreasury/:/src/ckanext-satreasury
+      - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
+
+  ckan-worker:
+    volumes:
+      - ../ckanext-satreasury/:/src/ckanext-satreasury
+      - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client

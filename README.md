@@ -17,13 +17,13 @@ Table of contents
   - [CKAN](#ckan)
   - [HTTP Cache](#http-cache)
 - [Set up development environment](#set-up-development-environment)
-  - [Clone and initialise our code](#clone-and-initialise-our-code)
+  - [Clone our app repositories](#clone-our-app-repositories)
   - [Edit configuration for development](#edit-configuration-for-development)
   - [Initialise the database](#initialise-the-database)
   - [Create a sysadmin user](#create-a-sysadmin-user)
   - [Set up local hostnames](#set-up-local-hostnames)
   - [Runtime configuration](#runtime-configuration)
-  - [SSO Authentication in Development](#sso-authentication-in-development)
+  - [Developing our plugins](#developing-our-plugins)
   - [Maintenance](#maintenance)
 
 Set up in production
@@ -327,9 +327,9 @@ While you can set up CKAN directly on your OS, docker-compose is useful to devel
 
 For development, it is easiest to use docker-compose to build your development environment.
 
-The default development setup doesn't use `discourse-sso-client` because that requires running vulekamali Datamanager side-by-side for authentication. [See how to enable that](#sso-authentication-in-development) for development of `discourse-sso-client`.
+The default development setup doesn't use `discourse-sso-client` because that requires running vulekamali Datamanager side-by-side for authentication. [See how to enable that](#developing-our-plugins) for development of `discourse-sso-client`.
 
-### Clone and initialise our code
+### Clone our app repositories
 
 Clone this repo and supporting repos:
 
@@ -337,18 +337,6 @@ Clone this repo and supporting repos:
 git clone git@github.com:OpenUpSA/treasury-ckan.git
 git clone git@github.com:OpenUpSA/ckan-solr-dokku.git
 git clone git@github.com:OpenUpSA/ckan-datapusher.git
-git clone git@github.com:OpenUpSA/ckanext-satreasury.git
-git clone git@github.com:OpenUpSA/ckanext-discourse-sso-client.git
-```
-
-Setup development entry points:
-
-```
-cd ckanext-satreasury
-python setup.py egg_info
-cd ../ckanext-discourse-sso-client
-python setup.py egg_info
-cd ../treasury-ckan
 ```
 
 ### Edit configuration for development
@@ -404,7 +392,30 @@ Set the homepage layout and colour scheme
 
 Create an organisation named National Treasury. Ensure the slug is `national-treasury`.
 
-### SSO Authentication in Development
+### Developing our plugins
+
+Clone the repositories in the directory above this project
+
+```
+git clone git@github.com:OpenUpSA/ckanext-satreasury.git
+git clone git@github.com:OpenUpSA/ckanext-discourse-sso-client.git
+```
+
+Setup development entry points:
+
+```
+cd ckanext-satreasury
+python setup.py egg_info
+cd ../ckanext-discourse-sso-client
+python setup.py egg_info
+cd ../treasury-ckan
+```
+
+And overlay the `docker-compose.yml` file with `docker-compose.plugins.yml`, e.g.
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.plugins.yml up`
+```
 
 To use SSO authentication in development, run vulekamali Datamanager on the same machine with configuration to enable SSO (same SSO secret, etc) e.g.
 

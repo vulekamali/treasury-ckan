@@ -1,11 +1,5 @@
 version: "2.2"
 
-# docker-compose build && docker-compose up
-# If you experience problems with the CKAN container not being
-# able to connect to the DB, then most likely the DB has not
-# started up quickly enough. Just do "docker-compose up ckan"
-# again to retry
-
 services:
   ckan:
     build: .
@@ -31,8 +25,6 @@ services:
       - ./ckan.ini:/ckan.ini
       - ./who.ini:/who.ini
       - ckan-filestore:/var/lib/ckan/default
-      - ../ckanext-satreasury/:/src/ckanext-satreasury
-      - ../ckanext-discourse-sso-client/:/src/ckanext-discourse-sso-client
     command: ["/bin/wait-for-deps.sh", "paster", "serve", "ckan.ini"]
     depends_on:
       - solr
