@@ -22,6 +22,8 @@ Table of contents
   - [Initialise the database](#initialise-the-database)
   - [Create a sysadmin user](#create-a-sysadmin-user)
   - [Set up local hostnames](#set-up-local-hostnames)
+  - [Runtime configuration](#runtime-configuration)
+  - [SSO Authentication in Development](#sso-authentication-in-development)
   - [Maintenance](#maintenance)
 
 Set up in production
@@ -389,7 +391,18 @@ Set up the hostnames `ckan` and `accounts` to point to `127.0.0.1` in your `host
 
 If you need to work with SSO, run Datamanager with something like the following to let CKAN use it for authentication:
 
+### Runtime configuration
+
 Visit `https://ckan:5000` and login with username `admin` and the password `admin`.
+
+Set the homepage layout and colour scheme
+
+1. Click the hammer icon at the top right, beside the link to admin's profile
+2. Select the Config tab
+3. Change Style to Green
+4. Change Homepage to `Search, introductoray area and stats`
+
+Create an organisation named National Treasury. Ensure the slug is `national-treasury`.
 
 ### SSO Authentication in Development
 
