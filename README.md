@@ -397,7 +397,7 @@ Create an organisation named National Treasury. Ensure the slug is `national-tre
 Clone the repositories in the directory above this project
 
 ```
-git clone git@github.com:OpenUpSA/ckanext-satreasury.git
+git clone git@github.com:vulekamali/ckanext-satreasury.git
 git clone git@github.com:OpenUpSA/ckanext-discourse-sso-client.git
 ```
 
