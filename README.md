@@ -75,7 +75,9 @@ create database datastore_default with owner ckan_default;
 
 ### S3
 
-Create a bucket and a programmatic access user, and grant the user full access to the bucket with the following policy
+Create a bucket and a programmatic access user, and grant the user full access to the bucket with the following policy.
+
+Unckeck "Block all public access" - ckan must be able to grant public access to files.
 
 ```
 {
@@ -260,10 +262,47 @@ git push dokku master
 Set up database and first sysadmin user.
 
 ```
-dokku run ckan bash
-cd src/ckan
-paster db init -c /ckan.ini
-paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
+dokku --rm run ckan paster db init -c /ckan.ini
+dokku --rm run ckan paster sysadmin add admin email="webapps@openup.org.za" -c /ckan.ini
+```
+
+Initialise the ckanext_extractor installation
+
+```
+dokku --rm run ckan paster --plugin=ckanext-extractor init -c /ckan.ini
+```
+
+Configure the datapusher database.
+
+Generate the SQL for creating tables and configuring permissions based on the database name and read and write users you've configured using something like
+
+```
+dokku --rm run vulekamali-ckan-sandbox paster --plugin=ckan datastore set-permissions -c /ckan.ini | grep -v ckanext > set-perms.sql
+```
+
+Then apply this SQL something like the following, connecting to the database as superuser. Pay attention to the exit status which should indicate whether this was successful.
+
+```
+cat set-perms.sql | psql --set ON_ERROR_STOP=on
+```
+
+If it's successful it will exit with status code zero (`echo $?`) and look something like
+
+```
+REVOKE
+REVOKE
+GRANT
+GRANT
+GRANT
+GRANT
+REVOKE
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+CREATE VIEW
+ALTER VIEW
+GRANT
 ```
 
 Start the worker:
@@ -391,6 +430,30 @@ Set the homepage layout and colour scheme
 4. Change Homepage to `Search, introductoray area and stats`
 
 Create an organisation named National Treasury. Ensure the slug is `national-treasury`.
+
+Create these groups:
+
+| Name | slug |
+---------------
+| Adjusted Budget Vote Documents | adjusted-budget-vote-documents |
+| Adjusted Estimates of National Expenditure | adjusted-estimates-of-national-expenditure |
+| Annual Report Expenditure Data | annual-reports |
+| Budgeted and Actual National Expenditure | budgeted-and-actual-national-expenditure |
+| Budgeted and Actual Provincial Expenditure | budgeted-and-actual-provincial-expenditure |
+| Budget Vote Documents | budget-vote-documents |
+| Consolidated Expenditure | consolidated-expenditure-budget |
+| CPI Inflation | cpi-inflation |
+| Division of Revenue Bills | division-of-revenue-bills |
+| Estimates of National Expenditure | estimates-of-national-expenditure |
+| Estimates of National Revenue | estimates-of-national-revenue |
+| Estimates of Provincial Expenditure | estimates-of-provincial-expenditure |
+| Frameworks for Conditional Grants to Municipalities | frameworks-for-conditional-grants-to-municipalities |
+| Frameworks for Conditional Grants to Provinces | frameworks-for-conditional-grants-to-provinces |
+| Infrastructure Projects | infrastructure-projects |
+| Performance and Expenditure Reviews | performance-and-expenditure-reviews |
+| Procurement portals and resources | procurement-portals-and-resources |
+| Socio-economic Data | socio-economic-data |
+
 
 ### Developing our plugins
 
