@@ -433,26 +433,26 @@ Create an organisation named National Treasury. Ensure the slug is `national-tre
 
 Create these groups:
 
-| Name | slug |
----------------
-| Adjusted Budget Vote Documents | adjusted-budget-vote-documents |
+| Name                                       | slug                           |
+|--------------------------------------------|--------------------------------|
+| Adjusted Budget Vote Documents             | adjusted-budget-vote-documents |
 | Adjusted Estimates of National Expenditure | adjusted-estimates-of-national-expenditure |
-| Annual Report Expenditure Data | annual-reports |
-| Budgeted and Actual National Expenditure | budgeted-and-actual-national-expenditure |
+| Annual Report Expenditure Data             | annual-reports                 |
+| Budgeted and Actual National Expenditure   | budgeted-and-actual-national-expenditure |
 | Budgeted and Actual Provincial Expenditure | budgeted-and-actual-provincial-expenditure |
-| Budget Vote Documents | budget-vote-documents |
-| Consolidated Expenditure | consolidated-expenditure-budget |
-| CPI Inflation | cpi-inflation |
-| Division of Revenue Bills | division-of-revenue-bills |
-| Estimates of National Expenditure | estimates-of-national-expenditure |
-| Estimates of National Revenue | estimates-of-national-revenue |
-| Estimates of Provincial Expenditure | estimates-of-provincial-expenditure |
+| Budget Vote Documents               | budget-vote-documents                 |
+| Consolidated Expenditure            | consolidated-expenditure-budget       |
+| CPI Inflation                       | cpi-inflation                         |
+| Division of Revenue Bills           | division-of-revenue-bills             |
+| Estimates of National Expenditure   | estimates-of-national-expenditure     |
+| Estimates of National Revenue       | estimates-of-national-revenue         |
+| Estimates of Provincial Expenditure | estimates-of-provincial-expenditure   |
 | Frameworks for Conditional Grants to Municipalities | frameworks-for-conditional-grants-to-municipalities |
 | Frameworks for Conditional Grants to Provinces | frameworks-for-conditional-grants-to-provinces |
-| Infrastructure Projects | infrastructure-projects |
-| Performance and Expenditure Reviews | performance-and-expenditure-reviews |
-| Procurement portals and resources | procurement-portals-and-resources |
-| Socio-economic Data | socio-economic-data |
+| Infrastructure Projects             | infrastructure-projects               |
+| Performance and Expenditure Reviews | performance-and-expenditure-reviews   |
+| Procurement portals and resources   | procurement-portals-and-resources     |
+| Socio-economic Data                 | socio-economic-data                   |
 
 
 ### Developing our plugins
