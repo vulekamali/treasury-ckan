@@ -227,9 +227,8 @@ if ($host = www.treasurydata.openup.org.za) {
 
 ## ---
 
-# The X-Frame-Options header indicates whether a browser should be allowed
-# to render a page within a frame or iframe.
-add_header X-Frame-Options SAMEORIGIN;
+# Only allow iframing from vulekamali proper and ckan itself
+add_header Content-Security-Policy 'frame-ancestors \'self\' https://vulekamali.gov.za;';
 
 # MIME type sniffing security protection
 #	There are very few edge cases where you wouldn't want this enabled.
