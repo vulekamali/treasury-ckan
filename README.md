@@ -229,6 +229,15 @@ if ($host = www.treasurydata.openup.org.za) {
 
 # Only allow iframing from vulekamali proper and ckan itself
 add_header Content-Security-Policy 'frame-ancestors \'self\' https://vulekamali.gov.za;';
+# The X-Frame-Options header indicates whether a browser should be allowed
+# to render a page within a frame or iframe.
+# "Content-Security-Policy: frame-ancestors" obsoletes X-Frame-Options which means
+# X-Frame-Options SHOULD be ignored by browsers supporting frame-ancestors.
+add_header X-Frame-Options SAMEORIGIN;
+
+By setting both, IE can be blocked from clickjacking but won't show embedded PDFs,
+but supporting browsers will show embedded PDFs and be protected from clickjacking
+as long as vulekamali.gov.za doesn't enable that.
 
 # MIME type sniffing security protection
 #	There are very few edge cases where you wouldn't want this enabled.
