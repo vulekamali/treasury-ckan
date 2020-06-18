@@ -10,6 +10,7 @@ RUN pip install ckanext-envvars \
                 -e git+https://github.com/OpenUpSA/ckanext-discourse-sso-client.git@master#egg=ckanext-discourse-sso-client \
                 -e git+https://github.com/ckan/ckanext-googleanalytics.git@v2.0.2#egg=ckanext-googleanalytics \
                 -e git+https://github.com/stadt-karlsruhe/ckanext-extractor@1d49dd6#egg=ckanext-extractor \
+                sentry==0.0.2 \
  && pip install -r src/ckanext-extractor/requirements.txt
 
 ADD Procfile /Procfile
