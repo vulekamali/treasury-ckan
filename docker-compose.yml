@@ -47,6 +47,12 @@ services:
         - CKAN_SQLALCHEMY_URL=postgres://ckan_default@db/ckan_default
         - CKAN_DATASTORE_WRITE_URL=postgres://ckan_default@db/datastore_default
         - CKAN_DATASTORE_READ_URL=postgres://datastore_default@db/datastore_default
+        - CKAN___CKANEXT__S3FILESTORE__AWS_BUCKET_NAME=treasury-budget-portal-dev
+        - CKAN___CKANEXT__S3FILESTORE__AWS_ACCESS_KEY_ID=minio-access-key
+        - CKAN___CKANEXT__S3FILESTORE__AWS_SECRET_ACCESS_KEY=minio-secret-key
+        - CKAN___CKANEXT__S3FILESTORE__HOST_NAME=http://minio
+        - CKAN___CKANEXT__S3FILESTORE__REGION_NAME=eu-west-1
+        - CKAN___CKANEXT__S3FILESTORE__SIGNATURE_VERSION=s3v4
     volumes:
       - ./bin/connect-to-postgres.py:/bin/connect-to-postgres.py
       - ./bin/connect-to-solr.py:/bin/connect-to-solr.py
@@ -57,19 +63,16 @@ services:
     command: ["/bin/wait-for-deps.sh", "paster", "--plugin=ckan", "jobs", "worker", "--config", "/ckan.ini"]
 
   ckan-datapusher:
-    build:
-      context: ../ckan-datapusher
+    build: https://github.com/OpenUpSA/ckan-datapusher.git
     ports:
       - "8800:8800"
 
   solr:
-    build: ../ckan-solr-dokku
+    build: https://github.com/OpenUpSA/ckan-solr-dokku.git
     ports:
         - "8983:8983"
     volumes:
       - solr-data:/opt/solr/server/solr/ckan/data
-      - ../ckan-solr-dokku/solrconfig.xml:/opt/solr/server/solr/ckan/conf/solrconfig.xml
-      - ../ckan-solr-dokku/schema.xml:/opt/solr/server/solr/ckan/conf/schema.xml
 
   redis:
     image: redis:latest
@@ -83,7 +86,34 @@ services:
     ports:
     - "5433:5432"
 
+  minio:
+    image: "minio/minio:RELEASE.2019-10-12T01-39-57Z"
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+    environment:
+      - MINIO_ACCESS_KEY=minio-access-key
+      - MINIO_SECRET_KEY=minio-secret-key
+      - MINIO_DOMAIN=minio
+    command: minio --compat server data
+
+  minio-client:
+    image: "minio/mc"
+    depends_on:
+      - minio
+    environment:
+      - MINIO_ACCESS_KEY=minio-access-key
+      - MINIO_SECRET_KEY=minio-secret-key
+      - MINIO_DOMAIN=minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc mb treasury-budget-portal-dev;
+      /usr/bin/mc policy set public treasury-budget-portal-dev;
+      "
+
 volumes:
   solr-data:
   ckan-filestore:
   db-data:
+  minio-data:
