@@ -5,7 +5,7 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 argparse==1.4.0           # via ofs
-Babel==2.3.4
+Babel==2.9.1
 Beaker==1.8.1             # via pylons
 bleach==3.1.4
 click==6.7
