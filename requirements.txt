@@ -20,7 +20,7 @@ gunicorn==19.7.1
 html5lib==0.9999999       # via bleach
 itsdangerous==0.24        # via flask
 Jinja2==2.8               # via flask
-Mako==1.0.4               # via pylons
+Mako==1.2.2               # via pylons
 Markdown==2.6.7
 MarkupSafe==0.23          # via jinja2, mako, webhelpers
 newrelic==2.94.0.79
