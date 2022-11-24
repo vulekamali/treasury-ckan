@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    schedule:
+      - cron: '0 0 * * 0' # weekly
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: sed -i '/s3filestore/d' ./ckan.ini
+    - run: git clone https://github.com/OpenUpSA/ckan-datapusher.git ../ckan-datapusher
+    - run: git clone https://github.com/OpenUpSA/ckan-solr-dokku.git ../ckan-solr-dokku
+    - run: docker-compose up -d
+    - run: bin/wait-for-ckan.sh
+    - run: "docker-compose run --rm ckan paster --plugin=ckan db init -c /ckan.ini"
+    - run: "docker-compose run --rm ckan paster --plugin=ckanext-extractor init -c /ckan.ini"
+    - run: 'echo y | docker-compose run --rm ckan paster --plugin=ckan sysadmin add admin email="you@domain.com" name=admin password=admin -c /ckan.ini'
+    - run: curl -f ckan:5000 | grep "Welcome to CKAN"
