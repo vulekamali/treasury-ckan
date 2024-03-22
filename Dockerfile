@@ -4,7 +4,7 @@ MAINTAINER OpenUp
 WORKDIR /
 
 RUN pip install ckanext-envvars \
-                boto3 \
+                boto3==1.11.5 \
                 git+https://github.com/keitaroinc/ckanext-s3filestore.git@v0.0.8 \
                 -e git+https://github.com/vulekamali/ckanext-satreasury.git@master#egg=ckanext-satreasury \
                 -e git+https://github.com/OpenUpSA/ckanext-discourse-sso-client.git@master#egg=ckanext-discourse-sso-client \
